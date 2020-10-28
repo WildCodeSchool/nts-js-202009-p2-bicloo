@@ -1,0 +1,16 @@
+couleurs:
+
+bleu header: #2288AB
+orange bouton: #F8962C
+orange marker map: #F8962C
+bleu bouton itinéraire: #248BAD
+blanc bouton itinéraire: #F2F2F2
+gris bouton carte/liste: #BDBDBD
+
+police:
+
+days one
+dosis
+
+taille police:
+
