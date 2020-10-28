@@ -1,13 +1,12 @@
 import React from 'react';
-import './App.css';
+import styles from './css/app.module.css';
 import StationsList from './components/StationsList';
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.app}>
       <StationsList />
     </div>
   );
 }
-
 export default App;

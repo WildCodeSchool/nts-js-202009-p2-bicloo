@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap');
+
+:root {
+  /* mobile */
+  /* header */
+  --header-background: #2288ab;
+  --header-checkbox-background: #f09f2c;
+  --header-searchBar-icon-color: #666666;
+  --header-searchBar-background: #ffffff;
+  --header-checkbox-label-color: #ffffff;
+  --header-btn-listOrMapAndsubscription-active-background: #f2f2f2;
+  --header-btn-listOrMapAndsubscription-disabled-background: #f6f7fb;
+  --header-btn-listOrMapAndsubscription-color: #0f5b79;
+  /* map */
+  --map-markers-background: #ec6726;
+  --map-itinerary-line: #136789;
+  /* main-button */
+  --main-btn-active-background: #f8962c;
+  --main-btn-disabled-background: #fcb84f;
+  --main-btn-color: #ffffff;
+  /* card list & subscription */
+  --card-background: #ffffff;
+  --card-item-background: #ffffff;
+  --card-item-title-color: #2d2d2d;
+  --card-item-btn-itinerary-background: #248bad;
+  --card-item-btn-born-background: #f2f2f2;
+  /* contact */
+  --card-icons-background: #f8962c;
+  --card-closingCross: #136789;
+
+  /* desktop */
+  /* header */
+  --header-searchBar-btn-background: #248bad;
+  /* subscription */
+  --subscription-free-background: #f8962c;
+  --subscription-long-background: #2389ac;
+  --subscription-color: #ffffff;
+
+  /* fonts */
+  --daysOne: 'Days One', sans-serif;
+  --dosis: 'Dosis', sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
