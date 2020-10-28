@@ -15,6 +15,12 @@
   "rules": {
     "linebreak-style": 0,
     "class-methods-use-this": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "react/jsx-props-no-spreading": [
+      2,
+      {
+        "exceptions": ["CardList"]
+      }
+    ]
   }
 }

@@ -7,16 +7,7 @@ const StationsList = ({ stations }) => {
     <div>
       <ul>
         {stations.map((station) => {
-          return (
-            <CardList
-              key={station.recordid}
-              name={station.name}
-              bike={station.availableBikes}
-              stands={station.availableBikeStand}
-              address={station.address}
-              banking={station.banking}
-            />
-          );
+          return <CardList key={station.id} {...station} />;
         })}
       </ul>
     </div>
@@ -26,5 +17,5 @@ const StationsList = ({ stations }) => {
 export default StationsList;
 
 StationsList.propTypes = {
-  stations: PropTypes.array.isRequired,
+  stations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
