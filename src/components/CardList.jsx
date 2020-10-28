@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardList = ({ name, bike, stands, address, banking }) => {
+const CardList = ({ station }) => {
+  console.log(station);
   return (
     <li>
-      <h2>{name}</h2>
+      <h2>{station.name}</h2>
       <p>
         Velos disponibles:
-        {bike}
+        {station.bike}
       </p>
       <p>
         Places disponibles:
-        {stands}
+        {station.stands}
       </p>
       <p>
         Adresse:
-        {address}
+        {station.address}
       </p>
       <button type="button">Itinéraire</button>
-      <p>{banking === 'True' ? 'Avec bornes' : 'Sans bornes'}</p>
+      <p>{station.banking === 'True' ? 'Avec bornes' : 'Sans bornes'}</p>
     </li>
   );
 };

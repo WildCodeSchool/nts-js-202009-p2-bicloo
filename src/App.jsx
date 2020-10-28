@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: {},
+      stations: {},
       loading: true,
     };
     this.fetchData = this.fetchData.bind(this);
@@ -24,20 +24,32 @@ class App extends Component {
         'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=125&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN'
       )
       .then(({ data }) => {
-        this.setState({ data: data.records });
+        const stations = data.records.map((record) => {
+          return {
+            id: record.recordid,
+            address: record.fields.address,
+            name: record.fields.name,
+            availableBikes: record.fields.available_bikes,
+            availableBikeStand: record.fields.available_bike_stands,
+            banking: record.fields.banking,
+            position: record.fields.position,
+          };
+        });
+        this.setState({ stations });
+
         this.setState({ loading: false });
       })
       .catch((err) => alert(err.message));
   }
 
   render() {
-    const { loading, data } = this.state;
+    const { loading, stations } = this.state;
     return (
       <div className="App">
         {!loading && (
           <>
-            <BikesMap />
-            <StationsList infos={data} />
+            {/* <BikesMap /> */}
+            <StationsList stations={stations} />
           </>
         )}
       </div>
