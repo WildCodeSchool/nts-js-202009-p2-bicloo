@@ -1,11 +1,11 @@
 import React from 'react';
-
-import BikesMap from './components/BikesMap';
+import WrapperStation from './components/WrapperStation';
+import styles from './css/app.module.css';
 
 function App() {
   return (
-    <div className="App">
-      <BikesMap />
+    <div className={styles.app}>
+      <WrapperStation />
     </div>
   );
 }
