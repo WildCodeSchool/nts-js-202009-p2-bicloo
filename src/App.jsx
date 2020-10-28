@@ -36,7 +36,6 @@ class App extends Component {
           };
         });
         this.setState({ stations });
-
         this.setState({ loading: false });
       })
       .catch((err) => alert(err.message));
@@ -48,7 +47,7 @@ class App extends Component {
       <div className="App">
         {!loading && (
           <>
-            {/* <BikesMap /> */}
+            <BikesMap />
             <StationsList stations={stations} />
           </>
         )}

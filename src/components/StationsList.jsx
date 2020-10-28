@@ -7,7 +7,16 @@ const StationsList = ({ stations }) => {
     <div>
       <ul>
         {stations.map((station) => {
-          return <CardList key={station.recordid} {...station} />;
+          return (
+            <CardList
+              key={station.recordid}
+              name={station.name}
+              bike={station.availableBikes}
+              stands={station.availableBikeStand}
+              address={station.address}
+              banking={station.banking}
+            />
+          );
         })}
       </ul>
     </div>
