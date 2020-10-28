@@ -1,9 +1,13 @@
 import React from 'react';
 
-import styles from './css/app.module.css';
+import BikesMap from './components/BikesMap';
 
 function App() {
-  return <div className={styles.app}>Almost Hello World!</div>;
+  return (
+    <div className="App">
+      <BikesMap />
+    </div>
+  );
 }
 
 export default App;
