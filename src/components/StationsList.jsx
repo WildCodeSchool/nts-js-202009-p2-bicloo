@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList';
 
-const StationsList = ({ infos }) => {
+const StationsList = ({ stations }) => {
   return (
     <div>
       <ul>
-        {infos.map((stations) => {
+        {stations.map((station) => {
           return (
             <CardList
-              key={stations.recordid}
-              name={stations.fields.name}
-              bike={stations.fields.available_bikes}
-              stands={stations.fields.available_bike_stands}
-              address={stations.fields.address}
-              banking={stations.fields.banking}
+              key={station.recordid}
+              name={station.name}
+              bike={station.availableBikes}
+              stands={station.availableBikeStand}
+              address={station.address}
+              banking={station.banking}
             />
           );
         })}
@@ -26,5 +26,5 @@ const StationsList = ({ infos }) => {
 export default StationsList;
 
 StationsList.propTypes = {
-  infos: PropTypes.array.isRequired,
+  stations: PropTypes.array.isRequired,
 };
