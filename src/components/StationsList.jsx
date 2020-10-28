@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardList from './CardList';
-import data from '../data.json';
+import styles from '../css/stationsList.module.css';
 
-const StationsList = () => {
-  const infos = data.records;
+const StationsList = ({ infos }) => {
   return (
     <div>
-      <ul>
+      <ul className={styles.main}>
         {infos.map((stations) => {
           return (
             <CardList
@@ -23,4 +23,10 @@ const StationsList = () => {
     </div>
   );
 };
+
 export default StationsList;
+
+StationsList.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  infos: PropTypes.array.isRequired,
+};
