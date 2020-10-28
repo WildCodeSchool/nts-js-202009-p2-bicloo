@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardList = ({ name, bike, stands, address, banking }) => {
+const CardList = ({
+  name,
+  availableBikeStand,
+  availableBikes,
+  address,
+  banking,
+}) => {
   return (
     <li>
       <>
         <h2>{name}</h2>
         <p>
           Velos disponibles:
-          {bike}
+          {availableBikes}
         </p>
         <p>
           Places disponibles:
-          {stands}
+          {availableBikeStand}
         </p>
         <p>
           Adresse:
@@ -28,8 +34,8 @@ export default CardList;
 
 CardList.propTypes = {
   name: PropTypes.string.isRequired,
-  bike: PropTypes.number.isRequired,
-  stands: PropTypes.number.isRequired,
+  availableBikeStand: PropTypes.number.isRequired,
+  availableBikes: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
   banking: PropTypes.string.isRequired,
 };

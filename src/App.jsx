@@ -35,8 +35,7 @@ class App extends Component {
             position: record.fields.position,
           };
         });
-        this.setState({ stations });
-        this.setState({ loading: false });
+        this.setState({ stations, loading: false });
       })
       .catch((err) => alert(err.message));
   }
