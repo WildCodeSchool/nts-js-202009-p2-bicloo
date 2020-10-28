@@ -28,7 +28,7 @@
         "number": 1012,
         "last_update": "2020-04-10T14:57:37+00:00",
         "available_bike_stands": 1,
-        "banking": "False",
+        "banking": "True",
         "available_bikes": 0,
         "address": "CREATION STATION TEST NANTES 2",
         "position": [

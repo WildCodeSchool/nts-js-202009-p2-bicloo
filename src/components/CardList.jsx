@@ -7,7 +7,7 @@ const CardList = ({ name, bike, stands, address, banking }) => {
       <p>Places disponibles: {stands}</p>
       <p>Adresse: {address}</p>
       <button type="button">Itinéraire</button>
-      <p>Avec/Sans bornes: {banking}</p>
+      <p>{banking === 'True' ? 'Avec bornes' : 'Sans bornes'}</p>
     </li>
   );
 };
