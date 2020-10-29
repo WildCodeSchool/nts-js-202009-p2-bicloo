@@ -23,7 +23,7 @@
   padding-right: 4vw;
   max-height: 60vw;
   display: flex;
-  border-radius: 2vw;
+  border-radius: 1vw;
   justify-content: space-around;
   box-shadow: 0 6px 7px rgb(185, 182, 182);
 }
@@ -61,4 +61,30 @@ p {
   padding: 1.5vw;
   border-radius: 0.5vh;
   height: 35px;
+}
+@media screen and (min-width: 768px) {
+  .stationBlock,
+  .mapBlock {
+    position: absolute;
+  }
+
+  .stationBlock {
+    width: 30vw;
+    height: 30vw;
+    right: 4vw;
+    z-index: 1;
+  }
+  .mapBlock {
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+  }
+  .main {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  .list {
+    margin: 1.5vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
 }

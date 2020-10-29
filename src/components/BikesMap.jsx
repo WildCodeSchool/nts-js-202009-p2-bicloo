@@ -5,6 +5,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
 import '../css/BikesMap.css';
+import styles from '../css/stationsList.module.css';
 
 class BikesMap extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class BikesMap extends Component {
     const { zoom, coords } = this.state;
     const { stations } = this.props;
     return (
-      <div>
+      <div className={styles.mapBlock}>
         <Map ref={this.mapRef} center={coords} zoom={zoom}>
           <TileLayer
             url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
