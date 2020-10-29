@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
+import CardList from './CardList';
+
 import '../css/bikesMap.css';
 
 class BikesMap extends Component {
@@ -70,8 +72,8 @@ class BikesMap extends Component {
               icon={goldIcon}
               position={station.position}
             >
-              <Popup>
-                <span>A test.</span>
+              <Popup className="card-popup">
+                <CardList {...station} />
               </Popup>
             </Marker>
           ))}
