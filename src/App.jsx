@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import BikesMap from './components/BikesMap';
-import StationsList from './components/StationsList.jsx';
+import StationsList from './components/StationsList';
 
 class App extends Component {
   constructor() {
@@ -41,13 +41,13 @@ class App extends Component {
   }
 
   render() {
-    const { loading, stations } = this.state;
+    const { loading } = this.state;
     return (
       <div className="App">
         {!loading && (
           <>
-            <BikesMap />
-            <StationsList stations={stations} />
+            <BikesMap {...this.state} />
+            <StationsList {...this.state} />
           </>
         )}
       </div>

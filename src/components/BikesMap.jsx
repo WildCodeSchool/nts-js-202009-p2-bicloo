@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+
 import '../css/BikesMap.css';
 
 class BikesMap extends Component {
@@ -11,12 +14,7 @@ class BikesMap extends Component {
       lat: 47.232964,
       lng: -1.51134,
       zoom: 13,
-      markers: [],
     };
-    /* { position1: [47.228371, -1.523621] },
-        { position1: [47.218371, -1.543621] },
-        { position1: [47.248371, -1.513621] }, */
-
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
     this.handleOnLocationError = this.handleOnLocationError.bind(this);
   }
@@ -55,10 +53,9 @@ class BikesMap extends Component {
       popupAnchor: [1, -34],
       shadowSize: [41, 41],
     });
-    const { zoom } = this.state;
-    const { lat, lng } = this.state;
+    const { zoom, lat, lng } = this.state;
     const position = [lat, lng];
-    const { markers } = this.state;
+    const { stations } = this.props;
     return (
       <div>
         <Map ref={this.mapRef} center={position} zoom={zoom}>
@@ -66,8 +63,8 @@ class BikesMap extends Component {
             url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-          {markers.map((localisation) => (
-            <Marker icon={goldIcon} position={localisation.position1}>
+          {stations.map((station) => (
+            <Marker icon={goldIcon} position={station.position}>
               <Popup>
                 <span>A test.</span>
               </Popup>
@@ -78,5 +75,9 @@ class BikesMap extends Component {
     );
   }
 }
+
+BikesMap.propTypes = {
+  stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default BikesMap;
