@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import BikesMap from './components/BikesMap';
-import StationsList from './components/StationsList';
+import ListSlider from './components/ListSlider';
 
 class App extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class App extends Component {
   fetchData() {
     axios
       .get(
-        'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=50&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN'
+        'https://cors-anywhere.herokuapp.com/https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=50&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN'
       )
       .then(({ data }) => {
         const stations = data.records.map((record) => {
@@ -46,8 +46,8 @@ class App extends Component {
       <div className="App">
         {!loading && (
           <>
+            <ListSlider {...this.state} />
             <BikesMap {...this.state} />
-            <StationsList {...this.state} />
           </>
         )}
       </div>

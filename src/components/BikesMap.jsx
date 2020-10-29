@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-import '../css/BikesMap.css';
+import '../css/bikesMap.css';
 
 class BikesMap extends Component {
   constructor(props) {
