@@ -3,21 +3,12 @@ import PropTypes from 'prop-types';
 import CardList from './CardList';
 import styles from '../css/stationsList.module.css';
 
-const StationsList = ({ infos }) => {
+const StationsList = ({ stations }) => {
   return (
     <div>
       <ul className={styles.main}>
-        {infos.map((stations) => {
-          return (
-            <CardList
-              key={stations.recordid}
-              name={stations.fields.name}
-              bike={stations.fields.available_bikes}
-              stands={stations.fields.available_bike_stands}
-              address={stations.fields.address}
-              banking={stations.fields.banking}
-            />
-          );
+        {stations.map((station) => {
+          return <CardList key={station.id} {...station} />;
         })}
       </ul>
     </div>
@@ -27,6 +18,5 @@ const StationsList = ({ infos }) => {
 export default StationsList;
 
 StationsList.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  infos: PropTypes.array.isRequired,
+  stations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
