@@ -21,7 +21,7 @@ class App extends Component {
   fetchData() {
     axios
       .get(
-        'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=125&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN'
+        'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=50&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN'
       )
       .then(({ data }) => {
         const stations = data.records.map((record) => {
@@ -41,13 +41,13 @@ class App extends Component {
   }
 
   render() {
-    const { loading, stations } = this.state;
+    const { loading } = this.state;
     return (
       <div className="App">
         {!loading && (
           <>
-            <BikesMap />
-            <StationsList stations={stations} />
+            <BikesMap {...this.state} />
+            <StationsList {...this.state} />
           </>
         )}
       </div>
