@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import BikesMap from './components/BikesMap';
-import StationsList from './components/StationsList';
+import WrapperStation from './components/WrapperStation';
 
 class App extends Component {
   constructor() {
@@ -46,8 +44,7 @@ class App extends Component {
       <div className="App">
         {!loading && (
           <>
-            <BikesMap />
-            <StationsList stations={stations} />
+            <WrapperStation stations={stations} />
           </>
         )}
       </div>
