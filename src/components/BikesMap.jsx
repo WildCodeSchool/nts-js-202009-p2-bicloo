@@ -11,8 +11,8 @@ class BikesMap extends Component {
     super(props);
     this.mapRef = React.createRef();
     this.state = {
-      lat: 47.232964,
-      lng: -1.51134,
+      lat: 47.214938,
+      lng: -1.556287,
       zoom: 13,
     };
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
@@ -64,7 +64,11 @@ class BikesMap extends Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {stations.map((station) => (
-            <Marker icon={goldIcon} position={station.position}>
+            <Marker
+              key={station.id}
+              icon={goldIcon}
+              position={station.position}
+            >
               <Popup>
                 <span>A test.</span>
               </Popup>
