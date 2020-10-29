@@ -41,13 +41,13 @@ class App extends Component {
   }
 
   render() {
-    const { loading, stations } = this.state;
+    const { loading } = this.state;
     return (
       <div className="App">
         {!loading && (
           <>
-            <BikesMap />
-            <StationsList stations={stations} />
+            <BikesMap {...this.state} />
+            <StationsList {...this.state} />
           </>
         )}
       </div>

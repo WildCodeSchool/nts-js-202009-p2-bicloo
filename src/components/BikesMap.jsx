@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import PropTypes from 'prop-types';
+
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+
 import '../css/BikesMap.css';
 
 class BikesMap extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.mapRef = React.createRef();
     this.state = {
       lat: 47.232964,
@@ -40,9 +43,19 @@ class BikesMap extends Component {
   }
 
   render() {
-    const { zoom } = this.state;
-    const { lat, lng } = this.state;
+    const goldIcon = new L.Icon({
+      iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+    const { zoom, lat, lng } = this.state;
     const position = [lat, lng];
+    const { stations } = this.props;
     return (
       <div>
         <Map ref={this.mapRef} center={position} zoom={zoom}>
@@ -50,10 +63,21 @@ class BikesMap extends Component {
             url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
+          {stations.map((station) => (
+            <Marker icon={goldIcon} position={station.position}>
+              <Popup>
+                <span>A test.</span>
+              </Popup>
+            </Marker>
+          ))}
         </Map>
       </div>
     );
   }
 }
+
+BikesMap.propTypes = {
+  stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default BikesMap;
