@@ -12,7 +12,9 @@ const CardList = ({
   return (
     <li className={styles.list}>
       <div className={styles.infos}>
-        <h2 className={styles.name}>{name}</h2>
+        <h2 className={styles.name}>
+          {name.substr(name.lastIndexOf('-') + 1)}
+        </h2>
         <p>
           Velos disponibles:
           {'  '}

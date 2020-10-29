@@ -11,8 +11,7 @@ class BikesMap extends Component {
     super(props);
     this.mapRef = React.createRef();
     this.state = {
-      lat: 47.214938,
-      lng: -1.556287,
+      coords: [47.214938, -1.556287],
       zoom: 13,
     };
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
@@ -34,6 +33,8 @@ class BikesMap extends Component {
     const { latlng } = e;
     const marker = L.marker(latlng);
     marker.addTo(map).bindPopup('Votre position ').openPopup();
+
+    this.setState({ zoom: 17, coords: latlng });
   }
 
   handleOnLocationError() {
@@ -53,15 +54,15 @@ class BikesMap extends Component {
       popupAnchor: [1, -34],
       shadowSize: [41, 41],
     });
-    const { zoom, lat, lng } = this.state;
-    const position = [lat, lng];
+    const { zoom, coords } = this.state;
     const { stations } = this.props;
     return (
       <div>
-        <Map ref={this.mapRef} center={position} zoom={zoom}>
+        <Map ref={this.mapRef} center={coords} zoom={zoom}>
           <TileLayer
             url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            maxZoom={25}
           />
           {stations.map((station) => (
             <Marker
