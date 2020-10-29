@@ -18,13 +18,13 @@
 
 .list {
   background-color: var(--card-item-background);
-  margin: 3vw;
-  padding-left: 4vw;
-  padding-right: 4vw;
+  margin: 1rem 3vw;
+  padding: 1.3rem;
   max-height: 60vw;
   display: flex;
-  border-radius: 2vw;
+  border-radius: 5px;
   justify-content: space-around;
+  align-items: center;
   box-shadow: 0 6px 7px rgb(185, 182, 182);
 }
 .infos {
@@ -51,14 +51,14 @@ p {
   border-color: #c92e3a;
   border-radius: 0.5vh;
   border-width: 1px;
-  padding: 1.5vw;
+  padding: 1.3rem 0.3rem;
   text-align: center;
+  margin-bottom: 0;
 }
 .button {
   background-color: var(--card-item-btn-itinerary-background);
   color: white;
   border: none;
-  padding: 1.5vw;
+  padding: 1.5rem 0.5rem;
   border-radius: 0.5vh;
-  height: 35px;
 }
