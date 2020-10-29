@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import BikesMap from './components/BikesMap';
 import ListSlider from './components/ListSlider';
+import StationsList from './components/StationsList';
 
 class App extends Component {
   constructor() {
@@ -46,8 +47,9 @@ class App extends Component {
       <div className="App">
         {!loading && (
           <>
-            <ListSlider {...this.state} />
             <BikesMap {...this.state} />
+            <ListSlider {...this.state} />
+            <StationsList {...this.state} />
           </>
         )}
       </div>

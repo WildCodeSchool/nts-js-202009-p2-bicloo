@@ -6,6 +6,7 @@
   --card-item-btn-itinerary-background: #248bad;
   --card-item-btn-born-background: #f2f2f2;
 */
+
 .main {
   background-color: var(--card-background);
   list-style: none;
@@ -61,4 +62,10 @@ p {
   padding: 1.5vw;
   border-radius: 0.5vh;
   height: 35px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    display: none;
+  }
 }
