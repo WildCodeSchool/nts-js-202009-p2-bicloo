@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import BikesMap from './BikesMap';
 
 const WrapperStation = () => {
-  const [dataStation, setdataStation] = useState([]);
+  const [dataStation, setdataStation] = useState();
 
   useEffect(() => {
     Axios.get(
@@ -13,11 +13,7 @@ const WrapperStation = () => {
     });
   }, []);
 
-  return (
-    <main>
-      <BikesMap infos={dataStation} />
-    </main>
-  );
+  return <main>{dataStation && <BikesMap infos={dataStation} />}</main>;
 };
 
 export default WrapperStation;

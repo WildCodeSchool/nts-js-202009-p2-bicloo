@@ -13,7 +13,6 @@ class BikesMap extends Component {
       zoom: 13,
       markers: [],
     };
-
     /* { position1: [47.228371, -1.523621] },
         { position1: [47.218371, -1.543621] },
         { position1: [47.248371, -1.513621] }, */
