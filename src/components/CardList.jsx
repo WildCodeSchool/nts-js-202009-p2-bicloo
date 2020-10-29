@@ -35,8 +35,8 @@ const CardList = ({
         <button type="button" className={styles.button}>
           Itinéraire
         </button>
-        <p className={styles.banking}>
-          {banking === 'True' ? 'Avec bornes' : 'Sans bornes'}
+        <p className={banking === 'False' ? styles.banking : styles.notBanking}>
+          {banking === 'True' ? 'Avec borne' : 'Sans borne'}
         </p>
       </div>
     </li>
