@@ -45,12 +45,12 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, stations } = this.state;
     return (
       <div className="App">
         {!loading && (
           <>
-            <WrapperStation stations={stations} />    
+            <WrapperStation stations={stations} />
           </>
         )}
       </div>
