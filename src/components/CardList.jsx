@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../css/stationsList.module.css';
 
 const CardList = ({
   name,
@@ -9,25 +10,39 @@ const CardList = ({
   banking,
 }) => {
   return (
-    <li>
-      <h2>{name}</h2>
-      <p>
-        Velos disponibles:
-        {availableBikes}
-      </p>
-      <p>
-        Places disponibles:
-        {availableBikeStand}
-      </p>
-      <p>
-        Adresse:
-        {address}
-      </p>
-      <button type="button">Itinéraire</button>
-      <p>{banking === 'True' ? 'Avec bornes' : 'Sans bornes'}</p>
+    <li className={styles.list}>
+      <div className={styles.infos}>
+        <h2 className={styles.name}>
+          {name.substr(name.lastIndexOf('-') + 1)}
+        </h2>
+        <p>
+          Velos disponibles:
+          {'  '}
+          <b>{availableBikes}</b>
+        </p>
+        <p>
+          Places disponibles:
+          {'  '}
+          <b>{availableBikeStand}</b>
+        </p>
+        <p>
+          Adresse:
+          {'  '}
+          <b>{address}</b>
+        </p>
+      </div>
+      <div className={styles.buttons}>
+        <button type="button" className={styles.button}>
+          Itinéraire
+        </button>
+        <p className={banking === 'False' ? styles.banking : styles.notBanking}>
+          {banking === 'True' ? 'Avec borne' : 'Sans borne'}
+        </p>
+      </div>
     </li>
   );
 };
+
 export default CardList;
 
 CardList.propTypes = {
