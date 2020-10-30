@@ -19,7 +19,13 @@ class App extends Component {
   fetchData() {
     axios
       .get(
-        'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=125&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN'
+        'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=50&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN',
+        {
+          headers: {
+            Authorization:
+              'ApiKey c05f988c5637dd721c0c53db8abf952a3416a0ac0fa2cd535d82a521 ',
+          },
+        }
       )
       .then(({ data }) => {
         const stations = data.records.map((record) => {
@@ -39,17 +45,16 @@ class App extends Component {
   }
 
   render() {
-    const { loading, stations } = this.state;
+    const { loading } = this.state;
     return (
       <div className="App">
         {!loading && (
           <>
-            <WrapperStation stations={stations} />
+            <WrapperStation stations={stations} />    
           </>
         )}
       </div>
     );
   }
 }
-
 export default App;
