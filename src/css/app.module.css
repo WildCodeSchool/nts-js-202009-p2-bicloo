@@ -1,0 +1,4 @@
+.app {
+  background-color: var(--header-background);
+  font-family: var(--daysOne);
+}

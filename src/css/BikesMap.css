@@ -1,0 +1,29 @@
+.leaflet-container {
+  height: 80vh;
+  width: 100%;
+}
+
+.leaflet-popup-tip-container {
+  display: none;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: none;
+  color: unset;
+  box-shadow: none;
+}
+
+.leaflet-popup-content {
+  width: 80vw !important;
+}
+
+.leaflet-popup-close-button {
+  display: none;
+}
+
+@media screen and (min-width: 768px){
+  .card-popup{
+    display: none;
+  }
+}
