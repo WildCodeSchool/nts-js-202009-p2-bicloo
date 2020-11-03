@@ -50,7 +50,7 @@ class App extends Component {
       <div className="App">
         {!loading && (
           <>
-            <WrapperStation stations={stations} />    
+            <WrapperStation stations={this.stations} />
           </>
         )}
       </div>
