@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useWindowSize } from 'react-use';
 import BikesMap from './BikesMap';
 import StationsList from './StationsList';
 import styles from '../css/WrapperStation.module.css';
 
 const WrapperStation = ({ stations }) => {
   const [display, setdisplay] = useState(true);
+  const { width } = useWindowSize();
 
   const handleDisplay = (bool) => {
     setdisplay(bool);
@@ -21,7 +23,7 @@ const WrapperStation = ({ stations }) => {
           List
         </button>
       </nav>
-      {display ? (
+      {display && width < 768 ? (
         <BikesMap stations={stations} />
       ) : (
         <StationsList stations={stations} />
@@ -38,6 +40,5 @@ const WrapperStation = ({ stations }) => {
 export default WrapperStation;
 
 WrapperStation.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  stations: PropTypes.array.isRequired,
+  stations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
