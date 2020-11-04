@@ -54,7 +54,7 @@ class BikesMap extends Component {
     const { leafletElement: map } = current;
 
     if (this.routingControl != null) {
-      this.removeRoutingCnotrol();
+      this.removeRoutingControl();
     }
     this.routingControl = L.Routing.control({
       waypoints: [L.latLng(coords), L.latLng(waypoints)],
