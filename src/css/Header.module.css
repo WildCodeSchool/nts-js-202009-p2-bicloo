@@ -1,0 +1,11 @@
+.wrapperHeader {
+  background-color: var(--header-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo {
+  transform: translateY(-1rem);
+}

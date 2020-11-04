@@ -1,5 +1,5 @@
 .leaflet-container {
-  height: 80vh;
+  height: 100%;
   width: 100%;
 }
 
@@ -22,8 +22,8 @@
   display: none;
 }
 
-@media screen and (min-width: 768px){
-  .card-popup{
+@media screen and (min-width: 768px) {
+  .card-popup {
     display: none;
   }
 }
