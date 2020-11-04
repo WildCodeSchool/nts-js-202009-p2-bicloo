@@ -51,7 +51,12 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
         />
-        <StationsList stations={stations} />
+        <StationsList
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
       </div>
     </main>
   );
