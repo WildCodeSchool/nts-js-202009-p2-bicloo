@@ -40,12 +40,12 @@ class BikesMap extends Component {
   }
 
   handleItinerary(position) {
-    const { coords, stationCoords } = this.state;
+    const { coords } = this.state;
     const { current } = this.mapRef;
     const { leafletElement: map } = current;
     this.setState({ stationCoords: position }, () => {
       L.Routing.control({
-        waypoints: [L.latLng(coords), L.latLng(stationCoords)],
+        waypoints: [L.latLng(coords), L.latLng(position)],
         lineOptions: {
           styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
         },
