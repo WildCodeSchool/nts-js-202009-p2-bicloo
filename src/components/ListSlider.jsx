@@ -23,7 +23,6 @@ function ListSlider({ stations }) {
         {stations.map((station) => {
           return <CardList key={station.id} {...station} />;
         })}
-        {'  '}
       </Slider>
     </div>
   );
