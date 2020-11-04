@@ -17,6 +17,7 @@ class BikesMap extends Component {
       stationCoords: null,
       zoom: 13,
     };
+    this.routing = {};
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
     this.handleItinerary = this.handleItinerary.bind(this);
   }
@@ -26,6 +27,20 @@ class BikesMap extends Component {
     const { leafletElement: map } = current;
     map.locate({ setView: true });
     map.on('locationfound', this.handleOnLocationFound);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { stationCoords } = this.state;
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+
+    if (stationCoords !== prevState.stationCoords) {
+      console.log(this.routing._routes);
+      if (this.routing._routes) {
+        this.routing._routes.splice(0, 1);
+      }
+      // this.handleItinerary(st);
+    }
   }
 
   handleOnLocationFound(e) {
@@ -43,13 +58,15 @@ class BikesMap extends Component {
     const { coords, stationCoords } = this.state;
     const { current } = this.mapRef;
     const { leafletElement: map } = current;
+
     this.setState({ stationCoords: position }, () => {
-      L.Routing.control({
+      this.routing = L.Routing.control({
         waypoints: [L.latLng(coords), L.latLng(position)],
         lineOptions: {
           styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
         },
-      }).addTo(map);
+      });
+      this.routing.addTo(map);
     });
   }
 
