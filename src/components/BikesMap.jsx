@@ -14,9 +14,11 @@ class BikesMap extends Component {
     this.mapRef = React.createRef();
     this.state = {
       coords: [47.214938, -1.556287],
+      stationCoords: [],
       zoom: 13,
     };
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
+    this.handleItinerary = this.handleItinerary.bind(this);
   }
 
   componentDidMount() {
@@ -24,13 +26,6 @@ class BikesMap extends Component {
     const { leafletElement: map } = current;
     map.locate({ setView: true });
     map.on('locationfound', this.handleOnLocationFound);
-
-    L.Routing.control({
-      waypoints: [L.latLng(57.74, 11.94), L.latLng(57.6792, 11.949)],
-      lineOptions: {
-        styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
-      },
-    }).addTo(map);
   }
 
   handleOnLocationFound(e) {
@@ -42,6 +37,20 @@ class BikesMap extends Component {
     marker.addTo(map).bindPopup('Votre position ').openPopup();
 
     this.setState({ zoom: 17, coords: latlng });
+  }
+
+  handleItinerary(position) {
+    const { coords, stationCoords } = this.state;
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+    this.setState({ stationCoords: position }, () => {
+      L.Routing.control({
+        waypoints: [L.latLng(coords), L.latLng(stationCoords)],
+        lineOptions: {
+          styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+        },
+      }).addTo(map);
+    });
   }
 
   render() {
@@ -72,7 +81,10 @@ class BikesMap extends Component {
               position={station.position}
             >
               <Popup className="card-popup">
-                <CardList {...station} />
+                <CardList
+                  station={station}
+                  handleItinerary={this.handleItinerary}
+                />
               </Popup>
             </Marker>
           ))}
