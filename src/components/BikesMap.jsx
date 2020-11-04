@@ -14,7 +14,7 @@ class BikesMap extends Component {
     this.mapRef = React.createRef();
     this.state = {
       coords: [47.214938, -1.556287],
-      stationCoords: [],
+      stationCoords: null,
       zoom: 13,
     };
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
@@ -40,7 +40,7 @@ class BikesMap extends Component {
   }
 
   handleItinerary(position) {
-    const { coords } = this.state;
+    const { coords, stationCoords } = this.state;
     const { current } = this.mapRef;
     const { leafletElement: map } = current;
     this.setState({ stationCoords: position }, () => {

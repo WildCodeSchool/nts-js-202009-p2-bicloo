@@ -58,6 +58,7 @@ CardList.propTypes = {
     availableBikes: PropTypes.number.isRequired,
     address: PropTypes.string.isRequired,
     banking: PropTypes.string.isRequired,
+    position: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
   handleItinerary: PropTypes.func.isRequired,
 };
