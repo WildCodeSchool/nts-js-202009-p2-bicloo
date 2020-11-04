@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../css/stationsList.module.css';
 
-const CardList = ({ station, handleItinerary }) => {
+const CardList = ({ station, handleRoutingControl }) => {
   return (
     <>
       {station && (
@@ -31,7 +31,7 @@ const CardList = ({ station, handleItinerary }) => {
             <button
               type="button"
               className={styles.button}
-              onClick={() => handleItinerary(station.position)}
+              onClick={() => handleRoutingControl(station.position)}
             >
               Itinéraire
             </button>
@@ -60,5 +60,5 @@ CardList.propTypes = {
     banking: PropTypes.string.isRequired,
     position: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
-  handleItinerary: PropTypes.func.isRequired,
+  handleRoutingControl: PropTypes.func.isRequired,
 };

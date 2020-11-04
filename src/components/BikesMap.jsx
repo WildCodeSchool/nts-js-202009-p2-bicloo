@@ -19,9 +19,9 @@ class BikesMap extends Component {
     };
     this.routingControl = null;
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
-    this.handleItinerary = this.handleItinerary.bind(this);
     this.addRoutingControl = this.addRoutingControl.bind(this);
     this.removeRoutingControl = this.removeRoutingControl.bind(this);
+    this.handleRoutingControl = this.handleRoutingControl.bind(this);
   }
 
   componentDidMount() {
@@ -30,18 +30,6 @@ class BikesMap extends Component {
     map.locate({ setView: true });
     map.on('locationfound', this.handleOnLocationFound);
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { stationCoords } = this.state;
-  //   const { current } = this.mapRef;
-  //   const { leafletElement: map } = current;
-
-  //   if (stationCoords !== prevState.stationCoords) {
-  //     //console.log(this.routing.options.waypoints);
-  //     //this.routing.options.lineOptions;
-  //     // this.handleItinerary(st);
-  //   }
-  // }
 
   handleOnLocationFound(e) {
     const { current } = this.mapRef;
@@ -54,13 +42,19 @@ class BikesMap extends Component {
     this.setState({ zoom: 17, coords: latlng });
   }
 
+  /*
+    ajouter un itinéraire:
+    je vérifie qu'il n'y a pas déjà un itinéraire
+    si oui, j'appel removeRoutingCnotrol()
+    sinon je le créer et l'ajoute à la carte
+  */
   addRoutingControl(waypoints) {
     const { coords } = this.state;
     const { current } = this.mapRef;
     const { leafletElement: map } = current;
 
     if (this.routingControl != null) {
-      this.removeRoutingControl();
+      this.removeRoutingCnotrol();
     }
     this.routingControl = L.Routing.control({
       waypoints: [L.latLng(coords), L.latLng(waypoints)],
@@ -70,6 +64,12 @@ class BikesMap extends Component {
     }).addTo(map);
   }
 
+  /*
+    supprimer un itinéraire:
+    si routingControl n'est pas nul
+    je supprime l'itinéraire
+    et remet routingControl à nul
+  */
   removeRoutingControl() {
     const { current } = this.mapRef;
     const { leafletElement: map } = current;
@@ -80,7 +80,12 @@ class BikesMap extends Component {
     }
   }
 
-  handleItinerary(position) {
+  /*
+    dans CardList, au click
+    je créer un itinéraire
+    entre ma position et la position de la station
+  */
+  handleRoutingControl(position) {
     const { stationCoords } = this.state;
 
     this.setState({ stationCoords: position }, () => {
@@ -118,7 +123,7 @@ class BikesMap extends Component {
               <Popup className="card-popup">
                 <CardList
                   station={station}
-                  handleItinerary={this.handleItinerary}
+                  handleRoutingControl={this.handleRoutingControl}
                 />
               </Popup>
             </Marker>
