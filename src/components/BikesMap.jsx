@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import 'leaflet-routing-machine';
 
 import CardList from './CardList';
 
@@ -15,9 +16,14 @@ class BikesMap extends Component {
     this.mapRef = React.createRef();
     this.state = {
       coords: [47.214938, -1.556287],
+      stationCoords: null,
       zoom: 13,
     };
+    this.routingControl = null;
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
+    this.addRoutingControl = this.addRoutingControl.bind(this);
+    this.removeRoutingControl = this.removeRoutingControl.bind(this);
+    this.handleRoutingControl = this.handleRoutingControl.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +42,57 @@ class BikesMap extends Component {
     marker.addTo(map).bindPopup('Votre position ').openPopup();
 
     this.setState({ zoom: 17, coords: latlng });
+  }
+
+  /*
+    ajouter un itinéraire:
+    je vérifie qu'il n'y a pas déjà un itinéraire
+    si oui, j'appel removeRoutingCnotrol()
+    sinon je le créer et l'ajoute à la carte
+  */
+  addRoutingControl(waypoints) {
+    const { coords } = this.state;
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+
+    if (this.routingControl != null) {
+      this.removeRoutingControl();
+    }
+    this.routingControl = L.Routing.control({
+      waypoints: [L.latLng(coords), L.latLng(waypoints)],
+      lineOptions: {
+        styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+      },
+    }).addTo(map);
+  }
+
+  /*
+    supprimer un itinéraire:
+    si routingControl n'est pas nul
+    je supprime l'itinéraire
+    et remet routingControl à nul
+  */
+  removeRoutingControl() {
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+
+    if (this.routingControl != null) {
+      map.removeControl(this.routingControl);
+      this.routingControl = null;
+    }
+  }
+
+  /*
+    dans CardList, au click
+    je créer un itinéraire
+    entre ma position et la position de la station
+  */
+  handleRoutingControl(position) {
+    const { stationCoords } = this.state;
+
+    this.setState({ stationCoords: position }, () => {
+      this.addRoutingControl(position);
+    });
   }
 
   render() {
@@ -102,6 +159,21 @@ class BikesMap extends Component {
                 </Popup>
               </Marker>
             ))}
+
+          {stations.map((station) => (
+            <Marker
+              key={station.id}
+              icon={goldIcon}
+              position={station.position}
+            >
+              <Popup className="card-popup">
+                <CardList
+                  station={station}
+                  handleRoutingControl={this.handleRoutingControl}
+                />
+              </Popup>
+            </Marker>
+          ))}
         </Map>
       </div>
     );

@@ -1,8 +1,9 @@
 {
   "singleQuote": true,
   "trailingComma": "es5",
+  
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"    
   }
 }

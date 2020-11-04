@@ -1,0 +1,28 @@
+.btn {
+  width: 5em;
+  height: 5em;
+  border-radius: 50px;
+}
+
+.btnActive {
+  background-color: var(--main-btn-active-background);
+}
+
+.btnDisabled {
+  background-color: var(--main-btn-disabled-background);
+}
+
+.container {
+  width: 50vw;
+  background-color: var(--main-btn-active-background);
+}
+
+.containerActive {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.containerDisabled {
+  display: none;
+}

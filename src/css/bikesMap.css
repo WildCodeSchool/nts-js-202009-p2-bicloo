@@ -22,6 +22,11 @@
   display: none;
 }
 
+.leaflet-routing-container {
+  display: none;
+}
+
+
 @media screen and (min-width: 768px) {
   .card-popup {
     display: none;
