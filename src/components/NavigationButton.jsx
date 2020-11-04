@@ -15,7 +15,11 @@ function NavigationButton() {
         type="button"
       >
         +
-        <div className={styles.nav}>
+        <div
+          className={`${styles.container} ${
+            active ? styles.containerActive : styles.containerDisabled
+          }`}
+        >
           <p>rechercher</p>
           <p>tarifs</p>
           <p>contacts</p>
