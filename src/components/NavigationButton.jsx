@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import search from '../assets/icons/search.svg';
+import credit from '../assets/icons/credit_card.svg';
+
 import styles from '../css/navigationButton.module.css';
 
 function NavigationButton() {
@@ -16,8 +19,8 @@ function NavigationButton() {
           }`}
         >
           <p>contacts</p>
-          <p>tarifs</p>
-          <p>rechercher</p>
+          <img src={credit} alt="icon credit" />
+          <img src={search} alt="icon search" />
         </div>
         <button
           className={`${styles.btn} ${
