@@ -1,0 +1,62 @@
+.wrapperInput {
+  position: relative;
+  width: max-content;
+  font-family: var(--dosis);
+}
+
+.iconInput {
+  position: absolute;
+  transform: translate(0.4rem, 0.5rem);
+}
+
+.input {
+  font-family: var(--dosis);
+  font-size: 1.0625rem;
+  background-color: var(--header-searchBar-background);
+  border: 0.1px solid gray;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  width: 17rem;
+}
+
+.list {
+  font-family: var(--dosis);
+  background-color: var(--header-searchBar-background);
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  border: 0.1px solid gray;
+  border-top-color: gray;
+  border-top-style: solid;
+  border-top-width: 0.5px;
+  width: max-content;
+  border-top: none;
+  width: 19.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  transition: all 0.1s linear;
+}
+
+.listItem {
+  text-align: center;
+  padding: 0.4rem 0;
+}
+
+.listItem:active {
+  background-color: var(--card-item-btn-itinerary-background);
+  color: #fff;
+}
+
+.contains {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .listItem:hover {
+    cursor: pointer;
+    background-color: var(--card-item-btn-itinerary-background);
+    color: #fff;
+  }
+}
