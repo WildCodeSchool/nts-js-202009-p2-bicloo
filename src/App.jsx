@@ -10,16 +10,19 @@ class App extends Component {
       stations: {},
       loading: true,
       currentAddress: '',
+      arrivalAddress: '',
     };
     this.fetchData = this.fetchData.bind(this);
     this.setCurrentAdress = this.setCurrentAdress.bind(this);
+    this.setArrivalAddress = this.setArrivalAddress.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
   }
 
-  /** Fonction pour mettre a jour l'adresse actuel
+  /** Fonctions pour mettre a jour l'adresse actuel et
+   * la deuxième l'address d'arriver
    * on recurperes ses coordonners:
    * - id
    * - address
@@ -27,6 +30,10 @@ class App extends Component {
    */
   setCurrentAdress(currAddress) {
     this.setState({ currentAddress: currAddress });
+  }
+
+  setArrivalAddress(arrAddress) {
+    this.setState({ arrivalAddress: arrAddress });
   }
 
   fetchData() {
@@ -61,7 +68,10 @@ class App extends Component {
     const { loading, stations } = this.state;
     return (
       <div className="App">
-        <Header setCurrentAdress={this.setCurrentAdress} />
+        <Header
+          setCurrentAdress={this.setCurrentAdress}
+          setArrivalAddress={this.setArrivalAddress}
+        />
         {!loading && (
           <>
             <WrapperStation stations={stations} />
