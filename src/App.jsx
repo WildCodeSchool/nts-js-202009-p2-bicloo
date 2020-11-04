@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+import BikesMap from './components/BikesMap';
+import ListSlider from './components/ListSlider';
+import StationsList from './components/StationsList';
 import WrapperStation from './components/WrapperStation';
 import Header from './components/Header';
+
 
 class App extends Component {
   constructor() {
@@ -40,6 +45,7 @@ class App extends Component {
           },
         }
       )
+
       .then(({ data }) => {
         const stations = data.records.map((record) => {
           return {
@@ -64,6 +70,9 @@ class App extends Component {
         <Header setCurrentAdress={this.setCurrentAdress} />
         {!loading && (
           <>
+            <BikesMap {...this.state} />
+            <ListSlider {...this.state} />
+            <StationsList {...this.state} />
             <WrapperStation stations={stations} />
           </>
         )}

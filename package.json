@@ -13,6 +13,8 @@
     "react-dom": "^16.14.0",
     "react-leaflet": "^2.8.0",
     "react-scripts": "3.4.3",
+    "react-slick": "^0.27.12",
+    "slick-carousel": "^1.8.1",
     "react-use": "^15.3.4"
   },
   "scripts": {
