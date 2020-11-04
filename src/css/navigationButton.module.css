@@ -1,7 +1,30 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 1em;
+  border: 2px solid black;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  border-radius: 35px;
+  width: 80vw;
+}
+
+.containerActive {
+  background-color: var(--main-btn-disabled-background);
+  border-radius: 35px;
+}
+
 .btn {
   width: 5em;
   height: 5em;
   border-radius: 50px;
+  border: none;
+  outline: none;
 }
 
 .btnActive {
@@ -12,17 +35,18 @@
   background-color: var(--main-btn-disabled-background);
 }
 
-.container {
+.nav {
   width: 50vw;
-  background-color: var(--main-btn-active-background);
+  background-color: var(--main-btn-disabled-background);
 }
 
-.containerActive {
+.navActive {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  border-radius: 35px;
 }
-.containerDisabled {
+.navDisabled {
   display: none;
 }

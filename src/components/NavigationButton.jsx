@@ -6,25 +6,29 @@ function NavigationButton() {
   const [active, setActive] = useState(false);
 
   return (
-    <div>
-      <button
-        className={`${styles.btn} ${
-          active ? styles.btnActive : styles.btnDisabled
-        }`}
-        onClick={() => setActive(!active)}
-        type="button"
+    <div className={styles.main}>
+      <div
+        className={`${styles.container} ${active && styles.containerActive}`}
       >
-        +
         <div
-          className={`${styles.container} ${
-            active ? styles.containerActive : styles.containerDisabled
+          className={`${styles.nav} ${
+            active ? styles.navActive : styles.navDisabled
           }`}
         >
-          <p>rechercher</p>
-          <p>tarifs</p>
           <p>contacts</p>
+          <p>tarifs</p>
+          <p>rechercher</p>
         </div>
-      </button>
+        <button
+          className={`${styles.btn} ${
+            active ? styles.btnActive : styles.btnDisabled
+          }`}
+          onClick={() => setActive(!active)}
+          type="button"
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 }
