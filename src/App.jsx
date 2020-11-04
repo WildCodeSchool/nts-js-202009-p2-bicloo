@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import WrapperStation from './components/WrapperStation';
+
+import Header from './components/Header';
 
 class App extends Component {
   constructor() {
@@ -8,8 +11,12 @@ class App extends Component {
     this.state = {
       stations: {},
       loading: true,
+      bikesIsChecked: true,
+      standsIsChecked: true,
+      bankingIsChecked: true,
     };
     this.fetchData = this.fetchData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -44,13 +51,45 @@ class App extends Component {
       .catch((err) => alert(err.message));
   }
 
+  handleChange(e) {
+    if (e.target.name === 'bikes') {
+      this.setState({ bikesIsChecked: e.target.checked });
+      console.log(this.state.bikesIsChecked);
+    }
+    if (e.target.name === 'stands') {
+      this.setState({ standsIsChecked: e.target.checked });
+      console.log(this.state.standsIsChecked);
+    }
+    if (e.target.name === 'banking') {
+      this.setState({ bankingIsChecked: e.target.checked });
+      console.log(this.state.bankingIsChecked);
+    }
+  }
+
   render() {
-    const { loading, stations } = this.state;
+    const {
+      loading,
+      stations,
+      bikesIsChecked,
+      standsIsChecked,
+      bankingIsChecked,
+    } = this.state;
     return (
       <div className="App">
+        <Header
+          handleChange={this.handleChange}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
         {!loading && (
           <>
-            <WrapperStation stations={stations} />
+            <WrapperStation
+              stations={stations}
+              bikesIsChecked={bikesIsChecked}
+              standsIsChecked={standsIsChecked}
+              bankingIsChecked={bankingIsChecked}
+            />
           </>
         )}
       </div>

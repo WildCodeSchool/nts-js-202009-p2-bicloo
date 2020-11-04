@@ -5,7 +5,12 @@ import BikesMap from './BikesMap';
 import StationsList from './StationsList';
 import styles from '../css/WrapperStation.module.css';
 
-const WrapperStation = ({ stations }) => {
+const WrapperStation = ({
+  stations,
+  bikesIsChecked,
+  standsIsChecked,
+  bankingIsChecked,
+}) => {
   const [display, setdisplay] = useState(true);
   const { width } = useWindowSize();
 
@@ -24,13 +29,28 @@ const WrapperStation = ({ stations }) => {
         </button>
       </nav>
       {display && width < 768 ? (
-        <BikesMap stations={stations} />
+        <BikesMap
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
       ) : (
-        <StationsList stations={stations} />
+        <StationsList
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
       )}
 
       <div className={styles.desktop}>
-        <BikesMap stations={stations} />
+        <BikesMap
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
         <StationsList stations={stations} />
       </div>
     </main>
@@ -41,4 +61,7 @@ export default WrapperStation;
 
 WrapperStation.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  bikesIsChecked: PropTypes.bool.isRequired,
+  standsIsChecked: PropTypes.bool.isRequired,
+  bankingIsChecked: PropTypes.bool.isRequired,
 };

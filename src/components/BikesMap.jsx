@@ -49,6 +49,7 @@ class BikesMap extends Component {
     });
     const { zoom, coords } = this.state;
     const { stations } = this.props;
+    const { bikesIsChecked, standsIsChecked, bankingIsChecked } = this.props;
     return (
       <div>
         <Map ref={this.mapRef} center={coords} zoom={zoom}>
@@ -57,17 +58,48 @@ class BikesMap extends Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             maxZoom={25}
           />
-          {stations.map((station) => (
-            <Marker
-              key={station.id}
-              icon={goldIcon}
-              position={station.position}
-            >
-              <Popup className="card-popup">
-                <CardList {...station} />
-              </Popup>
-            </Marker>
-          ))}
+          {stations
+            .filter((station) => {
+              if (bankingIsChecked === true) {
+                if (station.banking === 'True') {
+                  return station;
+                }
+              } else {
+                return station;
+              }
+              return '';
+            })
+            .filter((station) => {
+              if (bikesIsChecked === true) {
+                if (station.availableBikes > 0) {
+                  return station;
+                }
+              } else {
+                return station;
+              }
+              return '';
+            })
+            .filter((station) => {
+              if (standsIsChecked === true) {
+                if (station.availableBikeStand > 10) {
+                  return station;
+                }
+              } else {
+                return station;
+              }
+              return '';
+            })
+            .map((station) => (
+              <Marker
+                key={station.id}
+                icon={goldIcon}
+                position={station.position}
+              >
+                <Popup className="card-popup">
+                  <CardList {...station} />
+                </Popup>
+              </Marker>
+            ))}
         </Map>
       </div>
     );
@@ -76,6 +108,9 @@ class BikesMap extends Component {
 
 BikesMap.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  bikesIsChecked: PropTypes.bool.isRequired,
+  standsIsChecked: PropTypes.bool.isRequired,
+  bankingIsChecked: PropTypes.bool.isRequired,
 };
 
 export default BikesMap;
