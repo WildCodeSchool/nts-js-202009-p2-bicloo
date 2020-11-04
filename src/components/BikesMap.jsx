@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import 'leaflet-routing-machine';
 
 import '../css/BikesMap.css';
 import CardList from './CardList';
@@ -23,6 +24,10 @@ class BikesMap extends Component {
     const { leafletElement: map } = current;
     map.locate({ setView: true });
     map.on('locationfound', this.handleOnLocationFound);
+
+    L.Routing.control({
+      waypoints: [L.latLng(57.74, 11.94), L.latLng(57.6792, 11.949)],
+    }).addTo(map);
   }
 
   handleOnLocationFound(e) {
