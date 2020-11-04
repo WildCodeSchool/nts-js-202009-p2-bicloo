@@ -81,7 +81,7 @@ class BikesMap extends Component {
             })
             .filter((station) => {
               if (standsIsChecked === true) {
-                if (station.availableBikeStand > 10) {
+                if (station.availableBikeStand > 0) {
                   return station;
                 }
               } else {
