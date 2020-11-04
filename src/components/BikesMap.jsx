@@ -17,9 +17,11 @@ class BikesMap extends Component {
       stationCoords: null,
       zoom: 13,
     };
-    this.routing = {};
+    this.routingControl = null;
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
     this.handleItinerary = this.handleItinerary.bind(this);
+    this.addRoutingControl = this.addRoutingControl.bind(this);
+    this.removeRoutingControl = this.removeRoutingControl.bind(this);
   }
 
   componentDidMount() {
@@ -29,19 +31,17 @@ class BikesMap extends Component {
     map.on('locationfound', this.handleOnLocationFound);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { stationCoords } = this.state;
-    const { current } = this.mapRef;
-    const { leafletElement: map } = current;
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { stationCoords } = this.state;
+  //   const { current } = this.mapRef;
+  //   const { leafletElement: map } = current;
 
-    if (stationCoords !== prevState.stationCoords) {
-      console.log(this.routing._routes);
-      if (this.routing._routes) {
-        this.routing._routes.splice(0, 1);
-      }
-      // this.handleItinerary(st);
-    }
-  }
+  //   if (stationCoords !== prevState.stationCoords) {
+  //     //console.log(this.routing.options.waypoints);
+  //     //this.routing.options.lineOptions;
+  //     // this.handleItinerary(st);
+  //   }
+  // }
 
   handleOnLocationFound(e) {
     const { current } = this.mapRef;
@@ -54,19 +54,37 @@ class BikesMap extends Component {
     this.setState({ zoom: 17, coords: latlng });
   }
 
-  handleItinerary(position) {
-    const { coords, stationCoords } = this.state;
+  addRoutingControl(waypoints) {
+    const { coords } = this.state;
     const { current } = this.mapRef;
     const { leafletElement: map } = current;
 
+    if (this.routingControl != null) {
+      this.removeRoutingControl();
+    }
+    this.routingControl = L.Routing.control({
+      waypoints: [L.latLng(coords), L.latLng(waypoints)],
+      lineOptions: {
+        styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+      },
+    }).addTo(map);
+  }
+
+  removeRoutingControl() {
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+
+    if (this.routingControl != null) {
+      map.removeControl(this.routingControl);
+      this.routingControl = null;
+    }
+  }
+
+  handleItinerary(position) {
+    const { stationCoords } = this.state;
+
     this.setState({ stationCoords: position }, () => {
-      this.routing = L.Routing.control({
-        waypoints: [L.latLng(coords), L.latLng(position)],
-        lineOptions: {
-          styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
-        },
-      });
-      this.routing.addTo(map);
+      this.addRoutingControl(position);
     });
   }
 
