@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList';
+
 import styles from '../css/stationsList.module.css';
 
 const StationsList = ({ stations }) => {
   return (
-    <div>
+    <div className={styles.stationBlock}>
       <ul className={styles.main}>
         {stations.map((station) => {
           return <CardList key={station.id} {...station} />;

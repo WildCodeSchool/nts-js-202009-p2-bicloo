@@ -72,7 +72,7 @@ const SearchBar = ({ setCurrentAdress }) => {
   };
 
   return (
-    <div>
+    <div className={styles.containerSearchBar}>
       <div className={styles.wrapperInput}>
         <img
           className={styles.iconInput}
