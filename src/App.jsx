@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import WrapperStation from './components/WrapperStation';
-
 import Header from './components/Header';
 
 class App extends Component {
@@ -11,16 +10,28 @@ class App extends Component {
     this.state = {
       stations: {},
       loading: true,
+      currentAddress: '',
       bikesIsChecked: true,
       standsIsChecked: true,
       bankingIsChecked: true,
     };
     this.fetchData = this.fetchData.bind(this);
+    this.setCurrentAdress = this.setCurrentAdress.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  /** Fonction pour mettre a jour l'adresse actuel
+   * on recurperes ses coordonners:
+   * - id
+   * - address
+   * - geographique
+   */
+  setCurrentAdress(currAddress) {
+    this.setState({ currentAddress: currAddress });
   }
 
   fetchData() {
@@ -34,6 +45,7 @@ class App extends Component {
           },
         }
       )
+
       .then(({ data }) => {
         const stations = data.records.map((record) => {
           return {
@@ -74,6 +86,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header
+          setCurrentAdress={this.setCurrentAdress}
           handleChange={this.handleChange}
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}

@@ -1,11 +1,3 @@
-/*
-
-  --card-background: #f6f7fb;
-  --card-item-background: #ffffff;
-  --card-item-title-color: #2d2d2d;
-  --card-item-btn-itinerary-background: #248bad;
-  --card-item-btn-born-background: #f2f2f2;
-*/
 .main {
   background-color: var(--card-background);
   list-style: none;
@@ -29,6 +21,7 @@
 }
 .infos {
   flex: 1;
+  padding-right: 1rem;
 }
 .buttons {
   display: flex;
@@ -55,8 +48,8 @@ p {
   text-align: center;
   margin-bottom: 0;
 }
-.notBanking{
-  color: #00754E;
+.notBanking {
+  color: #00754e;
   border-style: solid;
   border-color: #009966;
   border-radius: 0.5vh;
@@ -71,4 +64,31 @@ p {
   border: none;
   padding: 1.5rem 0.5rem;
   border-radius: 0.5vh;
+}
+
+.mapBlock {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    display: none;
+  }
+  .name {
+    font-size: 1.1em;
+  }
+  .list {
+    margin: 1rem 1.5vw;
+  }
+  .banking,
+  .notBanking {
+    margin: 0;
+    margin-top: 0.2rem;
+  }
+  p {
+    margin: 0.2rem;
+  }
 }

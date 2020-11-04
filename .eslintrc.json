@@ -19,7 +19,13 @@
     "react/jsx-props-no-spreading": [
       2,
       {
-        "exceptions": ["CardList", "BikesMap", "StationsList"]
+        "exceptions": [
+          "CardList",
+          "BikesMap",
+          "StationsList",
+          "Slider",
+          "ListSlider"
+        ]
       }
     ]
   }

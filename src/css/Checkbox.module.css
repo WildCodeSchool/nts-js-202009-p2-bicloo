@@ -1,0 +1,12 @@
+.allCheckboxes {
+  display: flex;
+  color: var(--header-checkbox-label-color);
+  font-family: var(--dosis);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.checkbox {
+  margin: 1rem;
+}

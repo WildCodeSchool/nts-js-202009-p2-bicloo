@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useWindowSize } from 'react-use';
+
+import ListSlider from './ListSlider';
 import BikesMap from './BikesMap';
 import StationsList from './StationsList';
 import styles from '../css/WrapperStation.module.css';
@@ -51,7 +53,7 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
         />
-        <StationsList
+        <ListSlider
           stations={stations}
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
