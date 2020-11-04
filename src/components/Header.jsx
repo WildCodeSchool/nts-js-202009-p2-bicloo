@@ -13,12 +13,12 @@ const Header = ({ setCurrentAdress, setArrivalAddress }) => {
       <img className={styles.logo} src={logoGeoBike} alt="logo GeoBike" />
       <div className={styles.wrapperSearch}>
         <SearchBar
-          placeholder="Depart - autour de moi"
+          placeholder="Départ - autour de moi"
           setStateAddress={(currAddress) => setCurrentAdress(currAddress)}
           send={send}
         />
         <SearchBar
-          placeholder="Arriver"
+          placeholder="Arrivée"
           setStateAddress={(arrAddress) => setArrivalAddress(arrAddress)}
           send={send}
         />
