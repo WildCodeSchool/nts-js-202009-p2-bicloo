@@ -18,7 +18,6 @@ class BikesMap extends Component {
       zoom: 13,
     };
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
-    this.handleOnLocationError = this.handleOnLocationError.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +25,6 @@ class BikesMap extends Component {
     const { leafletElement: map } = current;
     map.locate({ setView: true });
     map.on('locationfound', this.handleOnLocationFound);
-    map.on('locationerror', this.handleOnLocationError);
   }
 
   handleOnLocationFound(e) {
@@ -38,12 +36,6 @@ class BikesMap extends Component {
     marker.addTo(map).bindPopup('Votre position ').openPopup();
 
     this.setState({ zoom: 17, coords: latlng });
-  }
-
-  handleOnLocationError() {
-    const { current } = this.mapRef;
-    const { leafletElement: map } = current;
-    map.locate({ setView: false });
   }
 
   render() {

@@ -4,6 +4,9 @@ import axios from 'axios';
 import BikesMap from './components/BikesMap';
 import ListSlider from './components/ListSlider';
 import StationsList from './components/StationsList';
+import WrapperStation from './components/WrapperStation';
+import Header from './components/Header';
+
 
 class App extends Component {
   constructor() {
@@ -11,12 +14,24 @@ class App extends Component {
     this.state = {
       stations: {},
       loading: true,
+      currentAddress: '',
     };
     this.fetchData = this.fetchData.bind(this);
+    this.setCurrentAdress = this.setCurrentAdress.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  /** Fonction pour mettre a jour l'adresse actuel
+   * on recurperes ses coordonners:
+   * - id
+   * - address
+   * - geographique
+   */
+  setCurrentAdress(currAddress) {
+    this.setState({ currentAddress: currAddress });
   }
 
   fetchData() {
@@ -49,14 +64,16 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, stations } = this.state;
     return (
       <div className="App">
+        <Header setCurrentAdress={this.setCurrentAdress} />
         {!loading && (
           <>
             <BikesMap {...this.state} />
             <ListSlider {...this.state} />
             <StationsList {...this.state} />
+            <WrapperStation stations={stations} />
           </>
         )}
       </div>
