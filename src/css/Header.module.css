@@ -4,8 +4,26 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .logo {
   transform: translateY(-1rem);
+}
+
+.search {
+  position: absolute;
+  right: -3rem;
+  top: 1.55rem;
+  border-radius: 3rem;
+  padding: 0.5rem 0.4rem;
+  border: none;
+  padding-bottom: 0.2rem;
+  cursor: pointer;
+  background-color: var(--header-checkbox-background);
+}
+
+.wrapperSearch {
+  position: relative;
+  z-index: 1050;
 }
