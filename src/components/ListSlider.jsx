@@ -45,7 +45,7 @@ function ListSlider({
             return station;
           })
           .map((station) => {
-            return <CardList key={station.id} {...station} />;
+            return <CardList key={station.id} station={station} />;
           })}
       </Slider>
     </div>

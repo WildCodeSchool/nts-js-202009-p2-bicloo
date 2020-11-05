@@ -33,7 +33,7 @@ const StationsList = ({
             return station;
           })
           .map((station) => {
-            return <CardList key={station.id} {...station} />;
+            return <CardList key={station.id} station={station} />;
           })}
       </ul>
     </div>

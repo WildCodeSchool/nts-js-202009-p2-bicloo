@@ -6,7 +6,7 @@ function NavigationButton() {
   const [active, setActive] = useState(false);
 
   return (
-    <div>
+    <div className={styles.wrapperButton}>
       <button
         className={`${styles.btn} ${
           active ? styles.btnActive : styles.btnDisabled
