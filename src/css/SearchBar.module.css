@@ -88,4 +88,10 @@
     background-color: var(--card-item-btn-itinerary-background);
     color: #fff;
   }
+  .containerSearchBar {
+    transform: translateY(0rem);
+  }
+  .containerSearchBar:nth-of-type(2) {
+    transform: translateY(0rem);
+  }
 }

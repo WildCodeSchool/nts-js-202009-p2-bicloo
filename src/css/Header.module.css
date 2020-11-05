@@ -27,3 +27,18 @@
   position: relative;
   z-index: 1050;
 }
+@media screen and (min-width: 768px) {
+  .wrapperHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .wrapperSearch {
+    display: flex;
+    flex-direction: row;
+  }
+  .search {
+    top: 0rem;
+  }
+}
