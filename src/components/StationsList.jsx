@@ -9,7 +9,6 @@ const StationsList = ({
   standsIsChecked,
   bankingIsChecked,
   stations,
-  handleRoutingControl,
 }) => {
   return (
     <div className={styles.stationBlock}>
@@ -34,13 +33,7 @@ const StationsList = ({
             return station;
           })
           .map((station) => {
-            return (
-              <CardList
-                key={station.id}
-                station={station}
-                handleRoutingControl={handleRoutingControl}
-              />
-            );
+            return <CardList key={station.id} station={station} />;
           })}
       </ul>
     </div>
@@ -54,5 +47,4 @@ StationsList.propTypes = {
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
-  handleRoutingControl: PropTypes.func.isRequired,
 };

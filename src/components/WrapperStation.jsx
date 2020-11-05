@@ -122,7 +122,6 @@ const WrapperStation = ({
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
-          handleRoutingControl={handleRoutingControl}
         />
       )}
       <div className={styles.desktop}>
