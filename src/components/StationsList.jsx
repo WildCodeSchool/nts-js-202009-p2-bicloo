@@ -15,34 +15,22 @@ const StationsList = ({
       <ul className={styles.main}>
         {stations
           .filter((station) => {
-            if (bankingIsChecked === true) {
-              if (station.banking === 'True') {
-                return station;
-              }
-            } else {
-              return station;
+            if (bankingIsChecked) {
+              return station.banking === 'True';
             }
-            return '';
+            return station;
           })
           .filter((station) => {
-            if (bikesIsChecked === true) {
-              if (station.availableBikes > 0) {
-                return station;
-              }
-            } else {
-              return station;
+            if (bikesIsChecked) {
+              return station.availableBikes > 0;
             }
-            return '';
+            return station;
           })
           .filter((station) => {
-            if (standsIsChecked === true) {
-              if (station.availableBikeStand > 0) {
-                return station;
-              }
-            } else {
-              return station;
+            if (standsIsChecked) {
+              return station.availableBikeStand > 0;
             }
-            return '';
+            return station;
           })
           .map((station) => {
             return <CardList key={station.id} {...station} />;
