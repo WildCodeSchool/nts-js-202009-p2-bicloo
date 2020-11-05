@@ -105,17 +105,45 @@ const WrapperStation = ({
           List
         </button>
       </nav>
-
-      <BikesMap
-        ref={mapRef}
-        zoom={zoom}
-        coords={coords}
-        stations={stations}
-        bikesIsChecked={bikesIsChecked}
-        standsIsChecked={standsIsChecked}
-        bankingIsChecked={bankingIsChecked}
-        handleRoutingControl={handleRoutingControl}
-      />
+      {display && width < 768 ? (
+        <BikesMap
+          ref={mapRef}
+          zoom={zoom}
+          coords={coords}
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+        />
+      ) : (
+        <StationsList
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+        />
+      )}
+      <div className={styles.desktop}>
+        <BikesMap
+          ref={mapRef}
+          zoom={zoom}
+          coords={coords}
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+        />
+        <ListSlider
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+        />
+      </div>
     </main>
   );
 };
@@ -128,37 +156,3 @@ WrapperStation.propTypes = {
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
 };
-
-// {display && width < 768 ? (
-
-// ) : (
-//   <StationsList
-//     ref={mapRef}
-//     stations={stations}
-//     bikesIsChecked={bikesIsChecked}
-//     standsIsChecked={standsIsChecked}
-//     bankingIsChecked={bankingIsChecked}
-//     handleRoutingControl={handleRoutingControl}
-//   />
-// )}
-
-// <div className={styles.desktop}>
-// <BikesMap
-//   ref={mapRef}
-//   zoom={zoom}
-//   coords={coords}
-//   stations={stations}
-//   bikesIsChecked={bikesIsChecked}
-//   standsIsChecked={standsIsChecked}
-//   bankingIsChecked={bankingIsChecked}
-//   handleRoutingControl={handleRoutingControl}
-// />
-// <ListSlider
-//   ref={mapRef}
-//   stations={stations}
-//   bikesIsChecked={bikesIsChecked}
-//   standsIsChecked={standsIsChecked}
-//   bankingIsChecked={bankingIsChecked}
-//   handleRoutingControl={handleRoutingControl}
-// />
-// </div>

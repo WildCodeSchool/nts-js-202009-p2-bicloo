@@ -11,6 +11,7 @@ function ListSlider({
   standsIsChecked,
   bankingIsChecked,
   stations,
+  handleRoutingControl,
 }) {
   const settings = {
     infinite: false,
@@ -45,7 +46,13 @@ function ListSlider({
             return station;
           })
           .map((station) => {
-            return <CardList key={station.id} station={station} />;
+            return (
+              <CardList
+                key={station.id}
+                station={station}
+                handleRoutingControl={handleRoutingControl}
+              />
+            );
           })}
       </Slider>
     </div>
@@ -57,6 +64,7 @@ ListSlider.propTypes = {
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
+  handleRoutingControl: PropTypes.func.isRequired,
 };
 
 export default ListSlider;
