@@ -8,7 +8,7 @@
   margin: 0;
 }
 
-.list {
+.listStation {
   background-color: var(--card-item-background);
   margin: 1rem 3vw;
   padding: 1.3rem;
@@ -77,17 +77,22 @@ p {
   .main {
     display: none;
   }
+
   .name {
     font-size: 1.1em;
   }
-  .list {
+
+  .listStation {
     margin: 1rem 1.5vw;
+    max-width: 25rem;
   }
+
   .banking,
   .notBanking {
     margin: 0;
     margin-top: 0.2rem;
   }
+
   p {
     margin: 0.2rem;
   }

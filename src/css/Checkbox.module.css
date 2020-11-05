@@ -1,10 +1,12 @@
 .allCheckboxes {
   display: flex;
+  flex-wrap: wrap;
   color: var(--header-checkbox-label-color);
   font-family: var(--dosis);
   font-size: 1.0625rem;
   font-weight: 600;
   padding: 0 1rem 1rem 1rem;
+  width: 21rem;
 }
 
 .checkbox {
@@ -48,4 +50,10 @@ input[type='checkbox']:checked:before {
   color: var(--header-checkbox-label-color);
   font-size: 1.1rem;
   align-self: center;
+}
+
+@media screen and (min-width: 768px) {
+  .allCheckboxes {
+    width: auto;
+  }
 }
