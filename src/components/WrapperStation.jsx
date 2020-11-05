@@ -5,7 +5,11 @@ import { useWindowSize } from 'react-use';
 import ListSlider from './ListSlider';
 import BikesMap from './BikesMap';
 import StationsList from './StationsList';
+import Button from './Button';
+import logoMap from '../assets/icons/map.svg';
+import logoList from '../assets/icons/list.svg';
 import styles from '../css/WrapperStation.module.css';
+import buttonStyles from '../css/Button.module.css';
 
 const WrapperStation = ({
   stations,
@@ -23,12 +27,24 @@ const WrapperStation = ({
   return (
     <main>
       <nav className={styles.nav}>
-        <button onClick={() => handleDisplay(true)} type="button">
-          Map
-        </button>
-        <button onClick={() => handleDisplay(false)} type="button">
-          List
-        </button>
+        <Button
+          value="Carte"
+          logo={logoMap}
+          display={display}
+          className={
+            display ? buttonStyles.buttonActive : buttonStyles.buttonDisable
+          }
+          handleDisplay={() => handleDisplay(true)}
+        />
+        <Button
+          value="Liste"
+          logo={logoList}
+          display={display}
+          className={
+            display ? buttonStyles.buttonDisable : buttonStyles.buttonActive
+          }
+          handleDisplay={() => handleDisplay(false)}
+        />
       </nav>
       {display && width < 768 ? (
         <BikesMap
