@@ -16,7 +16,7 @@ const WrapperStation = ({
   bankingIsChecked,
 }) => {
   const [display, setdisplay] = useState(true);
-  const [zoom, setZoom] = useState(13);
+  const zoom = 13;
   const [coords, setCoords] = useState([47.214938, -1.556287]);
   const [stationCoords, setstationCoords] = useState(null);
 

@@ -83,6 +83,9 @@ BikesMap.propTypes = {
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
+  handleRoutingControl: PropTypes.func.isRequired,
+  zoom: PropTypes.number.isRequired,
+  coords: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default BikesMap;
