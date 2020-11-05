@@ -97,3 +97,20 @@ p {
     margin: 0.2rem;
   }
 }
+
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+  .listStation {
+    display: flex;
+    flex-direction: column;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+  .button,
+  .banking,
+  .notBanking {
+    margin: 0.5vw;
+  }
+}
