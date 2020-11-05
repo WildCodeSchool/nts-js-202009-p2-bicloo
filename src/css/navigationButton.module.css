@@ -48,10 +48,14 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 35px;
+  width: 70%;
+  opacity: 1;
 }
+
 .navDisabled {
   display: none;
 }
 
 .icon {
+  width: 3em;
 }

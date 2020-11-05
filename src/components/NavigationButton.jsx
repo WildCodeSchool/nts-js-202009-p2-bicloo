@@ -21,8 +21,8 @@ function NavigationButton() {
           }`}
         >
           <img className={styles.icon} src={help} alt="icon help" />
-          <img src={credit} alt="icon credit" />
-          <img src={search} alt="icon search" />
+          <img className={styles.icon} src={credit} alt="icon credit" />
+          <img className={styles.icon} src={search} alt="icon search" />
         </div>
         <button
           className={`${styles.btn} ${
@@ -31,7 +31,7 @@ function NavigationButton() {
           onClick={() => setActive(!active)}
           type="button"
         >
-          <img src={more} alt="icon more" />
+          <img className={styles.icon} src={more} alt="icon more" />
         </button>
       </div>
     </div>
