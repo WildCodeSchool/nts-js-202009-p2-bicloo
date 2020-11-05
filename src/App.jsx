@@ -12,20 +12,23 @@ class App extends Component {
       stations: {},
       loading: true,
       currentAddress: '',
+      arrivalAddress: '',
       bikesIsChecked: true,
       standsIsChecked: true,
       bankingIsChecked: true,
     };
+    this.handleChange = this.handleChange.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.setCurrentAdress = this.setCurrentAdress.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.setArrivalAddress = this.setArrivalAddress.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
   }
 
-  /** Fonction pour mettre a jour l'adresse actuel
+  /** Fonctions pour mettre a jour l'adresse actuel et
+   * la deuxième l'address d'arriver
    * on recurperes ses coordonners:
    * - id
    * - address
@@ -33,6 +36,10 @@ class App extends Component {
    */
   setCurrentAdress(currAddress) {
     this.setState({ currentAddress: currAddress });
+  }
+
+  setArrivalAddress(arrAddress) {
+    this.setState({ arrivalAddress: arrAddress });
   }
 
   fetchData() {
@@ -92,6 +99,7 @@ class App extends Component {
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
+          setArrivalAddress={this.setArrivalAddress}
         />
         {!loading && (
           <>
