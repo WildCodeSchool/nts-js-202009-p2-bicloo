@@ -24,8 +24,8 @@ const WrapperStation = ({
   const mapRef = useRef();
   let routingControl = null;
 
-  const handleDisplay = (bool) => {
-    setdisplay(bool);
+  const handleDisplay = () => {
+    setdisplay(!display);
   };
 
   const handleOnLocationFound = (e) => {
@@ -98,10 +98,10 @@ const WrapperStation = ({
   return (
     <main>
       <nav className={styles.nav}>
-        <button onClick={() => handleDisplay(true)} type="button">
+        <button onClick={handleDisplay} type="button">
           Map
         </button>
-        <button onClick={() => handleDisplay(false)} type="button">
+        <button onClick={handleDisplay} type="button">
           List
         </button>
       </nav>
@@ -115,6 +115,7 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
+          display={display}
         />
       ) : (
         <StationsList
@@ -122,6 +123,7 @@ const WrapperStation = ({
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
+          display={display}
         />
       )}
       <div className={styles.desktop}>
@@ -134,6 +136,7 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
+          display={display}
         />
         <ListSlider
           stations={stations}
@@ -141,6 +144,7 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
+          display={display}
         />
       </div>
     </main>

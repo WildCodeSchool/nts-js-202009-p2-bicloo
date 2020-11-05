@@ -30,6 +30,7 @@ const BikesMap = React.forwardRef((props, ref) => {
     bankingIsChecked,
     stations,
     handleRoutingControl,
+    display,
   } = props;
 
   return (
@@ -69,6 +70,7 @@ const BikesMap = React.forwardRef((props, ref) => {
                 <CardList
                   station={station}
                   handleRoutingControl={handleRoutingControl}
+                  display={display}
                 />
               </Popup>
             </Marker>
@@ -83,6 +85,7 @@ BikesMap.propTypes = {
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
+  display: PropTypes.bool.isRequired,
   handleRoutingControl: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
   coords: PropTypes.arrayOf(PropTypes.number).isRequired,

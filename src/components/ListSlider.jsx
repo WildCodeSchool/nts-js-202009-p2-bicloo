@@ -12,6 +12,7 @@ function ListSlider({
   bankingIsChecked,
   stations,
   handleRoutingControl,
+  display,
 }) {
   const settings = {
     infinite: false,
@@ -51,6 +52,7 @@ function ListSlider({
                 key={station.id}
                 station={station}
                 handleRoutingControl={handleRoutingControl}
+                display={display}
               />
             );
           })}
@@ -65,6 +67,7 @@ ListSlider.propTypes = {
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
   handleRoutingControl: PropTypes.func.isRequired,
+  display: PropTypes.bool.isRequired,
 };
 
 export default ListSlider;
