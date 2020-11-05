@@ -68,7 +68,7 @@ p {
 
 .mapBlock {
   position: absolute;
-  height: 100%;
+  height: 43vw;
   width: 100%;
   z-index: 0;
 }
