@@ -88,8 +88,6 @@ class BikesMap extends Component {
     entre ma position et la position de la station
   */
   handleRoutingControl(position) {
-    const { stationCoords } = this.state;
-
     this.setState({ stationCoords: position }, () => {
       this.addRoutingControl(position);
     });
@@ -119,34 +117,22 @@ class BikesMap extends Component {
           />
           {stations
             .filter((station) => {
-              if (bankingIsChecked === true) {
-                if (station.banking === 'True') {
-                  return station;
-                }
-              } else {
-                return station;
+              if (bankingIsChecked) {
+                return station.banking === 'True';
               }
-              return '';
+              return station;
             })
             .filter((station) => {
-              if (bikesIsChecked === true) {
-                if (station.availableBikes > 0) {
-                  return station;
-                }
-              } else {
-                return station;
+              if (bikesIsChecked) {
+                return station.availableBikes > 0;
               }
-              return '';
+              return station;
             })
             .filter((station) => {
-              if (standsIsChecked === true) {
-                if (station.availableBikeStand > 0) {
-                  return station;
-                }
-              } else {
-                return station;
+              if (standsIsChecked) {
+                return station.availableBikeStand > 0;
               }
-              return '';
+              return station;
             })
             .map((station) => (
               <Marker
@@ -155,25 +141,13 @@ class BikesMap extends Component {
                 position={station.position}
               >
                 <Popup className="card-popup">
-                  <CardList {...station} />
+                  <CardList
+                    station={station}
+                    handleRoutingControl={this.handleRoutingControl}
+                  />
                 </Popup>
               </Marker>
             ))}
-
-          {stations.map((station) => (
-            <Marker
-              key={station.id}
-              icon={goldIcon}
-              position={station.position}
-            >
-              <Popup className="card-popup">
-                <CardList
-                  station={station}
-                  handleRoutingControl={this.handleRoutingControl}
-                />
-              </Popup>
-            </Marker>
-          ))}
         </Map>
       </div>
     );

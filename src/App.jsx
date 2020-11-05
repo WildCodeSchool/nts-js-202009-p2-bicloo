@@ -72,15 +72,7 @@ class App extends Component {
   }
 
   handleChange(e) {
-    if (e.target.name === 'bikes') {
-      this.setState({ bikesIsChecked: e.target.checked });
-    }
-    if (e.target.name === 'stands') {
-      this.setState({ standsIsChecked: e.target.checked });
-    }
-    if (e.target.name === 'banking') {
-      this.setState({ bankingIsChecked: e.target.checked });
-    }
+    this.setState({ [e.target.name]: e.target.checked });
   }
 
   render() {

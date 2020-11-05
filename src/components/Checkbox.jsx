@@ -16,7 +16,7 @@ const Checkbox = (props) => {
           <input
             type="checkbox"
             id="bikes"
-            name="bikes"
+            name="bikesIsChecked"
             defaultChecked
             isChecked={bikesIsChecked}
             onChange={handleChange}
@@ -29,7 +29,7 @@ const Checkbox = (props) => {
           <input
             type="checkbox"
             id="stands"
-            name="stands"
+            name="standsIsChecked"
             defaultChecked
             isChecked={standsIsChecked}
             onChange={handleChange}
@@ -42,7 +42,7 @@ const Checkbox = (props) => {
           <input
             type="checkbox"
             id="banking"
-            name="banking"
+            name="bankingIsChecked"
             defaultChecked
             isChecked={bankingIsChecked}
             onChange={handleChange}

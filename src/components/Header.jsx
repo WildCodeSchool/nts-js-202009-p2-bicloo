@@ -6,19 +6,20 @@ import Checkbox from './Checkbox';
 import iconSearch from '../assets/icons/search.svg';
 import styles from '../css/Header.module.css';
 
-const Header = (props, { setCurrentAdress, setArrivalAddress }) => {
-  const {
-    handleChange,
-    bikesIsChecked,
-    standsIsChecked,
-    bankingIsChecked,
-  } = props;
+const Header = ({
+  setCurrentAdress,
+  setArrivalAddress,
+  handleChange,
+  bikesIsChecked,
+  bankingIsChecked,
+  standsIsChecked,
+}) => {
   const [send, setSend] = useState(false);
 
   return (
     <header className={styles.wrapperHeader}>
       <img className={styles.logo} src={logoGeoBike} alt="logo GeoBike" />
-       <div className={styles.wrapperSearch}>
+      <div className={styles.wrapperSearch}>
         <SearchBar
           placeholder="Départ - autour de moi"
           setStateAddress={(currAddress) => setCurrentAdress(currAddress)}

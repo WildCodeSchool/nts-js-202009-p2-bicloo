@@ -6,7 +6,7 @@ const CardList = ({ station, handleRoutingControl }) => {
   return (
     <>
       {station && (
-        <li className={styles.list}>
+        <li className={styles.listStation}>
           <div className={styles.infos}>
             <h2 className={styles.name}>
               {station.name.substr(station.name.lastIndexOf('-') + 1)}
