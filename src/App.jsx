@@ -13,7 +13,11 @@ class App extends Component {
       loading: true,
       currentAddress: '',
       arrivalAddress: '',
+      bikesIsChecked: true,
+      standsIsChecked: true,
+      bankingIsChecked: true,
     };
+    this.handleChange = this.handleChange.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.setCurrentAdress = this.setCurrentAdress.bind(this);
     this.setArrivalAddress = this.setArrivalAddress.bind(this);
@@ -67,17 +71,44 @@ class App extends Component {
       .catch((err) => alert(err.message));
   }
 
+  handleChange(e) {
+    if (e.target.name === 'bikes') {
+      this.setState({ bikesIsChecked: e.target.checked });
+    }
+    if (e.target.name === 'stands') {
+      this.setState({ standsIsChecked: e.target.checked });
+    }
+    if (e.target.name === 'banking') {
+      this.setState({ bankingIsChecked: e.target.checked });
+    }
+  }
+
   render() {
-    const { loading, stations } = this.state;
+    const {
+      loading,
+      stations,
+      bikesIsChecked,
+      standsIsChecked,
+      bankingIsChecked,
+    } = this.state;
     return (
       <div className="App">
         <Header
           setCurrentAdress={this.setCurrentAdress}
+          handleChange={this.handleChange}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
           setArrivalAddress={this.setArrivalAddress}
         />
         {!loading && (
           <>
-            <WrapperStation stations={stations} />
+            <WrapperStation
+              stations={stations}
+              bikesIsChecked={bikesIsChecked}
+              standsIsChecked={standsIsChecked}
+              bankingIsChecked={bankingIsChecked}
+            />
           </>
         )}
         <NavigationButton />

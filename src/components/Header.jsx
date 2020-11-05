@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import logoGeoBike from '../assets/geobike-mobile.png';
+import Checkbox from './Checkbox';
 import iconSearch from '../assets/icons/search.svg';
 import styles from '../css/Header.module.css';
 
-const Header = ({ setCurrentAdress, setArrivalAddress }) => {
+const Header = (props, { setCurrentAdress, setArrivalAddress }) => {
+  const {
+    handleChange,
+    bikesIsChecked,
+    standsIsChecked,
+    bankingIsChecked,
+  } = props;
   const [send, setSend] = useState(false);
 
   return (
     <header className={styles.wrapperHeader}>
       <img className={styles.logo} src={logoGeoBike} alt="logo GeoBike" />
-      <div className={styles.wrapperSearch}>
+       <div className={styles.wrapperSearch}>
         <SearchBar
           placeholder="Départ - autour de moi"
           setStateAddress={(currAddress) => setCurrentAdress(currAddress)}
@@ -30,13 +37,23 @@ const Header = ({ setCurrentAdress, setArrivalAddress }) => {
           <img src={iconSearch} alt="icon search" />
         </button>
       </div>
+      <Checkbox
+        handleChange={handleChange}
+        bikesIsChecked={bikesIsChecked}
+        standsIsChecked={standsIsChecked}
+        bankingIsChecked={bankingIsChecked}
+      />
     </header>
   );
 };
 
-export default Header;
-
 Header.propTypes = {
   setCurrentAdress: PropTypes.func.isRequired,
+  bikesIsChecked: PropTypes.bool.isRequired,
+  standsIsChecked: PropTypes.bool.isRequired,
+  bankingIsChecked: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
   setArrivalAddress: PropTypes.func.isRequired,
 };
+
+export default Header;
