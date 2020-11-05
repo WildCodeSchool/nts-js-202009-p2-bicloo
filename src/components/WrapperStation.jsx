@@ -1,77 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useWindowSize } from 'react-use';
 
 import ListSlider from './ListSlider';
 import BikesMap from './BikesMap';
 import StationsList from './StationsList';
 import styles from '../css/WrapperStation.module.css';
 
-class WrapperStation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      display: true,
-    };
-    this.handleDisplay = this.handleDisplay.bind(this);
-  }
+const WrapperStation = ({
+  stations,
+  bikesIsChecked,
+  standsIsChecked,
+  bankingIsChecked,
+}) => {
+  const [display, setdisplay] = useState(true);
+  const { width } = useWindowSize();
 
-  handleDisplay() {
-    const { display } = this.state;
-    this.setState({ display: !display });
-  }
+  const handleDisplay = (bool) => {
+    setdisplay(bool);
+  };
 
-  render() {
-    const { display } = this.state;
-    const {
-      stations,
-      bikesIsChecked,
-      standsIsChecked,
-      bankingIsChecked,
-    } = this.props;
-    return (
-      <main>
-        <nav className={styles.nav}>
-          <button onClick={this.handleDisplay} type="button">
-            Map
-          </button>
-          <button onClick={this.handleDisplay} type="button">
-            List
-          </button>
-        </nav>
-        {display ? (
-          <BikesMap
-            stations={stations}
-            bikesIsChecked={bikesIsChecked}
-            standsIsChecked={standsIsChecked}
-            bankingIsChecked={bankingIsChecked}
-          />
-        ) : (
-          <StationsList
-            stations={stations}
-            bikesIsChecked={bikesIsChecked}
-            standsIsChecked={standsIsChecked}
-            bankingIsChecked={bankingIsChecked}
-          />
-        )}
+  return (
+    <main>
+      <nav className={styles.nav}>
+        <button onClick={() => handleDisplay(true)} type="button">
+          Map
+        </button>
+        <button onClick={() => handleDisplay(false)} type="button">
+          List
+        </button>
+      </nav>
+      {display && width < 768 ? (
+        <BikesMap
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
+      ) : (
+        <StationsList
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
+      )}
 
-        <div className={styles.desktop}>
-          <BikesMap
-            stations={stations}
-            bikesIsChecked={bikesIsChecked}
-            standsIsChecked={standsIsChecked}
-            bankingIsChecked={bankingIsChecked}
-          />
-          <ListSlider
-            stations={stations}
-            bikesIsChecked={bikesIsChecked}
-            standsIsChecked={standsIsChecked}
-            bankingIsChecked={bankingIsChecked}
-          />
-        </div>
-      </main>
-    );
-  }
-}
+      <div className={styles.desktop}>
+        <BikesMap
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
+        <ListSlider
+          stations={stations}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
+      </div>
+    </main>
+  );
+};
 
 export default WrapperStation;
 
