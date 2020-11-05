@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
+import more from '../assets/icons/more.svg';
 import search from '../assets/icons/search.svg';
 import credit from '../assets/icons/credit_card.svg';
+import help from '../assets/icons/help.svg';
 
 import styles from '../css/navigationButton.module.css';
 
@@ -18,7 +20,7 @@ function NavigationButton() {
             active ? styles.navActive : styles.navDisabled
           }`}
         >
-          <p>contacts</p>
+          <img className={styles.icon} src={help} alt="icon help" />
           <img src={credit} alt="icon credit" />
           <img src={search} alt="icon search" />
         </div>
@@ -29,7 +31,7 @@ function NavigationButton() {
           onClick={() => setActive(!active)}
           type="button"
         >
-          +
+          <img src={more} alt="icon more" />
         </button>
       </div>
     </div>
