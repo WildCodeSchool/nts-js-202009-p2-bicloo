@@ -30,7 +30,6 @@ const WrapperStation = ({
         <Button
           value="Carte"
           logo={logoMap}
-          display={display}
           className={
             display ? buttonStyles.buttonActive : buttonStyles.buttonDisable
           }
@@ -39,7 +38,6 @@ const WrapperStation = ({
         <Button
           value="Liste"
           logo={logoList}
-          display={display}
           className={
             display ? buttonStyles.buttonDisable : buttonStyles.buttonActive
           }
