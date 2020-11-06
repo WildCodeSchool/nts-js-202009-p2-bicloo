@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import 'leaflet-routing-machine';
 
-import '../css/BikesMap.css';
 import CardList from './CardList';
+
+import styles from '../css/stationsList.module.css';
+import '../css/BikesMap.css';
 
 class BikesMap extends Component {
   constructor(props) {
@@ -13,9 +16,14 @@ class BikesMap extends Component {
     this.mapRef = React.createRef();
     this.state = {
       coords: [47.214938, -1.556287],
+      stationCoords: null,
       zoom: 13,
     };
+    this.routingControl = null;
     this.handleOnLocationFound = this.handleOnLocationFound.bind(this);
+    this.addRoutingControl = this.addRoutingControl.bind(this);
+    this.removeRoutingControl = this.removeRoutingControl.bind(this);
+    this.handleRoutingControl = this.handleRoutingControl.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +44,55 @@ class BikesMap extends Component {
     this.setState({ zoom: 17, coords: latlng });
   }
 
+  /*
+    ajouter un itinéraire:
+    je vérifie qu'il n'y a pas déjà un itinéraire
+    si oui, j'appel removeRoutingCnotrol()
+    sinon je le créer et l'ajoute à la carte
+  */
+  addRoutingControl(waypoints) {
+    const { coords } = this.state;
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+
+    if (this.routingControl != null) {
+      this.removeRoutingControl();
+    }
+    this.routingControl = L.Routing.control({
+      waypoints: [L.latLng(coords), L.latLng(waypoints)],
+      lineOptions: {
+        styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+      },
+    }).addTo(map);
+  }
+
+  /*
+    supprimer un itinéraire:
+    si routingControl n'est pas nul
+    je supprime l'itinéraire
+    et remet routingControl à nul
+  */
+  removeRoutingControl() {
+    const { current } = this.mapRef;
+    const { leafletElement: map } = current;
+
+    if (this.routingControl != null) {
+      map.removeControl(this.routingControl);
+      this.routingControl = null;
+    }
+  }
+
+  /*
+    dans CardList, au click
+    je créer un itinéraire
+    entre ma position et la position de la station
+  */
+  handleRoutingControl(position) {
+    this.setState({ stationCoords: position }, () => {
+      this.addRoutingControl(position);
+    });
+  }
+
   render() {
     const goldIcon = new L.Icon({
       iconUrl:
@@ -49,25 +106,48 @@ class BikesMap extends Component {
     });
     const { zoom, coords } = this.state;
     const { stations } = this.props;
+    const { bikesIsChecked, standsIsChecked, bankingIsChecked } = this.props;
     return (
-      <div>
+      <div className={styles.mapBlock}>
         <Map ref={this.mapRef} center={coords} zoom={zoom}>
           <TileLayer
             url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             maxZoom={25}
           />
-          {stations.map((station) => (
-            <Marker
-              key={station.id}
-              icon={goldIcon}
-              position={station.position}
-            >
-              <Popup className="card-popup">
-                <CardList {...station} />
-              </Popup>
-            </Marker>
-          ))}
+          {stations
+            .filter((station) => {
+              if (bankingIsChecked) {
+                return station.banking === 'True';
+              }
+              return station;
+            })
+            .filter((station) => {
+              if (bikesIsChecked) {
+                return station.availableBikes > 0;
+              }
+              return station;
+            })
+            .filter((station) => {
+              if (standsIsChecked) {
+                return station.availableBikeStand > 0;
+              }
+              return station;
+            })
+            .map((station) => (
+              <Marker
+                key={station.id}
+                icon={goldIcon}
+                position={station.position}
+              >
+                <Popup className="card-popup">
+                  <CardList
+                    station={station}
+                    handleRoutingControl={this.handleRoutingControl}
+                  />
+                </Popup>
+              </Marker>
+            ))}
         </Map>
       </div>
     );
@@ -76,6 +156,9 @@ class BikesMap extends Component {
 
 BikesMap.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  bikesIsChecked: PropTypes.bool.isRequired,
+  standsIsChecked: PropTypes.bool.isRequired,
+  bankingIsChecked: PropTypes.bool.isRequired,
 };
 
 export default BikesMap;

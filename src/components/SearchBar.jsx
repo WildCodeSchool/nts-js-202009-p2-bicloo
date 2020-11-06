@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 import styles from '../css/SearchBar.module.css';
+
 import iconLocation from '../assets/icons/location.svg';
 
-const SearchBar = ({ setCurrentAdress }) => {
+const SearchBar = ({ setStateAddress, placeholder, send }) => {
   const [value, setvalue] = useState('');
+  const [keydown, setKeyDown] = useState(false);
   const [allAddress, setallAddress] = useState([]);
+  const [infoAddress, setinfoAddress] = useState([]);
 
   /** Ici je recupère toutes les valeurs que
    * l'utilisateur entre dans notre champ avec une fonction asynchrone
@@ -56,23 +59,30 @@ const SearchBar = ({ setCurrentAdress }) => {
     if (value.length > 0) {
       fetchAddress();
     }
-  }, [value]);
+  }, [keydown]);
 
-  /* Je met a jour l'input puis le state de l'adresse actuel
-   qui est dans le composant App */
+  /** Je met a jour le state d'adresse de départ ou
+   * d'arriver qui est dans le composant App
+   * avec un callback passer en props
+   */
+  useEffect(() => {
+    setStateAddress(infoAddress);
+  }, [send]);
+
+  /** Ici je récupère l'address selectionné */
   const selectAddress = (e) => {
     const addressCliked = e.target.textContent;
     const currentAdress = allAddress.find(
-      (element) => element.address === addressCliked
+      (element) => element.address === value
     );
 
-    setvalue(addressCliked);
-    setCurrentAdress(currentAdress);
-    setallAddress([]);
+    setvalue(addressCliked); // valeur mit a jour dans l'Input
+    setinfoAddress(currentAdress); // je récupère toutes les infos de l'adresse selectionné
+    setallAddress([]); // je vide la liste
   };
 
   return (
-    <div>
+    <div className={styles.containerSearchBar}>
       <div className={styles.wrapperInput}>
         <img
           className={styles.iconInput}
@@ -84,7 +94,8 @@ const SearchBar = ({ setCurrentAdress }) => {
           className={`${styles.input} ${
             allAddress.length ? styles.contains : ''
           }`}
-          placeholder="Depart - autour de moi"
+          placeholder={placeholder}
+          onKeyDown={() => setKeyDown(!keydown)}
           onChange={(e) => handleInput(e)}
           value={value}
         />
@@ -109,5 +120,7 @@ const SearchBar = ({ setCurrentAdress }) => {
 export default SearchBar;
 
 SearchBar.propTypes = {
-  setCurrentAdress: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  send: PropTypes.bool.isRequired,
+  setStateAddress: PropTypes.func.isRequired,
 };

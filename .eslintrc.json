@@ -16,10 +16,18 @@
     "linebreak-style": 0,
     "class-methods-use-this": "off",
     "no-alert": "off",
+    "react/no-unused-state": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/jsx-props-no-spreading": [
       2,
       {
-        "exceptions": ["CardList", "BikesMap", "StationsList"]
+        "exceptions": [
+          "CardList",
+          "BikesMap",
+          "StationsList",
+          "Slider",
+          "ListSlider"
+        ]
       }
     ]
   }

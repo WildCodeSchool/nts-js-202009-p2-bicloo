@@ -1,5 +1,7 @@
 .nav {
-  display: initial;
+  display: flex;
+  justify-content: center;
+  background-color: var(--header-background);
 }
 
 .desktop {

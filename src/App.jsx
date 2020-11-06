@@ -12,16 +12,23 @@ class App extends Component {
       stations: {},
       loading: true,
       currentAddress: '',
+      arrivalAddress: '',
+      bikesIsChecked: true,
+      standsIsChecked: true,
+      bankingIsChecked: true,
     };
+    this.handleChange = this.handleChange.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.setCurrentAdress = this.setCurrentAdress.bind(this);
+    this.setArrivalAddress = this.setArrivalAddress.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
   }
 
-  /** Fonction pour mettre a jour l'adresse actuel
+  /** Fonctions pour mettre a jour l'adresse actuel et
+   * la deuxième l'address d'arriver
    * on recurperes ses coordonners:
    * - id
    * - address
@@ -29,6 +36,10 @@ class App extends Component {
    */
   setCurrentAdress(currAddress) {
     this.setState({ currentAddress: currAddress });
+  }
+
+  setArrivalAddress(arrAddress) {
+    this.setState({ arrivalAddress: arrAddress });
   }
 
   fetchData() {
@@ -42,6 +53,7 @@ class App extends Component {
           },
         }
       )
+
       .then(({ data }) => {
         const stations = data.records.map((record) => {
           return {
@@ -59,14 +71,36 @@ class App extends Component {
       .catch((err) => alert(err.message));
   }
 
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.checked });
+  }
+
   render() {
-    const { loading, stations } = this.state;
+    const {
+      loading,
+      stations,
+      bikesIsChecked,
+      standsIsChecked,
+      bankingIsChecked,
+    } = this.state;
     return (
       <div className="App">
-        <Header setCurrentAdress={this.setCurrentAdress} />
+        <Header
+          setCurrentAdress={this.setCurrentAdress}
+          handleChange={this.handleChange}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+          setArrivalAddress={this.setArrivalAddress}
+        />
         {!loading && (
           <>
-            <WrapperStation stations={stations} />
+            <WrapperStation
+              stations={stations}
+              bikesIsChecked={bikesIsChecked}
+              standsIsChecked={standsIsChecked}
+              bankingIsChecked={bankingIsChecked}
+            />
           </>
         )}
         <NavigationButton />
