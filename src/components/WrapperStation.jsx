@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useWindowSize } from 'react-use';
 import L from 'leaflet';
@@ -65,9 +65,7 @@ const WrapperStation = ({
   const addRoutingControl = (waypoints) => {
     const { current } = mapRef;
     const { leafletElement: map } = current;
-    if (routingControl != null) {
-      removeRoutingControl();
-    }
+
     routingControl = L.Routing.control({
       waypoints: [L.latLng(coords), L.latLng(waypoints)],
       lineOptions: {
@@ -92,7 +90,7 @@ const WrapperStation = ({
     map.on('locationfound', handleOnLocationFound);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     addRoutingControl(stationCoords);
     return () => {
       removeRoutingControl();
