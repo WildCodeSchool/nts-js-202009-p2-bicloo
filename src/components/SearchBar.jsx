@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 import styles from '../css/SearchBar.module.css';
+
 import iconLocation from '../assets/icons/location.svg';
 
 const SearchBar = ({ setStateAddress, placeholder, send }) => {

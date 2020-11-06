@@ -8,7 +8,7 @@ import 'leaflet-routing-machine';
 import CardList from './CardList';
 
 import styles from '../css/stationsList.module.css';
-import '../css/bikesMap.css';
+import '../css/BikesMap.css';
 
 const BikesMap = React.forwardRef((props, ref) => {
   const goldIcon = new L.Icon({

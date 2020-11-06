@@ -7,7 +7,11 @@ import 'leaflet-routing-machine';
 import ListSlider from './ListSlider';
 import BikesMap from './BikesMap';
 import StationsList from './StationsList';
+import Button from './Button';
+import logoMap from '../assets/icons/map.svg';
+import logoList from '../assets/icons/list.svg';
 import styles from '../css/WrapperStation.module.css';
+import buttonStyles from '../css/Button.module.css';
 
 const WrapperStation = ({
   stations,
@@ -98,12 +102,22 @@ const WrapperStation = ({
   return (
     <main>
       <nav className={styles.nav}>
-        <button onClick={handleDisplay} type="button">
-          Map
-        </button>
-        <button onClick={handleDisplay} type="button">
-          List
-        </button>
+        <Button
+          value="Carte"
+          logo={logoMap}
+          className={
+            display ? buttonStyles.buttonActive : buttonStyles.buttonDisable
+          }
+          handleDisplay={handleDisplay}
+        />
+        <Button
+          value="Liste"
+          logo={logoList}
+          className={
+            display ? buttonStyles.buttonDisable : buttonStyles.buttonActive
+          }
+          handleDisplay={handleDisplay}
+        />
       </nav>
       {display && width < 768 ? (
         <BikesMap

@@ -49,9 +49,7 @@ const CardList = ({ station, handleRoutingControl, display }) => {
     </>
   );
 };
-
 export default CardList;
-
 CardList.propTypes = {
   station: PropTypes.shape({
     name: PropTypes.string.isRequired,
