@@ -19,17 +19,19 @@ const WrapperStation = ({
   standsIsChecked,
   bankingIsChecked,
 }) => {
-  const [display, setdisplay] = useState(true);
-  const zoom = 13;
+  const [display, setDisplay] = useState(true);
+  const [defaultMarker, setDefaultMarker] = useState(true);
   const [coords, setCoords] = useState([47.214938, -1.556287]);
   const [stationCoords, setstationCoords] = useState(null);
 
   const { width } = useWindowSize();
   const mapRef = useRef();
+  const zoom = 13;
+  let marker = null;
   let routingControl = null;
 
   const handleDisplay = () => {
-    setdisplay(!display);
+    setDisplay(!display);
   };
 
   const handleOnLocationFound = (e) => {
@@ -37,7 +39,7 @@ const WrapperStation = ({
     const { leafletElement: map } = current;
 
     const { latlng } = e;
-    const marker = L.marker(latlng);
+    marker = L.marker(latlng);
     marker.addTo(map);
     setCoords(latlng);
   };
@@ -52,8 +54,10 @@ const WrapperStation = ({
     const { current } = mapRef;
     const { leafletElement: map } = current;
 
-    map.removeControl(routingControl);
-    routingControl = null;
+    if (!defaultMarker) {
+      map.removeControl(routingControl);
+      routingControl = null;
+    }
   };
 
   /*
@@ -66,12 +70,16 @@ const WrapperStation = ({
     const { current } = mapRef;
     const { leafletElement: map } = current;
 
-    routingControl = L.Routing.control({
-      waypoints: [L.latLng(coords), L.latLng(waypoints)],
-      lineOptions: {
-        styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
-      },
-    }).addTo(map);
+    if (!defaultMarker) {
+      routingControl = L.Routing.control({
+        waypoints: [L.latLng(coords), L.latLng(waypoints)],
+        lineOptions: {
+          styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+        },
+      }).addTo(map);
+    } else {
+      setDefaultMarker(false);
+    }
   };
 
   /*
