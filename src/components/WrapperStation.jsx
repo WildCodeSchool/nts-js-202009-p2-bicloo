@@ -54,7 +54,7 @@ const WrapperStation = ({
     const { current } = mapRef;
     const { leafletElement: map } = current;
 
-    if (!defaultMarker) {
+    if (routingControl) {
       map.removeControl(routingControl);
       routingControl = null;
     }
