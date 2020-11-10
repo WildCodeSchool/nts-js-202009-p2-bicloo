@@ -6,7 +6,12 @@ import CardList from './CardList';
 
 import styles from '../css/listSlider.module.css';
 
-function ListSlider({ stations }) {
+function ListSlider({
+  bikesIsChecked,
+  standsIsChecked,
+  bankingIsChecked,
+  stations,
+}) {
   const sliderRef = createRef();
   const scroll = useCallback(
     (y) => {
@@ -28,30 +33,38 @@ function ListSlider({ stations }) {
     infinite: false,
     speed: 500,
     slidesToShow: 3,
+    slidesToScroll: 2,
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
     draggable: true,
   };
 
-  // const slide = (y) => {
-  //   const { current } = slider;
-  //   return y > 0 ? current.slickNext() : current.slickPrev();
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener('wheel', (e) => {
-  //     slide(e.wheelDelta);
-  //   });
-  // }, []);
-
   return (
     <div className={styles.container}>
-      <Slider ref={sliderRef} {...settings} className={styles.slider}>
-        {stations.map((station) => {
-          return <CardList key={station.id} {...station} />;
-        })}
-        {'  '}
+      <Slider ref={sliderRef} className={styles.slider} {...settings}>
+        {stations
+          .filter((station) => {
+            if (bankingIsChecked) {
+              return station.banking === 'True';
+            }
+            return station;
+          })
+          .filter((station) => {
+            if (bikesIsChecked) {
+              return station.availableBikes > 0;
+            }
+            return station;
+          })
+          .filter((station) => {
+            if (standsIsChecked) {
+              return station.availableBikeStand > 0;
+            }
+            return station;
+          })
+          .map((station) => {
+            return <CardList key={station.id} station={station} />;
+          })}
       </Slider>
     </div>
   );
@@ -59,6 +72,9 @@ function ListSlider({ stations }) {
 
 ListSlider.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  bikesIsChecked: PropTypes.bool.isRequired,
+  standsIsChecked: PropTypes.bool.isRequired,
+  bankingIsChecked: PropTypes.bool.isRequired,
 };
 
 export default ListSlider;
