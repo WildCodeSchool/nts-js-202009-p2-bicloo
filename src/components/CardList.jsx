@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styles from '../css/stationsList.module.css';
 
-const CardList = ({ station, handleRoutingControl }) => {
+const CardList = ({ station, handleRoutingControl, display }) => {
   return (
     <>
       {station && (
@@ -31,9 +32,9 @@ const CardList = ({ station, handleRoutingControl }) => {
             <button
               type="button"
               className={styles.button}
-              onClick={() => handleRoutingControl(station.position)}
+              onClick={() => display && handleRoutingControl(station.position)}
             >
-              Itinéraire
+              {display ? 'Itinéraire' : 'Itinéraire non disponible'}
             </button>
             <p
               className={
@@ -48,9 +49,7 @@ const CardList = ({ station, handleRoutingControl }) => {
     </>
   );
 };
-
 export default CardList;
-
 CardList.propTypes = {
   station: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -61,4 +60,5 @@ CardList.propTypes = {
     position: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
   handleRoutingControl: PropTypes.func.isRequired,
+  display: PropTypes.bool.isRequired,
 };
