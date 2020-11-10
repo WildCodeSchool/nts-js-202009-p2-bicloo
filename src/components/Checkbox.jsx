@@ -8,9 +8,12 @@ const Checkbox = (props) => {
     bikesIsChecked,
     standsIsChecked,
     bankingIsChecked,
+    isSetting,
   } = props;
   return (
-    <section className={styles.allCheckboxes}>
+    <section
+      className={`${styles.allCheckboxes} ${isSetting && styles.display}`}
+    >
       <div className={styles.checkbox}>
         <label htmlFor="bikes">
           <input
@@ -59,6 +62,7 @@ Checkbox.propTypes = {
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
+  isSetting: PropTypes.bool.isRequired,
 };
 
 export default Checkbox;

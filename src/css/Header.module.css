@@ -15,7 +15,7 @@
 .setting {
   position: absolute;
   right: -3rem;
-  padding: 0.5rem 0.4rem;
+  padding: 0.5rem 0.5rem;
   cursor: pointer;
   border: none;
   outline: none;
@@ -56,6 +56,10 @@
     background-position: 50% 40%;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  .wrapperSearchCheckbox {
+    position: relative;
   }
 
   .wrapperSearch {
