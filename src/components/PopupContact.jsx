@@ -25,11 +25,11 @@ const PopupContact = (props) => {
             src={PhoneIcon}
             alt="icon phone"
           />
-          <p>06 36 42 88 90</p>
+          <a href="tel:+33130793344">01 30 79 33 44</a>
         </div>
         <div className={styles.opneningTime}>
           <p>Du lundi au vendredi 9h/17h</p>
-          <p>Le samedi et jours fériers 9h/12h</p>
+          <p>Le samedi et jours fériés 9h/12h</p>
         </div>
         <div className={styles.adressContact}>
           <div className={styles.adress}>
