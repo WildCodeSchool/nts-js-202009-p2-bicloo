@@ -57,14 +57,14 @@ const Header = ({
             <img src={iconSearch} alt="icon search" />
           </button>
         </div>
-        {isSetting && (
-          <Checkbox
-            handleChange={handleChange}
-            bikesIsChecked={bikesIsChecked}
-            standsIsChecked={standsIsChecked}
-            bankingIsChecked={bankingIsChecked}
-          />
-        )}
+
+        <Checkbox
+          isSetting={isSetting}
+          handleChange={handleChange}
+          bikesIsChecked={bikesIsChecked}
+          standsIsChecked={standsIsChecked}
+          bankingIsChecked={bankingIsChecked}
+        />
       </div>
     </header>
   );
