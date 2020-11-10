@@ -27,6 +27,13 @@ function ListSlider({
     window.addEventListener('wheel', (e) => {
       scroll(e.deltaY);
     });
+  }, []);
+
+  useEffect(() => {
+    return () =>
+      window.removeEventListener('wheel', (e) => {
+        scroll(e.deltaY);
+      });
   });
 
   const settings = {

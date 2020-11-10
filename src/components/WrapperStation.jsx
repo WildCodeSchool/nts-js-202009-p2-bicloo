@@ -69,6 +69,7 @@ const WrapperStation = ({
         />
         <ListSlider
           stations={stations}
+          display={display}
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
