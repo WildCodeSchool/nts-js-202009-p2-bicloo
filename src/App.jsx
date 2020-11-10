@@ -4,6 +4,7 @@ import axios from 'axios';
 import WrapperStation from './components/WrapperStation';
 import Header from './components/Header';
 import NavigationButton from './components/NavigationButton';
+import PricesList from './components/PricesList';
 
 class App extends Component {
   constructor() {
@@ -103,6 +104,7 @@ class App extends Component {
             />
           </>
         )}
+        <PricesList />
         <NavigationButton />
       </div>
     );

@@ -8,7 +8,7 @@ import 'leaflet-routing-machine';
 import CardList from './CardList';
 
 import styles from '../css/stationsList.module.css';
-import '../css/bikesMap.css';
+import '../css/BikesMap.css';
 
 class BikesMap extends Component {
   constructor(props) {
