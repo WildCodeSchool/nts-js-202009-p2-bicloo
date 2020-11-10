@@ -86,7 +86,7 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
   ]);
 
   useEffect(() => {
-    setAddress(infoAddress);
+    setAddress(value ? infoAddress : ''); // si notre champ est bien remplie on envoie toutes les infos sur l'address sinon on le reinitialize
   }, [send]);
 
   /** Ici je récupère l'address selectionné */
