@@ -72,7 +72,13 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  margin-top: 1.3rem;
+  margin-top: 2.2rem;
+}
+
+.phoneContact > a {
+  text-decoration: none;
+  font-family: var(--dosis);
+  color: black;
 }
 
 .contactIcons {
@@ -81,7 +87,7 @@
 
 .opneningTime {
   line-height: 0.5rem;
-  margin: 1.7rem 0rem;
+  margin: 3rem 0rem;
 }
 
 .adressContact {
