@@ -112,14 +112,14 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
         <input
           type="text"
           className={`${styles.input} ${
-            allAddress.length ? styles.contains : ''
+            allAddress.length && value ? styles.contains : ''
           }`}
           placeholder={placeholder}
           onChange={(e) => handleInput(e)}
           value={value}
         />
       </div>
-      {allAddress.length > 0 && (
+      {value && allAddress.length > 0 && (
         <ul className={styles.list}>
           {allAddress.map((data) => (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events
