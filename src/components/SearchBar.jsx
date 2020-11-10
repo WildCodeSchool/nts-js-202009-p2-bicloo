@@ -7,7 +7,6 @@ import iconLocation from '../assets/icons/location.svg';
 
 const SearchBar = ({ setStateAddress, placeholder, send }) => {
   const [value, setvalue] = useState('');
-  const [keydown, setKeyDown] = useState(false);
   const [allAddress, setallAddress] = useState([]);
   const [infoAddress, setinfoAddress] = useState([]);
 
@@ -54,12 +53,29 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
       });
   };
 
+  /** On limite les requêtes a 10 par secondes au bout de une seconde
+   *  on remet les compteurs a zero.
+   */
+  const [currentToken, setcurrentToken] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setcurrentToken(0);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [currentToken]);
+
   /** Cycle de vie: quand le state 'value' change je fais une requête */
   useEffect(() => {
-    if (value.length > 0) {
+    setcurrentToken((token) => token + 1);
+
+    const address = infoAddress && infoAddress.address;
+
+    if (value.length > 0 && currentToken < 10 && address !== value) {
       fetchAddress();
     }
-  }, [keydown]);
+  }, [value]);
 
   /** Je met a jour le state d'adresse de départ ou
    * d'arriver qui est dans le composant App
@@ -99,7 +115,6 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
             allAddress.length ? styles.contains : ''
           }`}
           placeholder={placeholder}
-          onKeyDown={() => setKeyDown(!keydown)}
           onChange={(e) => handleInput(e)}
           value={value}
         />
