@@ -56,7 +56,6 @@ class App extends Component {
           },
         }
       )
-
       .then(({ data }) => {
         const stations = data.records.map((record) => {
           return {
