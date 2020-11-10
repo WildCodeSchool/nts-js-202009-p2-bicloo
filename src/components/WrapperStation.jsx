@@ -152,7 +152,7 @@ const WrapperStation = ({
           zoom={zoom}
           coords={coords}
           stations={stations}
-          bikesIsChecked={bikesIsChecked
+          bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
@@ -165,7 +165,6 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
-          display={display}
         />
       </div>
     </main>
