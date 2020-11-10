@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import PricesCard from './PricesCard';
 
+import styles from '../css/PricesList.module.css';
+
 class PricesList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      prices: {},
+      prices: [],
     };
     this.fetchData = this.fetchData.bind(this);
   }
@@ -42,10 +45,15 @@ class PricesList extends Component {
   }
 
   render() {
+    const { prices } = this.state;
     return (
-      <div>
+      <div className={styles.main}>
         <h1>Tarifs</h1>
-        <PricesCard key={this.prices.id} prices={this.prices} />
+        <ul>
+          {prices.map((price) => {
+            return <PricesCard key={price.id} price={price} />;
+          })}
+        </ul>
       </div>
     );
   }
