@@ -11,22 +11,39 @@
   transform: translateY(-1rem);
 }
 
-.search {
+.search,
+.setting {
   position: absolute;
   right: -3rem;
+  padding: 0.5rem 0.4rem;
+  cursor: pointer;
+  border: none;
+  cursor: pointer;
+}
+
+.search {
   top: 1.55rem;
   border-radius: 3rem;
-  padding: 0.5rem 0.4rem;
-  border: none;
   padding-bottom: 0.2rem;
-  cursor: pointer;
   background-color: var(--header-checkbox-background);
+}
+
+.setting {
+  top: -2rem;
+  background-color: transparent;
 }
 
 .wrapperSearch {
   position: relative;
   z-index: 1050;
 }
+
+.wrapperSearchCheckbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media screen and (min-width: 768px) {
   .wrapperHeader {
     display: flex;
@@ -49,9 +66,18 @@
     width: 30vh;
   }
 
+  .search,
+  .setting {
+    z-index: 1010;
+  }
+
   .search {
     top: 0.6rem;
     right: 0.6rem;
-    z-index: 1010;
+  }
+
+  .setting {
+    right: 4rem;
+    top: 0.6rem;
   }
 }
