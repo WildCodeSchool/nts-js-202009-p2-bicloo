@@ -35,6 +35,7 @@ class App extends Component {
    * - address
    * - geographique
    */
+
   setCurrentAdress(currAddress) {
     this.setState({ currentAddress: currAddress });
   }

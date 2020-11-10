@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import more from '../assets/icons/more.svg';
 import search from '../assets/icons/search.svg';
@@ -21,7 +22,10 @@ function NavigationButton() {
           }`}
         >
           <img className={styles.icon} src={help} alt="icon help" />
-          <img className={styles.icon} src={credit} alt="icon credit" />
+          <Link to="/prices">
+            <img className={styles.icon} src={credit} alt="icon credit" />
+          </Link>
+
           <img className={styles.icon} src={search} alt="icon search" />
         </div>
         <button
