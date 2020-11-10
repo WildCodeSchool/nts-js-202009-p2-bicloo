@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
@@ -14,6 +14,27 @@ function ListSlider({
   handleRoutingControl,
   display,
 }) {
+  const sliderRef = useRef();
+  const scroll = useCallback(
+    (y) => {
+      if (y > 0) {
+        return sliderRef.current.slickNext();
+      }
+      return sliderRef.current.slickPrev();
+    },
+    [sliderRef]
+  );
+
+  useEffect(() => {
+    window.addEventListener('wheel', (e) => {
+      scroll(e.deltaY);
+    });
+    return () =>
+      window.removeEventListener('wheel', (e) => {
+        scroll(e.deltaY);
+      });
+  }, []);
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -22,11 +43,12 @@ function ListSlider({
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
+    draggable: true,
   };
 
   return (
     <div className={styles.container}>
-      <Slider className={styles.slider} {...settings}>
+      <Slider ref={sliderRef} className={styles.slider} {...settings}>
         {stations
           .filter((station) => {
             if (bankingIsChecked) {
