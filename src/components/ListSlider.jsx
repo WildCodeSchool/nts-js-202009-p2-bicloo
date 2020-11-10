@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
@@ -14,7 +14,7 @@ function ListSlider({
   handleRoutingControl,
   display,
 }) {
-  const sliderRef = createRef();
+  const sliderRef = useRef();
   const scroll = useCallback(
     (y) => {
       if (y > 0) {
@@ -29,14 +29,11 @@ function ListSlider({
     window.addEventListener('wheel', (e) => {
       scroll(e.deltaY);
     });
-  }, []);
-
-  useEffect(() => {
     return () =>
       window.removeEventListener('wheel', (e) => {
         scroll(e.deltaY);
       });
-  });
+  }, []);
 
   const settings = {
     infinite: false,
