@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useWindowSize } from 'react-use';
+import L from 'leaflet';
+import 'leaflet-routing-machine';
 
 import ListSlider from './ListSlider';
 import BikesMap from './BikesMap';
@@ -17,12 +19,91 @@ const WrapperStation = ({
   standsIsChecked,
   bankingIsChecked,
 }) => {
-  const [display, setdisplay] = useState(true);
-  const { width } = useWindowSize();
+  const [display, setDisplay] = useState(true);
+  const [defaultMarker, setDefaultMarker] = useState(true);
+  const [coords, setCoords] = useState([47.214938, -1.556287]);
+  const [stationCoords, setstationCoords] = useState(null);
 
-  const handleDisplay = (bool) => {
-    setdisplay(bool);
+  const { width } = useWindowSize();
+  const mapRef = useRef();
+  const zoom = 13;
+  let marker = null;
+  let routingControl = null;
+
+  const handleDisplay = () => {
+    setDisplay(!display);
   };
+
+  const handleOnLocationFound = (e) => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
+
+    const { latlng } = e;
+    marker = L.marker(latlng);
+    marker.addTo(map);
+    setCoords(latlng);
+  };
+
+  /*
+    supprimer un itinéraire:
+    si routingControl n'est pas nul
+    je supprime l'itinéraire
+    et remet routingControl à nul
+  */
+  const removeRoutingControl = () => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
+
+    if (routingControl) {
+      map.removeControl(routingControl);
+      routingControl = null;
+    }
+  };
+
+  /*
+    ajouter un itinéraire:
+    je vérifie qu'il n'y a pas déjà un itinéraire
+    si oui, j'appel removeRoutingCnotrol()
+    sinon je le créer et l'ajoute à la carte
+  */
+  const addRoutingControl = (waypoints) => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
+
+    if (!defaultMarker) {
+      routingControl = L.Routing.control({
+        waypoints: [L.latLng(coords), L.latLng(waypoints)],
+        lineOptions: {
+          styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+        },
+      }).addTo(map);
+    } else {
+      setDefaultMarker(false);
+    }
+  };
+
+  /*
+    dans CardList, au click
+    je créer un itinéraire
+    entre ma position et la position de la station
+  */
+  const handleRoutingControl = (position) => {
+    setstationCoords(position);
+  };
+
+  useEffect(() => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
+    map.locate({ setView: true });
+    map.on('locationfound', handleOnLocationFound);
+  }, []);
+
+  useEffect(() => {
+    addRoutingControl(stationCoords);
+    return () => {
+      removeRoutingControl();
+    };
+  }, [stationCoords]);
 
   return (
     <main>
@@ -33,7 +114,7 @@ const WrapperStation = ({
           className={
             display ? buttonStyles.buttonActive : buttonStyles.buttonDisable
           }
-          handleDisplay={() => handleDisplay(true)}
+          handleDisplay={handleDisplay}
         />
         <Button
           value="Liste"
@@ -41,15 +122,20 @@ const WrapperStation = ({
           className={
             display ? buttonStyles.buttonDisable : buttonStyles.buttonActive
           }
-          handleDisplay={() => handleDisplay(false)}
+          handleDisplay={handleDisplay}
         />
       </nav>
       {display && width < 768 ? (
         <BikesMap
+          ref={mapRef}
+          zoom={zoom}
+          coords={coords}
           stations={stations}
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+          display={display}
         />
       ) : (
         <StationsList
@@ -57,21 +143,29 @@ const WrapperStation = ({
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
+          display={display}
         />
       )}
-
       <div className={styles.desktop}>
         <BikesMap
+          ref={mapRef}
+          zoom={zoom}
+          coords={coords}
           stations={stations}
-          bikesIsChecked={bikesIsChecked}
+          bikesIsChecked={bikesIsChecked
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+          display={display}
         />
         <ListSlider
           stations={stations}
+          display={display}
           bikesIsChecked={bikesIsChecked}
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
+          handleRoutingControl={handleRoutingControl}
+          display={display}
         />
       </div>
     </main>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import more from '../assets/icons/more.svg';
 import search from '../assets/icons/search.svg';
@@ -8,8 +9,11 @@ import help from '../assets/icons/help.svg';
 
 import styles from '../css/navigationButton.module.css';
 
-function NavigationButton() {
+function NavigationButton(props) {
   const [active, setActive] = useState(false);
+  const { handlePopup } = props;
+
+  /* Popup temporaire en attendant d'avoir la 2ème page */
 
   return (
     <div className={styles.main}>
@@ -21,7 +25,12 @@ function NavigationButton() {
             active ? styles.navActive : styles.navDisabled
           }`}
         >
-          <img className={styles.icon} src={help} alt="icon help" />
+          <img
+            onClick={handlePopup}
+            className={styles.icon}
+            src={help}
+            alt="icon help"
+          />
           <Link to="/prices">
             <img className={styles.icon} src={credit} alt="icon credit" />
           </Link>
@@ -41,5 +50,9 @@ function NavigationButton() {
     </div>
   );
 }
+
+NavigationButton.propTypes = {
+  handlePopup: PropTypes.func.isRequired,
+};
 
 export default NavigationButton;

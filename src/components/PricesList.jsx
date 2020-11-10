@@ -49,6 +49,9 @@ class PricesList extends Component {
     return (
       <div className={styles.main}>
         <h1>Tarifs</h1>
+        <button type="button">Location de vélo moyenne et longue durée</button>
+        <button type="button">Vélo en libre service</button>
+        <button type="button">Stationnement vélo abrité </button>
         <ul>
           {prices.map((price) => {
             return <PricesCard key={price.id} price={price} />;
