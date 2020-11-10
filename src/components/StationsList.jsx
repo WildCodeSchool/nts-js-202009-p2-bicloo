@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList';
 
-// import { scroll } from './ListSlider';
-
 import styles from '../css/stationsList.module.css';
 
 const StationsList = ({
