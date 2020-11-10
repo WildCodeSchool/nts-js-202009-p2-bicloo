@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 import styles from '../css/SearchBar.module.css';
@@ -65,19 +65,15 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
    * d'arriver qui est dans le composant App
    * avec un callback passer en props
    */
-  const setAddress = useCallback((address) => setStateAddress(address), [
-    setStateAddress,
-  ]);
-
   useEffect(() => {
-    setAddress(infoAddress);
+    setStateAddress(infoAddress);
   }, [send]);
 
   /** Ici je récupère l'address selectionné */
   const selectAddress = (e) => {
     const addressCliked = e.target.textContent;
     const currentAdress = allAddress.find(
-      (element) => element.address === addressCliked
+      (element) => element.address === value
     );
 
     setvalue(addressCliked); // valeur mit a jour dans l'Input
@@ -107,7 +103,6 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
       {allAddress.length > 0 && (
         <ul className={styles.list}>
           {allAddress.map((data) => (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             <li
               key={data.id}
               className={styles.listItem}
