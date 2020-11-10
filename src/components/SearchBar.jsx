@@ -65,9 +65,10 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
    * d'arriver qui est dans le composant App
    * avec un callback passer en props
    */
-  const setAddress = useCallback((prop) => setStateAddress(prop), [
+  const setAddress = useCallback((address) => setStateAddress(address), [
     setStateAddress,
   ]);
+
   useEffect(() => {
     setAddress(infoAddress);
   }, [send]);
