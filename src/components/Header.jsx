@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
-import logoGeoBike from '../assets/geobike-mobile.png';
+import logoGeoBikeMobile from '../assets/geobike-mobile.png';
+import logoGeoBikeDesktop from '../assets/geobike-desktop.png';
 import Checkbox from './Checkbox';
 import iconSearch from '../assets/icons/search.svg';
 import styles from '../css/Header.module.css';
@@ -18,7 +19,15 @@ const Header = ({
 
   return (
     <header className={styles.wrapperHeader}>
-      <img className={styles.logo} src={logoGeoBike} alt="logo GeoBike" />
+      <picture>
+        <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
+        <source srcSet={logoGeoBikeMobile} />
+        <img
+          className={styles.logo}
+          src={logoGeoBikeMobile}
+          alt="logo GeoBike"
+        />
+      </picture>
       <div className={styles.wrapperSearch}>
         <SearchBar
           placeholder="Départ - autour de moi"
