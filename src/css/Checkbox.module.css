@@ -4,7 +4,7 @@
   color: var(--header-checkbox-label-color);
   font-family: var(--dosis);
   font-size: 1.0625rem;
-  padding: 0;
+  padding: 0 1rem 1rem 1rem;
   font-weight: 600;
   max-width: 21rem;
   height: 0;
@@ -13,7 +13,6 @@
 }
 
 .display {
-  padding: 0 1rem 1rem 1rem;
   height: 6rem;
 }
 
@@ -69,6 +68,7 @@ input[type='checkbox']:checked:before {
   .allCheckboxes {
     position: absolute;
     z-index: 1020;
+    padding: 0;
     top: 3rem;
     background-color: #fff;
     color: var(--card-item-title-color);
@@ -78,6 +78,7 @@ input[type='checkbox']:checked:before {
   }
 
   .display {
+    padding: 0 1rem 1rem 1rem;
     height: 3rem;
   }
 }
