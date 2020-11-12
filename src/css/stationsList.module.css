@@ -8,6 +8,15 @@
   margin: 0;
 }
 
+.stationBlock {
+  display: none;
+}
+
+.display {
+  display: initial;
+  position: relative;
+}
+
 .listStation {
   background-color: var(--card-item-background);
   margin: 1rem 3vw;
