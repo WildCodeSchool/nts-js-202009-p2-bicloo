@@ -32,9 +32,9 @@ const CardList = ({ station, handleRoutingControl, display }) => {
             <button
               type="button"
               className={styles.button}
-              onClick={() => display && handleRoutingControl(station.position)}
+              onClick={() => !display && handleRoutingControl(station.position)}
             >
-              {display ? 'Itinéraire' : 'Itinéraire non disponible'}
+              {!display ? 'Itinéraire' : 'Itinéraire non disponible'}
             </button>
             <p
               className={
