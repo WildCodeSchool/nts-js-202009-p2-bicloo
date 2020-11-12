@@ -12,7 +12,7 @@ const StationsList = ({
   display,
 }) => {
   return (
-    <div className={`${display && styles.display}`}>
+    <div className={`${styles.stationBlock} ${display && styles.display}`}>
       <ul className={styles.main}>
         {stations
           .filter((station) => {
