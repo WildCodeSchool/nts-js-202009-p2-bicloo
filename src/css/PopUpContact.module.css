@@ -38,7 +38,7 @@
   background-color: var(--card-item-background);
   padding: 1.2rem 1.2rem;
   width: 18rem;
-  height: 18rem;
+  height: 20rem;
   border-radius: 0.5rem;
 }
 
@@ -113,6 +113,7 @@
 
   .popupContent {
     width: 23rem;
+    height: 17rem;
   }
   .opneningTime {
     line-height: 1.2rem;
