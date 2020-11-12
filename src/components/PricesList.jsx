@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import axios from 'axios';
 
@@ -9,20 +10,37 @@ class PricesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      prices: [],
+      subscriptions: [],
       onlyLong: false,
       onlyFree: false,
       onlyParking: false,
+      all: [],
     };
     this.fetchData = this.fetchData.bind(this);
-    this.showLong = this.showLong.bind(this);
-    this.showFree = this.showFree.bind(this);
-    this.showParking = this.showParking.bind(this);
-    this.showAll = this.showAll.bind(this);
+    this.handleSubscription = this.handleSubscription.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  componentDidUpdate(prevProp, prevState) {
+    const { onlyLong, onlyFree, onlyParking } = this.state;
+    if (prevState.onlyLong !== onlyLong) {
+      this.handleSubscription(
+        'onlyLong',
+        'location de vélo moyenne et longue durée'
+      );
+    }
+
+    if (prevState.onlyFree !== onlyFree) {
+      this.handleSubscription('onlyFree', 'Vélo en libre service');
+    }
+
+    if (prevState.onlyParking !== onlyParking) {
+      this.handleSubscription('onlyParking', 'stationnement vélo abrité');
+    }
   }
 
   fetchData() {
@@ -37,7 +55,7 @@ class PricesList extends Component {
         }
       )
       .then(({ data }) => {
-        const prices = data.records.map((record) => {
+        const subscriptions = data.records.map((record) => {
           return {
             id: record.recordid,
             typeService: record.fields.type_de_service,
@@ -47,85 +65,77 @@ class PricesList extends Component {
             montant: record.fields.montant,
           };
         });
-        this.setState({ prices });
+        this.setState({ subscriptions });
       });
   }
 
-  showLong() {
+  handleSubscription(nameCheckbox, type) {
+    const { subscriptions, all, [nameCheckbox]: checkbox } = this.state;
+
+    const filtered = subscriptions.filter((rental) => {
+      if (checkbox) {
+        return rental.typeService === type;
+      }
+    });
+
+    const clearAll = all.filter((price) => {
+      if (!checkbox) {
+        return price.typeService !== type;
+      }
+
+      return true;
+    });
+
     this.setState({
-      onlyLong: true,
-      onlyFree: false,
-      onlyParking: false,
+      all: [...clearAll, ...filtered],
     });
   }
 
-  showFree() {
-    this.setState({
-      onlyLong: false,
-      onlyFree: true,
-      onlyParking: false,
-    });
-  }
+  handleCheckbox(e) {
+    const { name, checked } = e.target;
 
-  showParking() {
-    this.setState({
-      onlyLong: false,
-      onlyFree: false,
-      onlyParking: true,
-    });
-  }
-
-  showAll() {
-    this.setState({
-      onlyLong: true,
-      onlyFree: true,
-      onlyParking: true,
-    });
+    this.setState({ [name]: checked });
   }
 
   render() {
-    const { prices } = this.state;
-    const { onlyLong } = this.state;
-    const { onlyFree } = this.state;
-    const { onlyParking } = this.state;
+    const { subscriptions, all } = this.state;
 
     return (
       <div className={styles.main}>
         <h1>Tarifs</h1>
-        <button type="button" onClick={this.showAll}>
-          Tout afficher
-        </button>
-        <button type="button" onClick={this.showLong}>
+
+        <label htmlFor="long">
+          <input
+            type="checkbox"
+            name="onlyLong"
+            onChange={this.handleCheckbox}
+          />
           Moyenne et longue durée
-        </button>
-        <button type="button" onClick={this.showFree}>
+        </label>
+        <label htmlFor="free">
+          <input
+            type="checkbox"
+            name="onlyFree"
+            onChange={this.handleCheckbox}
+          />
           Libre service
-        </button>
-        <button type="button" onClick={this.showParking}>
+        </label>
+        <label htmlFor="parking">
+          <input
+            type="checkbox"
+            name="onlyParking"
+            onChange={this.handleCheckbox}
+          />
           Stationnement abrité
-        </button>
+        </label>
 
         <ul>
-          {prices
-            .filter((rental) => {
-              if (onlyLong && onlyFree && onlyParking) {
-                return rental.typeService;
-              } else if (onlyLong) {
-                return (
-                  rental.typeService ===
-                  'location de vélo moyenne et longue durée'
-                );
-              } else if (onlyFree) {
-                return rental.typeService === 'Vélo en libre service';
-              } else if (onlyParking) {
-                return rental.typeService === 'stationnement vélo abrité';
-              } else {
-                return rental.typeService;
-              }
-            })
-            .map((price) => {
-              return <PricesCard key={price.id} price={price} />;
-            })}
+          {all.length > 0
+            ? all.map((price) => <PricesCard key={price.id} price={price} />)
+            : subscriptions.map((price) => (
+                // eslint-disable-next-line react/jsx-indent
+                <PricesCard key={price.id} price={price} />
+              ))}
         </ul>
       </div>
     );
