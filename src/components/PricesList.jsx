@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import axios from 'axios';
 
@@ -13,16 +14,32 @@ class PricesList extends Component {
       onlyLong: false,
       onlyFree: false,
       onlyParking: false,
+      all: [],
     };
     this.fetchData = this.fetchData.bind(this);
     this.showLong = this.showLong.bind(this);
     this.showFree = this.showFree.bind(this);
     this.showParking = this.showParking.bind(this);
-    this.showAll = this.showAll.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  componentDidUpdate(prevProp, prevState) {
+    const { onlyLong, onlyFree, onlyParking } = this.state;
+    if (prevState.onlyLong !== onlyLong) {
+      this.showLong();
+    }
+
+    if (prevState.onlyFree !== onlyFree) {
+      this.showFree();
+    }
+
+    if (prevState.onlyParking !== onlyParking) {
+      this.showParking();
+    }
   }
 
   fetchData() {
@@ -52,61 +69,126 @@ class PricesList extends Component {
   }
 
   showLong() {
+    const { onlyLong, prices, all } = this.state;
+    const long = prices.filter((rental) => {
+      if (onlyLong) {
+        return (
+          rental.typeService === 'location de vélo moyenne et longue durée'
+        );
+      }
+    });
+
     this.setState({
-      onlyLong: true,
-      onlyFree: false,
-      onlyParking: false,
+      all: [...all, ...long],
     });
   }
 
   showFree() {
+    const { onlyFree, prices, all } = this.state;
+    const free = prices.filter((rental) => {
+      if (onlyFree) {
+        return rental.typeService === 'Vélo en libre service';
+      }
+    });
+
     this.setState({
-      onlyLong: false,
-      onlyFree: true,
-      onlyParking: false,
+      all: [...all, ...free],
     });
   }
 
   showParking() {
+    const { onlyParking, prices, all } = this.state;
+    const parking = prices.filter((rental) => {
+      if (onlyParking) {
+        return rental.typeService === 'stationnement vélo abrité';
+      }
+    });
+
     this.setState({
-      onlyLong: false,
-      onlyFree: false,
-      onlyParking: true,
+      all: [...all, ...parking],
     });
   }
 
-  showAll() {
-    this.setState({
-      onlyLong: true,
-      onlyFree: true,
-      onlyParking: true,
-    });
+  handleCheckbox(e) {
+    const { name, checked } = e.target;
+
+    this.setState({ [name]: checked });
   }
 
   render() {
-    const { prices } = this.state;
-    const { onlyLong } = this.state;
-    const { onlyFree } = this.state;
-    const { onlyParking } = this.state;
+    const { prices, all } = this.state;
 
     return (
       <div className={styles.main}>
         <h1>Tarifs</h1>
-        <button type="button" onClick={this.showAll}>
-          Tout afficher
-        </button>
-        <button type="button" onClick={this.showLong}>
+
+        <label htmlFor="long">
+          <input
+            type="checkbox"
+            name="onlyLong"
+            onChange={this.handleCheckbox}
+          />
           Moyenne et longue durée
-        </button>
-        <button type="button" onClick={this.showFree}>
+        </label>
+        <label htmlFor="free">
+          <input
+            type="checkbox"
+            name="onlyFree"
+            onChange={this.handleCheckbox}
+          />
           Libre service
-        </button>
-        <button type="button" onClick={this.showParking}>
+        </label>
+        <label htmlFor="parking">
+          <input
+            type="checkbox"
+            name="onlyParking"
+            onChange={this.handleCheckbox}
+          />
           Stationnement abrité
-        </button>
+        </label>
 
         <ul>
-          {prices
+          {all.length > 0
+            ? all.map((price) => <PricesCard key={price.id} price={price} />)
+            : prices.map((price) => (
+                // eslint-disable-next-line react/jsx-indent
+                <PricesCard key={price.id} price={price} />
+              ))}
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default PricesList;
+
+// if (onlyLong || onlyFree || onlyParking) {
+//   const long = prices.filter((rental) => {
+//     if (onlyLong) {
+//       return (
+//         rental.typeService === 'location de vélo moyenne et longue durée'
+//       );
+//     }
+//   });
+//   const free = prices.filter((rental) => {
+//     if (onlyFree) {
+//       return rental.typeService === 'Vélo en libre service';
+//     }
+//   });
+//   const parking = prices.filter((rental) => {
+//     if (onlyParking) {
+//       return rental.typeService === 'stationnement vélo abrité';
+//     }
+//   });
+
+//   allAbo.push([...parking, ...long, ...free]);
+// } else {
+//   allAbo.push(prices);
+// }
+
+/*
+
+
             .filter((rental) => {
               if (onlyLong && onlyFree && onlyParking) {
                 return rental.typeService;
@@ -119,17 +201,18 @@ class PricesList extends Component {
                 return rental.typeService === 'Vélo en libre service';
               } else if (onlyParking) {
                 return rental.typeService === 'stationnement vélo abrité';
+              } else if (onlyLong && onlyFree) {
+                //ToDO
+                return;
+
+              } else if (onlyLong && onlyParking) {
+                //ToDO
+                return;
+              } else if (onlyFree && onlyParking) {
+                //ToDO
+                return;
               } else {
                 return rental.typeService;
               }
             })
-            .map((price) => {
-              return <PricesCard key={price.id} price={price} />;
-            })}
-        </ul>
-      </div>
-    );
-  }
-}
-
-export default PricesList;
+*/
