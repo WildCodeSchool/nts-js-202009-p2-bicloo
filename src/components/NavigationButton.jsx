@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import more from '../assets/icons/more.svg';
@@ -30,7 +31,10 @@ function NavigationButton(props) {
             src={help}
             alt="icon help"
           />
-          <img className={styles.icon} src={credit} alt="icon credit" />
+          <Link to="/prices">
+            <img className={styles.icon} src={credit} alt="icon credit" />
+          </Link>
+
           <img className={styles.icon} src={search} alt="icon search" />
         </div>
         <button

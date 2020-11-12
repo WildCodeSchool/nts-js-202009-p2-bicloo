@@ -4,13 +4,25 @@
   color: var(--header-checkbox-label-color);
   font-family: var(--dosis);
   font-size: 1.0625rem;
-  font-weight: 600;
   padding: 0 1rem 1rem 1rem;
+  font-weight: 600;
   max-width: 21rem;
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s all ease-out;
 }
 
+.display {
+  height: 6rem;
+}
+
+.display .checkbox {
+  opacity: 1;
+}
 .checkbox {
   margin: 1rem;
+  opacity: 0;
+  transition: 0.3s all ease-out;
 }
 
 .checkbox > label {
@@ -55,11 +67,18 @@ input[type='checkbox']:checked:before {
 @media screen and (min-width: 768px) {
   .allCheckboxes {
     position: absolute;
-    bottom: 0;
+    z-index: 1020;
+    padding: 0;
+    top: 3rem;
     background-color: #fff;
     color: var(--card-item-title-color);
     max-width: initial;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+  }
+
+  .display {
+    padding: 0 1rem 1rem 1rem;
+    height: 3rem;
   }
 }
