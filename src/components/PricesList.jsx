@@ -10,16 +10,14 @@ class PricesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      prices: [],
+      subscriptions: [],
       onlyLong: false,
       onlyFree: false,
       onlyParking: false,
       all: [],
     };
     this.fetchData = this.fetchData.bind(this);
-    this.showLong = this.showLong.bind(this);
-    this.showFree = this.showFree.bind(this);
-    this.showParking = this.showParking.bind(this);
+    this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
@@ -30,15 +28,18 @@ class PricesList extends Component {
   componentDidUpdate(prevProp, prevState) {
     const { onlyLong, onlyFree, onlyParking } = this.state;
     if (prevState.onlyLong !== onlyLong) {
-      this.showLong();
+      this.handleSubscription(
+        'onlyLong',
+        'location de vélo moyenne et longue durée'
+      );
     }
 
     if (prevState.onlyFree !== onlyFree) {
-      this.showFree();
+      this.handleSubscription('onlyFree', 'Vélo en libre service');
     }
 
     if (prevState.onlyParking !== onlyParking) {
-      this.showParking();
+      this.handleSubscription('onlyParking', 'stationnement vélo abrité');
     }
   }
 
@@ -54,7 +55,7 @@ class PricesList extends Component {
         }
       )
       .then(({ data }) => {
-        const prices = data.records.map((record) => {
+        const subscriptions = data.records.map((record) => {
           return {
             id: record.recordid,
             typeService: record.fields.type_de_service,
@@ -64,48 +65,29 @@ class PricesList extends Component {
             montant: record.fields.montant,
           };
         });
-        this.setState({ prices });
+        this.setState({ subscriptions });
       });
   }
 
-  showLong() {
-    const { onlyLong, prices, all } = this.state;
-    const long = prices.filter((rental) => {
-      if (onlyLong) {
-        return (
-          rental.typeService === 'location de vélo moyenne et longue durée'
-        );
+  handleSubscription(nameCheckbox, type) {
+    const { subscriptions, all, [nameCheckbox]: checkbox } = this.state;
+
+    const filtered = subscriptions.filter((rental) => {
+      if (checkbox) {
+        return rental.typeService === type;
       }
     });
 
-    this.setState({
-      all: [...all, ...long],
-    });
-  }
-
-  showFree() {
-    const { onlyFree, prices, all } = this.state;
-    const free = prices.filter((rental) => {
-      if (onlyFree) {
-        return rental.typeService === 'Vélo en libre service';
+    const clearAll = all.filter((price) => {
+      if (!checkbox) {
+        return price.typeService !== type;
       }
+
+      return true;
     });
 
     this.setState({
-      all: [...all, ...free],
-    });
-  }
-
-  showParking() {
-    const { onlyParking, prices, all } = this.state;
-    const parking = prices.filter((rental) => {
-      if (onlyParking) {
-        return rental.typeService === 'stationnement vélo abrité';
-      }
-    });
-
-    this.setState({
-      all: [...all, ...parking],
+      all: [...clearAll, ...filtered],
     });
   }
 
@@ -116,7 +98,7 @@ class PricesList extends Component {
   }
 
   render() {
-    const { prices, all } = this.state;
+    const { subscriptions, all } = this.state;
 
     return (
       <div className={styles.main}>
@@ -150,7 +132,7 @@ class PricesList extends Component {
         <ul>
           {all.length > 0
             ? all.map((price) => <PricesCard key={price.id} price={price} />)
-            : prices.map((price) => (
+            : subscriptions.map((price) => (
                 // eslint-disable-next-line react/jsx-indent
                 <PricesCard key={price.id} price={price} />
               ))}
@@ -161,58 +143,3 @@ class PricesList extends Component {
 }
 
 export default PricesList;
-
-// if (onlyLong || onlyFree || onlyParking) {
-//   const long = prices.filter((rental) => {
-//     if (onlyLong) {
-//       return (
-//         rental.typeService === 'location de vélo moyenne et longue durée'
-//       );
-//     }
-//   });
-//   const free = prices.filter((rental) => {
-//     if (onlyFree) {
-//       return rental.typeService === 'Vélo en libre service';
-//     }
-//   });
-//   const parking = prices.filter((rental) => {
-//     if (onlyParking) {
-//       return rental.typeService === 'stationnement vélo abrité';
-//     }
-//   });
-
-//   allAbo.push([...parking, ...long, ...free]);
-// } else {
-//   allAbo.push(prices);
-// }
-
-/*
-
-
-            .filter((rental) => {
-              if (onlyLong && onlyFree && onlyParking) {
-                return rental.typeService;
-              } else if (onlyLong) {
-                return (
-                  rental.typeService ===
-                  'location de vélo moyenne et longue durée'
-                );
-              } else if (onlyFree) {
-                return rental.typeService === 'Vélo en libre service';
-              } else if (onlyParking) {
-                return rental.typeService === 'stationnement vélo abrité';
-              } else if (onlyLong && onlyFree) {
-                //ToDO
-                return;
-
-              } else if (onlyLong && onlyParking) {
-                //ToDO
-                return;
-              } else if (onlyFree && onlyParking) {
-                //ToDO
-                return;
-              } else {
-                return rental.typeService;
-              }
-            })
-*/
