@@ -165,7 +165,6 @@ const WrapperStation = ({
           standsIsChecked={standsIsChecked}
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
-          display={display}
         />
       </div>
     </main>
