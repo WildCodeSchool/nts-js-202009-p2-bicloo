@@ -19,7 +19,7 @@ const WrapperStation = ({
   standsIsChecked,
   bankingIsChecked,
 }) => {
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
   const [defaultMarker, setDefaultMarker] = useState(true);
   const [coords, setCoords] = useState([47.214938, -1.556287]);
   const [stationCoords, setstationCoords] = useState(null);
@@ -112,7 +112,7 @@ const WrapperStation = ({
           value="Carte"
           logo={logoMap}
           className={
-            display ? buttonStyles.buttonActive : buttonStyles.buttonDisable
+            display ? buttonStyles.buttonDisable : buttonStyles.buttonActive
           }
           handleDisplay={handleDisplay}
         />
@@ -120,24 +120,23 @@ const WrapperStation = ({
           value="Liste"
           logo={logoList}
           className={
-            display ? buttonStyles.buttonDisable : buttonStyles.buttonActive
+            display ? buttonStyles.buttonActive : buttonStyles.buttonDisable
           }
           handleDisplay={handleDisplay}
         />
       </nav>
+      <BikesMap
+        ref={mapRef}
+        zoom={zoom}
+        coords={coords}
+        stations={stations}
+        bikesIsChecked={bikesIsChecked}
+        standsIsChecked={standsIsChecked}
+        bankingIsChecked={bankingIsChecked}
+        handleRoutingControl={handleRoutingControl}
+        display={display}
+      />
       {display && width < 768 ? (
-        <BikesMap
-          ref={mapRef}
-          zoom={zoom}
-          coords={coords}
-          stations={stations}
-          bikesIsChecked={bikesIsChecked}
-          standsIsChecked={standsIsChecked}
-          bankingIsChecked={bankingIsChecked}
-          handleRoutingControl={handleRoutingControl}
-          display={display}
-        />
-      ) : (
         <StationsList
           stations={stations}
           bikesIsChecked={bikesIsChecked}
@@ -145,19 +144,7 @@ const WrapperStation = ({
           bankingIsChecked={bankingIsChecked}
           display={display}
         />
-      )}
-      <div className={styles.desktop}>
-        <BikesMap
-          ref={mapRef}
-          zoom={zoom}
-          coords={coords}
-          stations={stations}
-          bikesIsChecked={bikesIsChecked}
-          standsIsChecked={standsIsChecked}
-          bankingIsChecked={bankingIsChecked}
-          handleRoutingControl={handleRoutingControl}
-          display={display}
-        />
+      ) : (
         <ListSlider
           stations={stations}
           display={display}
@@ -166,7 +153,7 @@ const WrapperStation = ({
           bankingIsChecked={bankingIsChecked}
           handleRoutingControl={handleRoutingControl}
         />
-      </div>
+      )}
     </main>
   );
 };

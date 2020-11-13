@@ -8,6 +8,15 @@
   margin: 0;
 }
 
+.stationBlock {
+  display: none;
+}
+
+.display {
+  display: initial;
+  position: relative;
+}
+
 .listStation {
   background-color: var(--card-item-background);
   margin: 1rem 3vw;
@@ -102,7 +111,7 @@ p {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1000px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .listStation {
     display: flex;
     flex-direction: column;
