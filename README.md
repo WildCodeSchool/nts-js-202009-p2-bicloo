@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GeoBike
 
-## Available Scripts
+GeoBike est un outil qui permet d'aider à se déplacer à vélo dans la commune de Nantes. 
+L'utilisateur peut visualiser facilement où trouver un vélo en libre service et une place disponible. Il peut aussi se géolocaliser afin d'afficher un itinéraire pour trouver une station.
 
-In the project directory, you can run:
+## Démo
+*En développement*
 
-### `npm start`
+## Fonctionalités
+- Visualiser l'ensemble des stations avec leurs informations mises à jour en temps réel
+- Se géolocaliser
+- Barre de recherche
+- Filtrer la recherche
+- Itinéraire
+- Filtrer les abonnements
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologie
+- [React](https://reactjs.org/)
+- [Netlify](https://www.netlify.com/)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Ressources
+- [API Nantes Métropole](https://data.nantesmetropole.fr/pages/home/)
+- [API Gouv](https://geo.api.gouv.fr/adresse)
+- [ESLINT](https://eslint.org/)
+- [React Router](https://reactrouter.com/)
+- [Leaflet](https://leafletjs.com/)
+- [React Leaflet](https://react-leaflet.js.org/)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Contact
+- Nicolas Mercier : [Linkedin](https://www.linkedin.com/in/nicolas-mercier-80ba1232/) [Github](https://github.com/nicholas570)
+- Florian Milcendeau : [Linkedin](https://www.linkedin.com/in/florian-milcendeau/) [Github](https://github.com/FlorianMilcendeau)
+- Anaïs Cotinet : [Linkedin](https://www.linkedin.com/in/anais-cotinet) [Github](https://github.com/anais-ctnt)
+- Florian Pesset : [Linkedin](https://www.linkedin.com/in/florianpesset/) [Github](https://github.com/Florian-Pesset)
