@@ -26,7 +26,7 @@
   font-size: 1.0625rem;
   background-color: var(--header-searchBar-background);
   border: 0.1px solid #d4d4d4;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   padding: 0.5rem;
   padding-left: 2rem;
   width: 55vw;
@@ -39,7 +39,7 @@
   z-index: 1010;
   font-family: var(--dosis);
   background-color: var(--header-searchBar-background);
-  width: 100%;
+  width: 99.2%;
   max-width: 19.5rem;
   margin: 0;
   padding: 0;
@@ -93,5 +93,62 @@
   }
   .containerSearchBar:nth-of-type(2) {
     transform: translateY(0rem);
+  }
+
+  .input {
+    border-radius: 2rem;
+    height: 2.5rem;
+    border: none;
+  }
+
+  .containerSearchBar:nth-of-type(1)::after {
+    content: '';
+    display: block;
+    height: 0.1rem;
+    width: 2.5rem;
+    position: absolute;
+    top: 50%;
+    right: 0rem;
+    z-index: 1012;
+    transform: rotate(90deg);
+    background-color: #dbdbdb;
+    border-radius: 0.5rem;
+  }
+
+  .containerSearchBar:nth-of-type(1) .input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+
+  .containerSearchBar:nth-of-type(2) .input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+    max-width: initial;
+    width: 19rem;
+  }
+
+  .iconInput {
+    position: absolute;
+    transform: translate(0.4rem, 1rem);
+    z-index: 1;
+  }
+
+  .list {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .containerSearchBar:nth-of-type(1) .list {
+    width: 190%;
+    max-width: initial;
+    left: 10%;
+  }
+
+  .containerSearchBar:nth-of-type(2) .list {
+    width: 170%;
+    max-width: initial;
+    right: 10%;
   }
 }
