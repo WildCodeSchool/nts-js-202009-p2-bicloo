@@ -2,6 +2,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PricesCard from './PricesCard';
+
+import logoGeoBikeMobile from '../assets/geobike-mobile.png';
+import logoGeoBikeDesktop from '../assets/geobike-desktop.png';
+
 import styles from '../css/PricesList.module.css';
 
 class PricesList extends Component {
@@ -101,31 +105,38 @@ class PricesList extends Component {
     return (
       <div className={styles.main}>
         <div className={styles.header}>
-          <h1>Les prix</h1>
-          <label htmlFor="long">
-            <input
-              type="checkbox"
-              name="onlyLong"
-              onChange={this.handleCheckbox}
-            />
-            Moyenne et longue durée
-          </label>
-          <label htmlFor="free">
-            <input
-              type="checkbox"
-              name="onlyFree"
-              onChange={this.handleCheckbox}
-            />
-            Libre service
-          </label>
-          <label htmlFor="parking">
-            <input
-              type="checkbox"
-              name="onlyParking"
-              onChange={this.handleCheckbox}
-            />
-            Stationnement abrité
-          </label>
+          <img
+            className={styles.logo}
+            src={logoGeoBikeMobile}
+            alt="logo GeoBike"
+          />
+          <h1>Les Abonnements</h1>
+          <div className={styles.checkbox}>
+            <label htmlFor="long">
+              <input
+                type="checkbox"
+                name="onlyLong"
+                onChange={this.handleCheckbox}
+              />
+              Moyenne et longue durée
+            </label>
+            <label htmlFor="free">
+              <input
+                type="checkbox"
+                name="onlyFree"
+                onChange={this.handleCheckbox}
+              />
+              Libre service
+            </label>
+            <label htmlFor="parking">
+              <input
+                type="checkbox"
+                name="onlyParking"
+                onChange={this.handleCheckbox}
+              />
+              Stationnement abrité
+            </label>
+          </div>
         </div>
 
         <div>

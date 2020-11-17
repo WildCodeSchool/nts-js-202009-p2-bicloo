@@ -4,12 +4,14 @@ import styles from '../css/PricesCard.module.css';
 
 const PricesCard = ({ price }) => {
   return (
-    <div>
+    <div className={styles.pricesCard}>
       <li className={styles.card}>
         <h2>{price.name}</h2>
         <h3>{price.typeService}</h3>
         <p>{price.libelle}</p>
-        <p>{`${price.typeTarif}:${price.montant}€`}</p>
+        <p>
+          {price.typeTarif}: <b>{price.montant}€</b>
+        </p>
       </li>
     </div>
   );
