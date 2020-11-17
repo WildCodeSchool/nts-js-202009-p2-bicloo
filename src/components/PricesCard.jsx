@@ -6,11 +6,19 @@ const PricesCard = ({ price }) => {
   return (
     <div className={styles.pricesCard}>
       <li className={styles.card}>
-        <h2>{price.name}</h2>
-        <h3>{price.typeService}</h3>
+        <h2>
+          {price.name.charAt(0).toUpperCase() +
+            price.name.substring(1).toLowerCase()}
+        </h2>
+        <h3>
+          {price.typeService.charAt(0).toUpperCase() +
+            price.typeService.substring(1).toLowerCase()}
+        </h3>
         <p>{price.libelle}</p>
         <p>
-          {price.typeTarif}: <b>{price.montant}€</b>
+          {price.typeTarif.charAt(0).toUpperCase() +
+            price.typeTarif.substring(1).toLowerCase()}
+          : <b>{price.montant}€</b>
         </p>
       </li>
     </div>
