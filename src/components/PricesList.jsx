@@ -1,9 +1,7 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import PricesCard from './PricesCard';
-
 import styles from '../css/PricesList.module.css';
 
 class PricesList extends Component {
@@ -102,41 +100,44 @@ class PricesList extends Component {
 
     return (
       <div className={styles.main}>
-        <h1>Tarifs</h1>
+        <div className={styles.header}>
+          <h1>Les prix</h1>
+          <label htmlFor="long">
+            <input
+              type="checkbox"
+              name="onlyLong"
+              onChange={this.handleCheckbox}
+            />
+            Moyenne et longue durée
+          </label>
+          <label htmlFor="free">
+            <input
+              type="checkbox"
+              name="onlyFree"
+              onChange={this.handleCheckbox}
+            />
+            Libre service
+          </label>
+          <label htmlFor="parking">
+            <input
+              type="checkbox"
+              name="onlyParking"
+              onChange={this.handleCheckbox}
+            />
+            Stationnement abrité
+          </label>
+        </div>
 
-        <label htmlFor="long">
-          <input
-            type="checkbox"
-            name="onlyLong"
-            onChange={this.handleCheckbox}
-          />
-          Moyenne et longue durée
-        </label>
-        <label htmlFor="free">
-          <input
-            type="checkbox"
-            name="onlyFree"
-            onChange={this.handleCheckbox}
-          />
-          Libre service
-        </label>
-        <label htmlFor="parking">
-          <input
-            type="checkbox"
-            name="onlyParking"
-            onChange={this.handleCheckbox}
-          />
-          Stationnement abrité
-        </label>
-
-        <ul>
-          {all.length > 0
-            ? all.map((price) => <PricesCard key={price.id} price={price} />)
-            : subscriptions.map((price) => (
-                // eslint-disable-next-line react/jsx-indent
-                <PricesCard key={price.id} price={price} />
-              ))}
-        </ul>
+        <div>
+          <ul>
+            {all.length > 0
+              ? all.map((price) => <PricesCard key={price.id} price={price} />)
+              : subscriptions.map((price) => (
+                  // eslint-disable-next-line react/jsx-indent
+                  <PricesCard key={price.id} price={price} />
+                ))}
+          </ul>
+        </div>
       </div>
     );
   }
