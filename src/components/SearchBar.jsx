@@ -99,7 +99,7 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
     setvalue(addressCliked); // valeur mit a jour dans l'Input
     setinfoAddress({
       ...currentAdress,
-      coordinnates: currentAdress.coordinnates[0].reverse(),
+      coordinates: currentAdress.coordinnates[0].reverse(),
     }); // je récupère toutes les infos de l'adresse selectionné
     setallAddress([]); // je vide la liste
   };

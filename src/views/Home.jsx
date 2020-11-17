@@ -112,8 +112,8 @@ class Home extends Component {
               bikesIsChecked={bikesIsChecked}
               standsIsChecked={standsIsChecked}
               bankingIsChecked={bankingIsChecked}
-              currentAddress={currentAddress.coordinnates}
-              arrivalAddress={arrivalAddress.coordinnates}
+              currentAddress={currentAddress.coordinates}
+              arrivalAddress={arrivalAddress.coordinates}
             />
           </>
         )}
