@@ -105,11 +105,15 @@ class PricesList extends Component {
     return (
       <div className={styles.main}>
         <div className={styles.header}>
-          <img
-            className={styles.logo}
-            src={logoGeoBikeMobile}
-            alt="logo GeoBike"
-          />
+          <picture>
+            <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
+            <source srcSet={logoGeoBikeMobile} />
+            <img
+              className={styles.logo}
+              src={logoGeoBikeMobile}
+              alt="logo GeoBike"
+            />
+          </picture>
           <h1>Les Abonnements</h1>
           <div className={styles.checkbox}>
             <label htmlFor="long">
