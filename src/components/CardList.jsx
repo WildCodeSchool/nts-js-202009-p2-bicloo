@@ -40,7 +40,7 @@ const CardList = ({ station, handleRoutingControl, display }) => {
                   !display && handleRoutingControl(station.position)
                 }
               >
-                {!display ? 'Itinéraire' : 'Itinéraire non disponible'}
+                Itinéraire
               </button>
             )}
             <p
