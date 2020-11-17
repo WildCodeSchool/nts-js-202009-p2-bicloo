@@ -136,7 +136,7 @@ const WrapperStation = ({
         handleRoutingControl={handleRoutingControl}
         display={display}
       />
-      {display && width < 768 ? (
+      {width < 768 ? (
         <StationsList
           stations={stations}
           bikesIsChecked={bikesIsChecked}

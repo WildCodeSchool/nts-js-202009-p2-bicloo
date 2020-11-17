@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useWindowSize } from 'react-use';
 
 import styles from '../css/stationsList.module.css';
 
 const CardList = ({ station, handleRoutingControl, display }) => {
+  const { width } = useWindowSize();
+
   return (
     <>
       {station && (
@@ -29,13 +32,17 @@ const CardList = ({ station, handleRoutingControl, display }) => {
             </p>
           </div>
           <div className={styles.buttons}>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={() => !display && handleRoutingControl(station.position)}
-            >
-              {!display ? 'Itinéraire' : 'Itinéraire non disponible'}
-            </button>
+            {(width > 768 || !display) && (
+              <button
+                type="button"
+                className={styles.button}
+                onClick={() =>
+                  !display && handleRoutingControl(station.position)
+                }
+              >
+                {!display ? 'Itinéraire' : 'Itinéraire non disponible'}
+              </button>
+            )}
             <p
               className={
                 station.banking === 'False' ? styles.banking : styles.notBanking
