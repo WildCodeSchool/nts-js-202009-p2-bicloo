@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import PopupContact from '../components/PopupContact';
 import WrapperStation from '../components/WrapperStation';
 import Header from '../components/Header';
-import NavigationButton from '../components/NavigationButton';
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       stations: {},
       loading: true,
@@ -17,13 +15,11 @@ class Home extends Component {
       bikesIsChecked: true,
       standsIsChecked: true,
       bankingIsChecked: true,
-      isOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.setCurrentAdress = this.setCurrentAdress.bind(this);
     this.setArrivalAddress = this.setArrivalAddress.bind(this);
-    this.handlePopup = this.handlePopup.bind(this);
   }
 
   componentDidMount() {
@@ -78,11 +74,6 @@ class Home extends Component {
     this.setState({ [e.target.name]: e.target.checked });
   }
 
-  handlePopup() {
-    const { isOpen } = this.state;
-    this.setState({ isOpen: !isOpen });
-  }
-
   render() {
     const {
       loading,
@@ -90,11 +81,9 @@ class Home extends Component {
       bikesIsChecked,
       standsIsChecked,
       bankingIsChecked,
-      isOpen,
     } = this.state;
     return (
       <div className="App">
-        <PopupContact isOpen={isOpen} handlePopup={this.handlePopup} />
         <Header
           setCurrentAdress={this.setCurrentAdress}
           handleChange={this.handleChange}
@@ -113,9 +102,9 @@ class Home extends Component {
             />
           </>
         )}
-        <NavigationButton handlePopup={this.handlePopup} />
       </div>
     );
   }
 }
+
 export default Home;

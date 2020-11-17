@@ -13,8 +13,6 @@ function NavigationButton(props) {
   const [active, setActive] = useState(false);
   const { handlePopup } = props;
 
-  /* Popup temporaire en attendant d'avoir la 2ème page */
-
   return (
     <div className={styles.main}>
       <div
@@ -34,8 +32,9 @@ function NavigationButton(props) {
           <Link to="/prices">
             <img className={styles.icon} src={credit} alt="icon credit" />
           </Link>
-
-          <img className={styles.icon} src={search} alt="icon search" />
+          <Link to="/">
+            <img className={styles.icon} src={search} alt="icon search" />
+          </Link>
         </div>
         <button
           className={`${styles.btn} ${
