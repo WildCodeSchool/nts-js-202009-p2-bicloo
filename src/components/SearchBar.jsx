@@ -41,7 +41,7 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
         const data = res.data.features.map((client) => {
           return {
             id: client.properties.id,
-            coordinnates: [client.geometry.coordinates],
+            coordinates: [client.geometry.coordinates],
             address: client.properties.label,
           };
         });
@@ -99,7 +99,7 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
     setvalue(addressCliked); // valeur mit a jour dans l'Input
     setinfoAddress({
       ...currentAdress,
-      coordinates: currentAdress.coordinnates[0].reverse(),
+      coordinates: currentAdress.coordinates[0].reverse(),
     }); // je récupère toutes les infos de l'adresse selectionné
     setallAddress([]); // je vide la liste
   };
