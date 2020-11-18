@@ -1,5 +1,6 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PricesCard from './PricesCard';
 
@@ -105,15 +106,17 @@ class PricesList extends Component {
     return (
       <div className={styles.main}>
         <div className={styles.header}>
-          <picture>
-            <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
-            <source srcSet={logoGeoBikeMobile} />
-            <img
-              className={styles.logo}
-              src={logoGeoBikeMobile}
-              alt="logo GeoBike"
-            />
-          </picture>
+          <Link to="/">
+            <picture>
+              <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
+              <source srcSet={logoGeoBikeMobile} />
+              <img
+                className={styles.logo}
+                src={logoGeoBikeMobile}
+                alt="logo GeoBike"
+              />
+            </picture>
+          </Link>
           <h1>Les Abonnements</h1>
           <div className={styles.checkbox}>
             <label htmlFor="long" className={styles.filters}>
