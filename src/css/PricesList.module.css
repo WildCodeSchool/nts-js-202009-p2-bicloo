@@ -31,7 +31,7 @@ h1 {
   padding-bottom: 1rem;
 }
 
-label {
+.filters {
   margin: 0.5rem;
   display: flex;
   justify-items: center;
@@ -48,7 +48,7 @@ ul {
     justify-content: space-between;
     background-image: url(../assets/bc-velo.webp);
     height: 20vh;
-    background-position: 50% 40%;
+    background-position: 50% 60%;
     background-repeat: no-repeat;
     background-size: cover;
     flex-wrap: nowrap;
@@ -79,7 +79,7 @@ ul {
     margin-right: 2em;
   }
 
-  label {
+  .filters {
     margin: 0;
   }
 
