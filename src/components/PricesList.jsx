@@ -1,6 +1,8 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import axios from 'axios';
+import Pagination from 'rc-pagination';
+
 import PricesCard from './PricesCard';
 
 import logoGeoBikeMobile from '../assets/geobike-mobile.png';
@@ -17,10 +19,13 @@ class PricesList extends Component {
       onlyFree: false,
       onlyParking: false,
       all: [],
+      current: 1,
+      lengthPages: 0,
     };
     this.fetchData = this.fetchData.bind(this);
     this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +48,13 @@ class PricesList extends Component {
     if (prevState.onlyParking !== onlyParking) {
       this.handleSubscription('onlyParking', 'stationnement vélo abrité');
     }
+  }
+
+  onChange(page) {
+    console.log(page);
+    this.setState({
+      current: page,
+    });
   }
 
   fetchData() {
@@ -151,6 +163,13 @@ class PricesList extends Component {
                   // eslint-disable-next-line react/jsx-indent
                   <PricesCard key={price.id} price={price} />
                 ))}
+
+            <Pagination
+              onChange={this.onChange}
+              pageSize={3}
+              current={this.state.current}
+              total={this.lengthPages}
+            />
           </ul>
         </div>
       </div>
