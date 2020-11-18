@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 import PricesCard from './PricesCard';
 
@@ -19,8 +20,12 @@ class PricesList extends Component {
       onlyFree: false,
       onlyParking: false,
       all: [],
-      current: 1,
-      lengthPages: 0,
+      currentPages: 1,
+      lengthPages: 44,
+      cursor: {
+        start: 0,
+        end: 9,
+      },
     };
     this.fetchData = this.fetchData.bind(this);
     this.handleSubscription = this.handleSubscription.bind(this);
@@ -50,10 +55,13 @@ class PricesList extends Component {
     }
   }
 
-  onChange(page) {
-    console.log(page);
+  onChange(page, sizePages) {
+    this.setState({ currentPage: page });
     this.setState({
-      current: page,
+      cursor: {
+        start: (page - 1) * sizePages,
+        end: page * sizePages,
+      },
     });
   }
 
@@ -80,6 +88,23 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
+
+        /*
+        const { length } = data.records;
+
+        if (length > 5) {
+          this.setState({ lengthPages: Math.ceil(length) });
+        } else {
+          this.setState({ lengthPages: 0 });
+        }
+
+        this.setState({
+          cursor: {
+            start: 0,
+            end: 9,
+          },
+        });
+*/
       });
   }
 
@@ -112,7 +137,13 @@ class PricesList extends Component {
   }
 
   render() {
-    const { subscriptions, all } = this.state;
+    const {
+      subscriptions,
+      all,
+      cursor,
+      lengthPages,
+      currentPages,
+    } = this.state;
 
     return (
       <div className={styles.main}>
@@ -155,21 +186,23 @@ class PricesList extends Component {
           </div>
         </div>
 
+        <Pagination
+          style={{ marginTop: '2rem' }}
+          onChange={this.onChange}
+          pageSize={9}
+          current={currentPages}
+          total={lengthPages}
+        />
+
         <div>
           <ul>
             {all.length > 0
-              ? all.map((price) => <PricesCard key={price.id} price={price} />)
-              : subscriptions.map((price) => (
-                  // eslint-disable-next-line react/jsx-indent
-                  <PricesCard key={price.id} price={price} />
-                ))}
-
-            <Pagination
-              onChange={this.onChange}
-              pageSize={3}
-              current={this.state.current}
-              total={this.lengthPages}
-            />
+              ? all
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)
+              : subscriptions
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)}
           </ul>
         </div>
       </div>

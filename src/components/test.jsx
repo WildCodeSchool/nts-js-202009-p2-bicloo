@@ -35,7 +35,7 @@ const Main = () => {
         }
       )
       .then((res) => {
-        const length = res.data.length;
+        const { length } = res.data;
 
         if (length > 5) {
           setLengthPages(Math.ceil(length));
