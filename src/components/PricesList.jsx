@@ -1,5 +1,6 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
@@ -148,18 +149,20 @@ class PricesList extends Component {
     return (
       <div className={styles.main}>
         <div className={styles.header}>
-          <picture>
-            <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
-            <source srcSet={logoGeoBikeMobile} />
-            <img
-              className={styles.logo}
-              src={logoGeoBikeMobile}
-              alt="logo GeoBike"
-            />
-          </picture>
+          <Link to="/">
+            <picture>
+              <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
+              <source srcSet={logoGeoBikeMobile} />
+              <img
+                className={styles.logo}
+                src={logoGeoBikeMobile}
+                alt="logo GeoBike"
+              />
+            </picture>
+          </Link>
           <h1>Les Abonnements</h1>
           <div className={styles.checkbox}>
-            <label htmlFor="long">
+            <label htmlFor="long" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyLong"
@@ -167,7 +170,7 @@ class PricesList extends Component {
               />
               Moyenne et longue durée
             </label>
-            <label htmlFor="free">
+            <label htmlFor="free" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyFree"
@@ -175,7 +178,7 @@ class PricesList extends Component {
               />
               Libre service
             </label>
-            <label htmlFor="parking">
+            <label htmlFor="parking" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyParking"

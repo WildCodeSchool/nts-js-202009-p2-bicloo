@@ -56,6 +56,7 @@
 .listItem {
   text-align: center;
   padding: 0.4rem 0;
+  width: 100%;
   transition: all 0.1s linear;
 }
 
@@ -88,10 +89,17 @@
     background-color: var(--card-item-btn-itinerary-background);
     color: #fff;
   }
+
+  .listItem:last-child:hover {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
   .containerSearchBar {
     transform: translateY(0rem);
     z-index: 2;
   }
+
   .containerSearchBar:nth-of-type(2) {
     transform: translateY(0rem);
   }
@@ -109,7 +117,7 @@
     width: 2.5rem;
     position: absolute;
     top: 50%;
-    right: 0rem;
+    right: -1.2rem;
     z-index: 1012;
     transform: rotate(90deg);
     background-color: #dbdbdb;
@@ -141,15 +149,15 @@
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     position: absolute;
-    padding-top: 2.5rem;
-    top: 2.3rem;
+    padding-top: 1.8rem;
+    top: 2.2rem;
     z-index: -1;
   }
 
   .containerSearchBar:nth-of-type(1) .list {
-    width: 197%;
+    width: 196.7%;
     max-width: initial;
-    left: -0.5%;
+    left: 0;
   }
 
   .containerSearchBar:nth-of-type(2) .list {
