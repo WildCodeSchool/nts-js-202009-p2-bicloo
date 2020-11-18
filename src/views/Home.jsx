@@ -83,7 +83,6 @@ class Home extends Component {
       bankingIsChecked,
       currentAddress,
       arrivalAddress,
-      isOpen,
     } = this.state;
     return (
       <div className="App">
