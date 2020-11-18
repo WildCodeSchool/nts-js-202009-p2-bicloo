@@ -115,7 +115,7 @@ const WrapperStation = ({
       setCoords(currentAddress);
     }
     return () => {
-      map.removeLayer(marker);
+      if (marker) map.removeLayer(marker);
     };
   }, [currentAddress]);
 
