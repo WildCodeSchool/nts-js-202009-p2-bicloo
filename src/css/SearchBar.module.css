@@ -64,7 +64,7 @@
   color: #fff;
 }
 
-.contains {
+.contains .input {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: none;
@@ -90,6 +90,7 @@
   }
   .containerSearchBar {
     transform: translateY(0rem);
+    z-index: 2;
   }
   .containerSearchBar:nth-of-type(2) {
     transform: translateY(0rem);
@@ -126,7 +127,8 @@
     border-bottom-left-radius: 0;
     border-left: none;
     max-width: initial;
-    width: 19rem;
+    width: 10.5rem;
+    padding-right: 6.5rem;
   }
 
   .iconInput {
@@ -138,17 +140,21 @@
   .list {
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    position: absolute;
+    padding-top: 2.5rem;
+    top: 2.3rem;
+    z-index: -1;
   }
 
   .containerSearchBar:nth-of-type(1) .list {
-    width: 190%;
+    width: 197%;
     max-width: initial;
-    left: 10%;
+    left: -0.5%;
   }
 
   .containerSearchBar:nth-of-type(2) .list {
-    width: 170%;
+    width: 202%;
     max-width: initial;
-    right: 10%;
+    right: 0;
   }
 }

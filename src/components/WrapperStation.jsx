@@ -18,6 +18,8 @@ const WrapperStation = ({
   bikesIsChecked,
   standsIsChecked,
   bankingIsChecked,
+  currentAddress,
+  arrivalAddress,
 }) => {
   const [display, setDisplay] = useState(false);
   const [defaultMarker, setDefaultMarker] = useState(true);
@@ -74,7 +76,7 @@ const WrapperStation = ({
       routingControl = L.Routing.control({
         waypoints: [L.latLng(coords), L.latLng(waypoints)],
         lineOptions: {
-          styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+          styles: [{ color: '#669df6', opacity: 1, weight: 5 }],
         },
       }).addTo(map);
     } else {
@@ -100,10 +102,21 @@ const WrapperStation = ({
 
   useEffect(() => {
     addRoutingControl(stationCoords);
+
     return () => {
       removeRoutingControl();
     };
-  }, [stationCoords]);
+  }, [stationCoords, coords]);
+
+  useEffect(() => {
+    if (currentAddress) {
+      setCoords(currentAddress);
+    }
+
+    if (arrivalAddress) {
+      setstationCoords(arrivalAddress);
+    }
+  }, [currentAddress, arrivalAddress]);
 
   return (
     <main>
@@ -165,4 +178,6 @@ WrapperStation.propTypes = {
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
+  currentAddress: PropTypes.arrayOf(PropTypes.object).isRequired,
+  arrivalAddress: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

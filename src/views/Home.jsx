@@ -10,8 +10,8 @@ class Home extends Component {
     this.state = {
       stations: {},
       loading: true,
-      currentAddress: '',
-      arrivalAddress: '',
+      currentAddress: {},
+      arrivalAddress: {},
       bikesIsChecked: true,
       standsIsChecked: true,
       bankingIsChecked: true,
@@ -81,6 +81,9 @@ class Home extends Component {
       bikesIsChecked,
       standsIsChecked,
       bankingIsChecked,
+      currentAddress,
+      arrivalAddress,
+      isOpen,
     } = this.state;
     return (
       <div className="App">
@@ -99,6 +102,8 @@ class Home extends Component {
               bikesIsChecked={bikesIsChecked}
               standsIsChecked={standsIsChecked}
               bankingIsChecked={bankingIsChecked}
+              currentAddress={currentAddress.coordinates}
+              arrivalAddress={arrivalAddress.coordinates}
             />
           </>
         )}
