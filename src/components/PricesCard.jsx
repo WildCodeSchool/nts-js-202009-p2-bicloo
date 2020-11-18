@@ -6,7 +6,7 @@ const PricesCard = ({ price }) => {
   return (
     <div className={styles.pricesCard}>
       <li className={styles.card}>
-        <h2>
+        <h2 className={styles.titleCard}>
           {price.name.charAt(0).toUpperCase() +
             price.name.substring(1).toLowerCase()}
         </h2>
