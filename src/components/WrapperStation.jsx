@@ -109,14 +109,21 @@ const WrapperStation = ({
   }, [stationCoords, coords]);
 
   useEffect(() => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
     if (currentAddress) {
       setCoords(currentAddress);
     }
+    return () => {
+      map.removeLayer(marker);
+    };
+  }, [currentAddress]);
 
+  useEffect(() => {
     if (arrivalAddress) {
       setstationCoords(arrivalAddress);
     }
-  }, [currentAddress, arrivalAddress]);
+  }, [arrivalAddress]);
 
   return (
     <main>
