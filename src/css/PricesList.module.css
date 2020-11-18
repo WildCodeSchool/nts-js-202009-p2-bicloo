@@ -2,6 +2,91 @@
   background-color: #f6f7fb;
 }
 
+.header {
+  background-color: var(--header-background);
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  color: white;
+  display: flex;
+  height: 248px;
+}
+.logo {
+  transform: translateY(-1rem);
+}
+
+h1 {
+  font-family: var(--daysOne);
+  margin: 0;
+  padding: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  transform: translateY(-1rem);
+}
+.checkbox {
+  font-family: var(--dosis);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 1rem;
+}
+
+label {
+  margin: 0.5rem;
+  display: flex;
+  justify-items: center;
+}
+
 ul {
   padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-image: url(../assets/bc-velo.webp);
+    height: 20vh;
+    background-position: 50% 40%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-wrap: nowrap;
+  }
+
+  .logo {
+    transform: translateY(0);
+    width: 30vh;
+  }
+
+  h1 {
+    width: 40vw;
+    font-size: 2.5em;
+    padding: 0;
+    text-align: center;
+    transform: translateY(0);
+  }
+
+  .checkbox {
+    width: 30vw;
+    border-radius: 30px;
+    background: #fff;
+    justify-content: space-between;
+
+    border: 1px solid #ccc;
+    color: black;
+    padding: 1rem;
+    margin-right: 2em;
+  }
+
+  label {
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
