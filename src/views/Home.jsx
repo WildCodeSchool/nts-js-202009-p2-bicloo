@@ -54,8 +54,7 @@ class Home extends Component {
         },
 
         headers: {
-          Authorization:
-            'ApiKey c05f988c5637dd721c0c53db8abf952a3416a0ac0fa2cd535d82a521 ',
+          Authorization: process.env.REACT_APP_NANTES_DATA_API_KEY,
         },
       })
       .then(({ data }) => {
