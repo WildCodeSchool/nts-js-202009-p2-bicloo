@@ -45,7 +45,6 @@ class Home extends Component {
   fetchData() {
     axios
       .get('https://data.nantesmetropole.fr/api/records/1.0/search/', {
-        // ?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&rows=200&facet=status&refine.status=OPEN
         params: {
           dataset:
             '244400404_stations-velos-libre-service-nantes-metropole-disponibilites',
