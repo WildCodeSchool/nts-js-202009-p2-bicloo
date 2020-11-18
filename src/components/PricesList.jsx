@@ -116,7 +116,7 @@ class PricesList extends Component {
           </picture>
           <h1>Les Abonnements</h1>
           <div className={styles.checkbox}>
-            <label htmlFor="long">
+            <label htmlFor="long" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyLong"
@@ -124,7 +124,7 @@ class PricesList extends Component {
               />
               Moyenne et longue durée
             </label>
-            <label htmlFor="free">
+            <label htmlFor="free" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyFree"
@@ -132,7 +132,7 @@ class PricesList extends Component {
               />
               Libre service
             </label>
-            <label htmlFor="parking">
+            <label htmlFor="parking" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyParking"
