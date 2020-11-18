@@ -74,6 +74,9 @@ const WrapperStation = ({
 
     if (!defaultMarker) {
       routingControl = L.Routing.control({
+        router: L.Routing.mapbox(
+          'pk.eyJ1IjoibmljaG9sYXM1NzAiLCJhIjoiY2tobmw2a2k5MGR0ZDMyazYzbzVlMnhjYSJ9.8LJlSXnrtqJ272s_oWU_2Q'
+        ),
         waypoints: [L.latLng(coords), L.latLng(waypoints)],
         lineOptions: {
           styles: [{ color: '#669df6', opacity: 1, weight: 5 }],
