@@ -109,14 +109,21 @@ const WrapperStation = ({
   }, [stationCoords, coords]);
 
   useEffect(() => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
     if (currentAddress) {
       setCoords(currentAddress);
     }
+    return () => {
+      if (marker) map.removeLayer(marker);
+    };
+  }, [currentAddress]);
 
+  useEffect(() => {
     if (arrivalAddress) {
       setstationCoords(arrivalAddress);
     }
-  }, [currentAddress, arrivalAddress]);
+  }, [arrivalAddress]);
 
   return (
     <main>
@@ -173,11 +180,16 @@ const WrapperStation = ({
 
 export default WrapperStation;
 
+WrapperStation.defaultProps = {
+  currentAddress: '',
+  arrivalAddress: '',
+};
+
 WrapperStation.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
-  currentAddress: PropTypes.arrayOf(PropTypes.object).isRequired,
-  arrivalAddress: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentAddress: PropTypes.arrayOf(PropTypes.object),
+  arrivalAddress: PropTypes.arrayOf(PropTypes.object),
 };
