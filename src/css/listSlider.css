@@ -10,9 +10,9 @@
 
   .slider {
     position: relative;
-    left: 70vw;
-    width: 25vw;
-    top: 2vw;
+    left: 67vw;
+    width: 30vw;
+    top: 1.5vw;
     height: 75vh;
     overflow-y: clip;
   }
