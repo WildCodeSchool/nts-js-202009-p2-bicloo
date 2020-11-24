@@ -24,11 +24,14 @@
 }
 
 .btn {
-  width: 5em;
-  height: 5em;
+  width: 4em;
+  height: 4em;
   border-radius: 50px;
   border: none;
   outline: none;
+  min-width: 4em;
+  position: relative;
+  transition: background-color 0.1s linear;
 }
 
 .btnActive {
@@ -54,21 +57,63 @@
 }
 
 .navDisabled {
-  display: none;
+  width: 0;
+  overflow: hidden;
 }
 
 .icon {
-  width: 3em;
+  width: 2em;
   cursor: pointer;
+}
+
+.sliceCross {
+  display: block;
+  background-color: #fff;
+  width: 1.5rem;
+  height: 0.3rem;
+  position: absolute;
+  border-radius: 0.5rem;
+  transition: all 0.1s linear;
+}
+
+.sliceCross:nth-of-type(1) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.sliceCross:nth-of-type(2) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.btnActive > .sliceCross:nth-of-type(1) {
+  transform: translate(-50%, -50%) rotate(0deg);
 }
 
 @media screen and (min-width: 768px) {
   .container {
     width: 10vw;
+    max-width: 25rem;
+  }
+
+  .icon {
+    width: 3em;
+    cursor: pointer;
+  }
+
+  .btn {
+    cursor: pointer;
   }
 
   .containerActive {
     background-color: var(--main-btn-disabled-background);
     width: 30vw;
+    max-width: 25rem;
+  }
+
+  .sliceCross {
+    width: 1.8rem;
   }
 }
