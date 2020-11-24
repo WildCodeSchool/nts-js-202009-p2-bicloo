@@ -77,7 +77,7 @@ p {
 
 .mapBlock {
   position: absolute;
-  height: 80vh;
+  height: calc(100vh - 198px - 50.6px);
   width: 100%;
   z-index: 0;
 }
@@ -107,7 +107,7 @@ p {
   }
 
   .mapBlock {
-    height: 100vh;
+    height: calc(100vh - 20vh);
   }
 }
 
