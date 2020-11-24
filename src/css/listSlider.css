@@ -7,10 +7,19 @@
     display: block;
     width: 35vw;
   }
+
   .slider {
     position: relative;
     left: 70vw;
     width: 25vw;
     top: 2vw;
+    height: 75vh;
+    overflow-y: clip;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    opacity: 1;
+    color: grey !important;
   }
 }

@@ -86,7 +86,7 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
-        this.setState({ totale: subscriptions.length });
+        this.setState({ totale: subscriptions.length });        
       });
   }
 
