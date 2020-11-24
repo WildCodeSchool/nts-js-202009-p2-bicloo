@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -18,10 +18,12 @@ const StationsList = ({
   display,
 }) => {
   const [totale, settotale] = useState(0);
-  const [cursor, setcursor] = useState({ currentPage: 1, start: 0, end: 6 });
+  const [cursor, setcursor] = useState({ currentPage: 1, start: 0, end: 9 });
+  console.log(stations);
 
   useEffect(() => {
     settotale(stations.length);
+    console.log(stations.length);
   }, []);
 
   const handlePagination = (current, pageSize) => {
@@ -41,7 +43,7 @@ const StationsList = ({
           className={styles.pagination}
           onChange={handlePagination}
           current={currentPage}
-          pageSize={6}
+          pageSize={9}
           total={totale}
           locale={langLocal}
         />
