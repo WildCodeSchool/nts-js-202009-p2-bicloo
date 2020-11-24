@@ -17,8 +17,8 @@ function ListSlider({
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 2,
+    slidesToShow: 2.5,
+    slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
