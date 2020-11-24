@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from 'rc-pagination';
+// eslint-disable-next-line import/no-unresolved
 import 'rc-pagination/assets/index.css';
 
 import PricesCard from './PricesCard';
