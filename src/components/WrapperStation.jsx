@@ -97,7 +97,7 @@ const WrapperStation = ({
   useEffect(() => {
     const { current } = mapRef;
     const { leafletElement: map } = current;
-    map.locate({ setView: true });
+    map.locate({ setView: true, enableHighAccuracy: true });
     map.on('locationfound', handleOnLocationFound);
   }, []);
 
