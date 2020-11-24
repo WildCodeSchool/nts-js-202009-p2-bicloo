@@ -127,7 +127,6 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
       {value && allAddress.length > 0 && (
         <ul className={styles.list}>
           {allAddress.map((data) => (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             <li
               key={data.id}
               className={styles.listItem}
