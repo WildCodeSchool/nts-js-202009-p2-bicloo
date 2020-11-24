@@ -2,6 +2,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import langLocal from 'rc-pagination/es/locale/fr_FR';
+
 import PricesCard from './PricesCard';
 
 import logoGeoBikeMobile from '../assets/geobike-mobile.png';
@@ -18,10 +22,14 @@ class PricesList extends Component {
       onlyFree: false,
       onlyParking: false,
       all: [],
+      cursor: { currentPage: 1, start: 0, end: 9 },
+      totale: 0,
     };
     this.fetchData = this.fetchData.bind(this);
     this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.setcursor = this.setcursor.bind(this);
+    this.settotale = this.settotale.bind(this);
   }
 
   componentDidMount() {
@@ -35,15 +43,34 @@ class PricesList extends Component {
         'onlyLong',
         'location de vélo moyenne et longue durée'
       );
+      this.settotale();
     }
 
     if (prevState.onlyFree !== onlyFree) {
       this.handleSubscription('onlyFree', 'Vélo en libre service');
+      this.settotale();
     }
 
     if (prevState.onlyParking !== onlyParking) {
       this.handleSubscription('onlyParking', 'stationnement vélo abrité');
+      this.settotale();
     }
+  }
+
+  settotale() {
+    const { all, subscriptions } = this.state;
+
+    this.setState({ totale: all.length || subscriptions.length });
+  }
+
+  setcursor(current, pageSize) {
+    this.setState({
+      cursor: {
+        currentPage: current,
+        start: (current - 1) * pageSize,
+        end: current * pageSize,
+      },
+    });
   }
 
   fetchData() {
@@ -69,6 +96,7 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
+        this.settotale();
       });
   }
 
@@ -101,7 +129,7 @@ class PricesList extends Component {
   }
 
   render() {
-    const { subscriptions, all } = this.state;
+    const { subscriptions, all, cursor, totale } = this.state;
 
     return (
       <div className={styles.main}>
@@ -146,14 +174,24 @@ class PricesList extends Component {
           </div>
         </div>
 
+        <Pagination
+          className={styles.pagination}
+          onChange={this.setcursor}
+          current={cursor.currentPage}
+          pageSize={9}
+          total={totale}
+          locale={langLocal}
+        />
+
         <div>
           <ul>
             {all.length > 0
-              ? all.map((price) => <PricesCard key={price.id} price={price} />)
-              : subscriptions.map((price) => (
-                  // eslint-disable-next-line react/jsx-indent
-                  <PricesCard key={price.id} price={price} />
-                ))}
+              ? all
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)
+              : subscriptions
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)}
           </ul>
         </div>
       </div>

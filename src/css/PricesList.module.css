@@ -1,5 +1,6 @@
 .main {
   background-color: #f6f7fb;
+  min-height: 115vh;
 }
 
 .header {
@@ -41,6 +42,12 @@ ul {
   padding: 0;
 }
 
+.pagination {
+  justify-content: center;
+  margin: 1rem;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     display: flex;
@@ -72,7 +79,6 @@ ul {
     border-radius: 30px;
     background: #fff;
     justify-content: space-between;
-
     border: 1px solid #ccc;
     color: black;
     padding: 1rem;
