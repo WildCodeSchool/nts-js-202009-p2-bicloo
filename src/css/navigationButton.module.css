@@ -73,7 +73,7 @@
   height: 0.3rem;
   position: absolute;
   border-radius: 0.5rem;
-  transition: all 0.1s linear;
+  transition: all 0.2s ease-out;
 }
 
 .sliceCross:nth-of-type(1) {
