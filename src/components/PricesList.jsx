@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Pagination from 'rc-pagination';
-// eslint-disable-next-line import/no-unresolved
 import 'rc-pagination/assets/index.css';
+import langLocal from 'rc-pagination/es/locale/fr_FR';
 
 import PricesCard from './PricesCard';
 
@@ -22,17 +22,14 @@ class PricesList extends Component {
       onlyFree: false,
       onlyParking: false,
       all: [],
-      currentPages: 1,
-      lengthPages: 44,
-      cursor: {
-        start: 0,
-        end: 9,
-      },
+      cursor: { currentPage: 1, start: 0, end: 9 },
+      totale: 0,
     };
     this.fetchData = this.fetchData.bind(this);
     this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.setcursor = this.setcursor.bind(this);
+    this.settotale = this.settotale.bind(this);
   }
 
   componentDidMount() {
@@ -46,23 +43,32 @@ class PricesList extends Component {
         'onlyLong',
         'location de vélo moyenne et longue durée'
       );
+      this.settotale();
     }
 
     if (prevState.onlyFree !== onlyFree) {
       this.handleSubscription('onlyFree', 'Vélo en libre service');
+      this.settotale();
     }
 
     if (prevState.onlyParking !== onlyParking) {
       this.handleSubscription('onlyParking', 'stationnement vélo abrité');
+      this.settotale();
     }
   }
 
-  onChange(page, sizePages) {
-    this.setState({ currentPage: page });
+  settotale() {
+    const { all, subscriptions } = this.state;
+
+    this.setState({ totale: all.length || subscriptions.length });
+  }
+
+  setcursor(current, pageSize) {
     this.setState({
       cursor: {
-        start: (page - 1) * sizePages,
-        end: page * sizePages,
+        currentPage: current,
+        start: (current - 1) * pageSize,
+        end: current * pageSize,
       },
     });
   }
@@ -90,23 +96,7 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
-
-        /*
-        const { length } = data.records;
-
-        if (length > 5) {
-          this.setState({ lengthPages: Math.ceil(length) });
-        } else {
-          this.setState({ lengthPages: 0 });
-        }
-
-        this.setState({
-          cursor: {
-            start: 0,
-            end: 9,
-          },
-        });
-*/
+        this.settotale();
       });
   }
 
@@ -139,13 +129,7 @@ class PricesList extends Component {
   }
 
   render() {
-    const {
-      subscriptions,
-      all,
-      cursor,
-      lengthPages,
-      currentPages,
-    } = this.state;
+    const { subscriptions, all, cursor, totale } = this.state;
 
     return (
       <div className={styles.main}>
@@ -191,11 +175,12 @@ class PricesList extends Component {
         </div>
 
         <Pagination
-          style={{ marginTop: '2rem' }}
-          onChange={this.onChange}
+          className={styles.pagination}
+          onChange={this.setcursor}
+          current={cursor.currentPage}
           pageSize={9}
-          current={currentPages}
-          total={lengthPages}
+          total={totale}
+          locale={langLocal}
         />
 
         <div>
