@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
 import CardList from './CardList';
 
-import styles from '../css/listSlider.module.css';
+import '../css/listSlider.css';
 
 function ListSlider({
   bikesIsChecked,
@@ -14,53 +14,6 @@ function ListSlider({
   handleRoutingControl,
   display,
 }) {
-  const sliderRef = useRef();
-
-  // const scroll = useCallback(
-  //   (y) => {
-  //     if (y > 0) {
-  //       return sliderRef.current.slickNext();
-  //     }
-  //     return sliderRef.current.slickPrev();
-  //   },
-  //   [sliderRef]
-  // );
-
-  // useEffect(() => {
-  //   window.addEventListener('wheel', (e) => {
-  //     scroll(e.deltaY);
-  //   });
-  //   return () =>
-  //     window.removeEventListener('wheel', (e) => {
-  //       scroll(e.deltaY);
-  //     });
-  // }, []);
-
-  const handleScroll = (y) => {
-    if (y > 0) {
-      return sliderRef.current.slickNext();
-    }
-    return sliderRef.current.slickPrev();
-  };
-
-  // const handleScroll = (y) => {
-  //   if (y > 0) {
-  //     sliderRef.current.slickNext();
-  //   } else {
-  //     sliderRef.current.slickPrev();
-  //   }
-  // };
-
-  useEffect(() => {
-    window.addEventListener('wheel', (e) => handleScroll(e.deltaY));
-    console.log('mounted', sliderRef.current, window);
-
-    return () => {
-      console.log('destroyed', sliderRef.current, window);
-      window.removeEventListener('wheel', handleScroll());
-    };
-  }, []);
-
   const settings = {
     infinite: false,
     speed: 500,
@@ -73,8 +26,8 @@ function ListSlider({
   };
 
   return (
-    <div className={styles.container}>
-      <Slider ref={sliderRef} className={styles.slider} {...settings}>
+    <div className="container">
+      <Slider className="slider" {...settings}>
         {stations
           .filter((station) => {
             if (bankingIsChecked) {
