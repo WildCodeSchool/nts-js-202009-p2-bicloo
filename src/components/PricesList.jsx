@@ -29,7 +29,6 @@ class PricesList extends Component {
     this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.setcursor = this.setcursor.bind(this);
-    this.settotale = this.settotale.bind(this);
   }
 
   componentDidMount() {
@@ -43,24 +42,15 @@ class PricesList extends Component {
         'onlyLong',
         'location de vélo moyenne et longue durée'
       );
-      this.settotale();
     }
 
     if (prevState.onlyFree !== onlyFree) {
       this.handleSubscription('onlyFree', 'Vélo en libre service');
-      this.settotale();
     }
 
     if (prevState.onlyParking !== onlyParking) {
       this.handleSubscription('onlyParking', 'stationnement vélo abrité');
-      this.settotale();
     }
-  }
-
-  settotale() {
-    const { all, subscriptions } = this.state;
-
-    this.setState({ totale: all.length || subscriptions.length });
   }
 
   setcursor(current, pageSize) {
@@ -96,9 +86,11 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
-        this.settotale();
+        this.setState({ totale: subscriptions.length });
       });
   }
+
+  // Mise a jours des abonnments selon le ou les filtres selectionnés
 
   handleSubscription(nameCheckbox, type) {
     const { subscriptions, all, [nameCheckbox]: checkbox } = this.state;
@@ -119,6 +111,8 @@ class PricesList extends Component {
 
     this.setState({
       all: [...clearAll, ...filtered],
+      cursor: { start: 0, end: 9, currentPage: 1 }, // On réinitialize notre curseur à la première page
+      totale: [...clearAll, ...filtered].length || subscriptions.length, // On réinitialize le nombre de page
     });
   }
 
