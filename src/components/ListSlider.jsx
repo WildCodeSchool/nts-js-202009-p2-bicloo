@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
@@ -15,19 +15,49 @@ function ListSlider({
   display,
 }) {
   const sliderRef = useRef();
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      sliderRef.current.slickNext();
-    } else {
-      sliderRef.current.slickPrev();
+
+  // const scroll = useCallback(
+  //   (y) => {
+  //     if (y > 0) {
+  //       return sliderRef.current.slickNext();
+  //     }
+  //     return sliderRef.current.slickPrev();
+  //   },
+  //   [sliderRef]
+  // );
+
+  // useEffect(() => {
+  //   window.addEventListener('wheel', (e) => {
+  //     scroll(e.deltaY);
+  //   });
+  //   return () =>
+  //     window.removeEventListener('wheel', (e) => {
+  //       scroll(e.deltaY);
+  //     });
+  // }, []);
+
+  const handleScroll = (y) => {
+    if (y > 0) {
+      return sliderRef.current.slickNext();
     }
+    return sliderRef.current.slickPrev();
   };
 
+  // const handleScroll = (y) => {
+  //   if (y > 0) {
+  //     sliderRef.current.slickNext();
+  //   } else {
+  //     sliderRef.current.slickPrev();
+  //   }
+  // };
+
   useEffect(() => {
-    window.addEventListener('wheel', handleScroll);
+    window.addEventListener('wheel', (e) => handleScroll(e.deltaY));
+    console.log('mounted', sliderRef.current, window);
 
     return () => {
-      window.removeEventListener('wheel', handleScroll);
+      console.log('destroyed', sliderRef.current, window);
+      window.removeEventListener('wheel', handleScroll());
     };
   }, []);
 
