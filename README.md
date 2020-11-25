@@ -16,7 +16,7 @@ L'utilisateur peut visualiser facilement où trouver un vélo en libre service e
 - Itinéraire
 - Filtrer les abonnements
 
-## Technologie
+## Technologies
 - [React](https://reactjs.org/)
 - [Netlify](https://www.netlify.com/)
 
