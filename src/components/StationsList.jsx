@@ -19,13 +19,34 @@ const StationsList = ({
 }) => {
   const [totale, settotale] = useState(0);
   const [cursor, setcursor] = useState({ currentPage: 1, start: 0, end: 9 });
-  console.log(stations);
+  const [allStations, setallStations] = useState(stations);
+
+  // Filtres des stations
+  const filteredStation = () => {
+    const stationFiltered = stations
+      .filter((station) =>
+        bankingIsChecked ? station.banking === 'True' : station
+      )
+      .filter((station) =>
+        bikesIsChecked ? station.availableBikes > 0 : station
+      )
+      .filter((station) =>
+        standsIsChecked ? station.availableBikeStand > 0 : station
+      );
+
+    setallStations(stationFiltered);
+
+    return stationFiltered;
+  };
 
   useEffect(() => {
-    settotale(stations.length);
-    console.log(stations.length);
-  }, []);
+    const stationFiltered = filteredStation();
 
+    settotale(stationFiltered.length);
+    setcursor({ currentPage: 1, start: 0, end: 9 });
+  }, [bikesIsChecked, standsIsChecked, bankingIsChecked]);
+
+  // Mise à jour de la page sélectionnée
   const handlePagination = (current, pageSize) => {
     setcursor({
       currentPage: current,
@@ -46,32 +67,13 @@ const StationsList = ({
           pageSize={9}
           total={totale}
           locale={langLocal}
+          style={{ marginTop: '1rem' }}
         />
-        {stations
-          .filter((station) => {
-            if (bankingIsChecked) {
-              return station.banking === 'True';
-            }
-            return station;
-          })
-          .filter((station) => {
-            if (bikesIsChecked) {
-              return station.availableBikes > 0;
-            }
-            return station;
-          })
-          .filter((station) => {
-            if (standsIsChecked) {
-              return station.availableBikeStand > 0;
-            }
-            return station;
-          })
-          .slice(start, end)
-          .map((station) => {
-            return (
-              <CardList key={station.id} station={station} display={display} />
-            );
-          })}
+        {allStations.slice(start, end).map((station) => {
+          return (
+            <CardList key={station.id} station={station} display={display} />
+          );
+        })}
       </ul>
     </div>
   );

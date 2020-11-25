@@ -90,7 +90,7 @@ class PricesList extends Component {
       });
   }
 
-  // Mise a jours des abonnments selon le ou les filtres selectionnés
+  // Mise à jour des abonnements selon le ou les filtres selectionnés
 
   handleSubscription(nameCheckbox, type) {
     const { subscriptions, all, [nameCheckbox]: checkbox } = this.state;
@@ -111,8 +111,8 @@ class PricesList extends Component {
 
     this.setState({
       all: [...clearAll, ...filtered],
-      cursor: { start: 0, end: 9, currentPage: 1 }, // On réinitialize notre curseur à la première page
-      totale: [...clearAll, ...filtered].length || subscriptions.length, // On réinitialize le nombre de page
+      cursor: { start: 0, end: 9, currentPage: 1 }, // On réinitialise notre curseur à la première page
+      totale: [...clearAll, ...filtered].length || subscriptions.length, // On réinitialise le nombre de pages
     });
   }
 
