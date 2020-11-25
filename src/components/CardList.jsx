@@ -16,7 +16,7 @@ const CardList = ({ station, handleRoutingControl, display }) => {
               {station.name.substr(station.name.lastIndexOf('-') + 1)}
             </h2>
             <p>
-              Velos disponibles:
+              Vélos disponibles:
               {'  '}
               <b>{station.availableBikes}</b>
             </p>
