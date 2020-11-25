@@ -1,5 +1,7 @@
 # GeoBike
 
+<div style="text-align:center"><img src="https://zupimages.net/up/20/48/138f.png" /></div>
+
 GeoBike est un outil qui permet d'aider à se déplacer à vélo dans la commune de Nantes. 
 L'utilisateur peut visualiser facilement où trouver un vélo en libre service et une place disponible. Il peut aussi se géolocaliser afin d'afficher un itinéraire pour trouver une station.
 
