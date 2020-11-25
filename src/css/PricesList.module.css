@@ -1,5 +1,6 @@
 .main {
   background-color: #f6f7fb;
+  min-height: 125vh;
 }
 
 .header {
@@ -31,7 +32,7 @@ h1 {
   padding-bottom: 1rem;
 }
 
-label {
+.filters {
   margin: 0.5rem;
   display: flex;
   justify-items: center;
@@ -41,6 +42,12 @@ ul {
   padding: 0;
 }
 
+.pagination {
+  justify-content: center;
+  margin: 1rem;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     display: flex;
@@ -48,7 +55,7 @@ ul {
     justify-content: space-between;
     background-image: url(../assets/bc-velo.webp);
     height: 20vh;
-    background-position: 50% 40%;
+    background-position: 50% 60%;
     background-repeat: no-repeat;
     background-size: cover;
     flex-wrap: nowrap;
@@ -72,14 +79,13 @@ ul {
     border-radius: 30px;
     background: #fff;
     justify-content: space-between;
-
     border: 1px solid #ccc;
     color: black;
     padding: 1rem;
     margin-right: 2em;
   }
 
-  label {
+  .filters {
     margin: 0;
   }
 

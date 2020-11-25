@@ -1,6 +1,11 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import langLocal from 'rc-pagination/es/locale/fr_FR';
+
 import PricesCard from './PricesCard';
 
 import logoGeoBikeMobile from '../assets/geobike-mobile.png';
@@ -17,10 +22,13 @@ class PricesList extends Component {
       onlyFree: false,
       onlyParking: false,
       all: [],
+      cursor: { currentPage: 1, start: 0, end: 9 },
+      totale: 0,
     };
     this.fetchData = this.fetchData.bind(this);
     this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.setcursor = this.setcursor.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +51,16 @@ class PricesList extends Component {
     if (prevState.onlyParking !== onlyParking) {
       this.handleSubscription('onlyParking', 'stationnement vélo abrité');
     }
+  }
+
+  setcursor(current, pageSize) {
+    this.setState({
+      cursor: {
+        currentPage: current,
+        start: (current - 1) * pageSize,
+        end: current * pageSize,
+      },
+    });
   }
 
   fetchData() {
@@ -68,8 +86,11 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
+        this.setState({ totale: subscriptions.length });
       });
   }
+
+  // Mise a jours des abonnments selon le ou les filtres selectionnés
 
   handleSubscription(nameCheckbox, type) {
     const { subscriptions, all, [nameCheckbox]: checkbox } = this.state;
@@ -90,6 +111,8 @@ class PricesList extends Component {
 
     this.setState({
       all: [...clearAll, ...filtered],
+      cursor: { start: 0, end: 9, currentPage: 1 }, // On réinitialize notre curseur à la première page
+      totale: [...clearAll, ...filtered].length || subscriptions.length, // On réinitialize le nombre de page
     });
   }
 
@@ -100,23 +123,25 @@ class PricesList extends Component {
   }
 
   render() {
-    const { subscriptions, all } = this.state;
+    const { subscriptions, all, cursor, totale } = this.state;
 
     return (
       <div className={styles.main}>
         <div className={styles.header}>
-          <picture>
-            <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
-            <source srcSet={logoGeoBikeMobile} />
-            <img
-              className={styles.logo}
-              src={logoGeoBikeMobile}
-              alt="logo GeoBike"
-            />
-          </picture>
+          <Link to="/">
+            <picture>
+              <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
+              <source srcSet={logoGeoBikeMobile} />
+              <img
+                className={styles.logo}
+                src={logoGeoBikeMobile}
+                alt="logo GeoBike"
+              />
+            </picture>
+          </Link>
           <h1>Les Abonnements</h1>
           <div className={styles.checkbox}>
-            <label htmlFor="long">
+            <label htmlFor="long" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyLong"
@@ -124,7 +149,7 @@ class PricesList extends Component {
               />
               Moyenne et longue durée
             </label>
-            <label htmlFor="free">
+            <label htmlFor="free" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyFree"
@@ -132,7 +157,7 @@ class PricesList extends Component {
               />
               Libre service
             </label>
-            <label htmlFor="parking">
+            <label htmlFor="parking" className={styles.filters}>
               <input
                 type="checkbox"
                 name="onlyParking"
@@ -143,14 +168,24 @@ class PricesList extends Component {
           </div>
         </div>
 
+        <Pagination
+          className={styles.pagination}
+          onChange={this.setcursor}
+          current={cursor.currentPage}
+          pageSize={9}
+          total={totale}
+          locale={langLocal}
+        />
+
         <div>
           <ul>
             {all.length > 0
-              ? all.map((price) => <PricesCard key={price.id} price={price} />)
-              : subscriptions.map((price) => (
-                  // eslint-disable-next-line react/jsx-indent
-                  <PricesCard key={price.id} price={price} />
-                ))}
+              ? all
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)
+              : subscriptions
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)}
           </ul>
         </div>
       </div>

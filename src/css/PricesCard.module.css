@@ -15,22 +15,26 @@
   max-height: 60vw;
   border-radius: 5px;
   box-shadow: 0 6px 7px rgb(185, 182, 182);
-}
-
-.name {
-  color: var(--card-item-title-color);
-  font-family: 'Days One';
-  font-style: normal;
-}
-
-p {
   font-family: 'Dosis';
   font-style: normal;
+  color: var(--card-item-title-color);
+}
+
+.titleCard {
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
   .card {
-    width: 20vw;
-    height: 20vh;
+    width: 25vw;
+    padding: 0.2rem 1.3rem 0.5rem 1.3rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    height: 25vh;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1250px) {
+  .card {
+    min-height: 30vh;
   }
 }

@@ -74,6 +74,7 @@ const WrapperStation = ({
 
     if (!defaultMarker) {
       routingControl = L.Routing.control({
+        router: L.Routing.mapbox(process.env.REACT_APP_MAPBOX_API_KEY),
         waypoints: [L.latLng(coords), L.latLng(waypoints)],
         lineOptions: {
           styles: [{ color: '#669df6', opacity: 1, weight: 5 }],
@@ -96,7 +97,7 @@ const WrapperStation = ({
   useEffect(() => {
     const { current } = mapRef;
     const { leafletElement: map } = current;
-    map.locate({ setView: true });
+    map.locate({ setView: true, enableHighAccuracy: true });
     map.on('locationfound', handleOnLocationFound);
   }, []);
 
@@ -109,14 +110,21 @@ const WrapperStation = ({
   }, [stationCoords, coords]);
 
   useEffect(() => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
     if (currentAddress) {
       setCoords(currentAddress);
     }
+    return () => {
+      if (marker) map.removeLayer(marker);
+    };
+  }, [currentAddress]);
 
+  useEffect(() => {
     if (arrivalAddress) {
       setstationCoords(arrivalAddress);
     }
-  }, [currentAddress, arrivalAddress]);
+  }, [arrivalAddress]);
 
   return (
     <main>
@@ -173,11 +181,16 @@ const WrapperStation = ({
 
 export default WrapperStation;
 
+WrapperStation.defaultProps = {
+  currentAddress: '',
+  arrivalAddress: '',
+};
+
 WrapperStation.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
-  currentAddress: PropTypes.arrayOf(PropTypes.object).isRequired,
-  arrivalAddress: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentAddress: PropTypes.arrayOf(PropTypes.object),
+  arrivalAddress: PropTypes.arrayOf(PropTypes.object),
 };

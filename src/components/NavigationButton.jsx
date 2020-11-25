@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import more from '../assets/icons/more.svg';
 import search from '../assets/icons/search.svg';
 import credit from '../assets/icons/credit_card.svg';
 import help from '../assets/icons/help.svg';
@@ -14,7 +13,7 @@ function NavigationButton(props) {
   const { handlePopup } = props;
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} onClick={() => setActive(!active)}>
       <div
         className={`${styles.container} ${active && styles.containerActive}`}
       >
@@ -40,10 +39,10 @@ function NavigationButton(props) {
           className={`${styles.btn} ${
             active ? styles.btnActive : styles.btnDisabled
           }`}
-          onClick={() => setActive(!active)}
           type="button"
         >
-          <img className={styles.icon} src={more} alt="icon more" />
+          <span className={styles.sliceCross} />
+          <span className={styles.sliceCross} />
         </button>
       </div>
     </div>
