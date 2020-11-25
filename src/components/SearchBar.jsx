@@ -41,7 +41,7 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
         const data = res.data.features.map((client) => {
           return {
             id: client.properties.id,
-            coordinnates: [client.geometry.coordinates],
+            coordinates: [client.geometry.coordinates],
             address: client.properties.label,
           };
         });
@@ -97,12 +97,19 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
     );
 
     setvalue(addressCliked); // valeur mit a jour dans l'Input
-    setinfoAddress(currentAdress); // je récupère toutes les infos de l'adresse selectionné
+    setinfoAddress({
+      ...currentAdress,
+      coordinates: currentAdress.coordinates[0].reverse(),
+    }); // je récupère toutes les infos de l'adresse selectionné
     setallAddress([]); // je vide la liste
   };
 
   return (
-    <div className={styles.containerSearchBar}>
+    <div
+      className={`${styles.containerSearchBar} ${
+        allAddress.length && value ? styles.contains : ''
+      }`}
+    >
       <div className={styles.wrapperInput}>
         <img
           className={styles.iconInput}
@@ -111,9 +118,7 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
         />
         <input
           type="text"
-          className={`${styles.input} ${
-            allAddress.length && value ? styles.contains : ''
-          }`}
+          className={styles.input}
           placeholder={placeholder}
           onChange={(e) => handleInput(e)}
           value={value}
@@ -122,7 +127,6 @@ const SearchBar = ({ setStateAddress, placeholder, send }) => {
       {value && allAddress.length > 0 && (
         <ul className={styles.list}>
           {allAddress.map((data) => (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             <li
               key={data.id}
               className={styles.listItem}

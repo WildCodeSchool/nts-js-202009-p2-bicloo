@@ -18,6 +18,8 @@ const WrapperStation = ({
   bikesIsChecked,
   standsIsChecked,
   bankingIsChecked,
+  currentAddress,
+  arrivalAddress,
 }) => {
   const [display, setDisplay] = useState(false);
   const [defaultMarker, setDefaultMarker] = useState(true);
@@ -72,9 +74,10 @@ const WrapperStation = ({
 
     if (!defaultMarker) {
       routingControl = L.Routing.control({
+        router: L.Routing.mapbox(process.env.REACT_APP_MAPBOX_API_KEY),
         waypoints: [L.latLng(coords), L.latLng(waypoints)],
         lineOptions: {
-          styles: [{ color: 'lightgreen', opacity: 1, weight: 5 }],
+          styles: [{ color: '#669df6', opacity: 1, weight: 5 }],
         },
       }).addTo(map);
     } else {
@@ -94,16 +97,34 @@ const WrapperStation = ({
   useEffect(() => {
     const { current } = mapRef;
     const { leafletElement: map } = current;
-    map.locate({ setView: true });
+    map.locate({ setView: true, enableHighAccuracy: true });
     map.on('locationfound', handleOnLocationFound);
   }, []);
 
   useEffect(() => {
     addRoutingControl(stationCoords);
+
     return () => {
       removeRoutingControl();
     };
-  }, [stationCoords]);
+  }, [stationCoords, coords]);
+
+  useEffect(() => {
+    const { current } = mapRef;
+    const { leafletElement: map } = current;
+    if (currentAddress) {
+      setCoords(currentAddress);
+    }
+    return () => {
+      if (marker) map.removeLayer(marker);
+    };
+  }, [currentAddress]);
+
+  useEffect(() => {
+    if (arrivalAddress) {
+      setstationCoords(arrivalAddress);
+    }
+  }, [arrivalAddress]);
 
   return (
     <main>
@@ -136,7 +157,7 @@ const WrapperStation = ({
         handleRoutingControl={handleRoutingControl}
         display={display}
       />
-      {display && width < 768 ? (
+      {width < 768 ? (
         <StationsList
           stations={stations}
           bikesIsChecked={bikesIsChecked}
@@ -160,9 +181,16 @@ const WrapperStation = ({
 
 export default WrapperStation;
 
+WrapperStation.defaultProps = {
+  currentAddress: '',
+  arrivalAddress: '',
+};
+
 WrapperStation.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.object).isRequired,
   bikesIsChecked: PropTypes.bool.isRequired,
   standsIsChecked: PropTypes.bool.isRequired,
   bankingIsChecked: PropTypes.bool.isRequired,
+  currentAddress: PropTypes.arrayOf(PropTypes.object),
+  arrivalAddress: PropTypes.arrayOf(PropTypes.object),
 };

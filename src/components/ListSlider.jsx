@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
 import CardList from './CardList';
 
-import styles from '../css/listSlider.module.css';
+import '../css/listSlider.css';
 
 function ListSlider({
   bikesIsChecked,
@@ -14,28 +14,11 @@ function ListSlider({
   handleRoutingControl,
   display,
 }) {
-  const sliderRef = useRef();
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      sliderRef.current.slickNext();
-    } else {
-      sliderRef.current.slickPrev();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('wheel', handleScroll);
-
-    return () => {
-      window.removeEventListener('wheel', handleScroll);
-    };
-  }, []);
-
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 2,
+    slidesToShow: 2.5,
+    slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
@@ -43,8 +26,8 @@ function ListSlider({
   };
 
   return (
-    <div className={styles.container}>
-      <Slider ref={sliderRef} className={styles.slider} {...settings}>
+    <div className="container">
+      <Slider className="slider" {...settings}>
         {stations
           .filter((station) => {
             if (bankingIsChecked) {

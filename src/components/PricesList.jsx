@@ -1,8 +1,15 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import langLocal from 'rc-pagination/es/locale/fr_FR';
 
 import PricesCard from './PricesCard';
+
+import logoGeoBikeMobile from '../assets/geobike-mobile.png';
+import logoGeoBikeDesktop from '../assets/geobike-desktop.png';
 
 import styles from '../css/PricesList.module.css';
 
@@ -15,10 +22,13 @@ class PricesList extends Component {
       onlyFree: false,
       onlyParking: false,
       all: [],
+      cursor: { currentPage: 1, start: 0, end: 9 },
+      totale: 0,
     };
     this.fetchData = this.fetchData.bind(this);
     this.handleSubscription = this.handleSubscription.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.setcursor = this.setcursor.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +51,16 @@ class PricesList extends Component {
     if (prevState.onlyParking !== onlyParking) {
       this.handleSubscription('onlyParking', 'stationnement vélo abrité');
     }
+  }
+
+  setcursor(current, pageSize) {
+    this.setState({
+      cursor: {
+        currentPage: current,
+        start: (current - 1) * pageSize,
+        end: current * pageSize,
+      },
+    });
   }
 
   fetchData() {
@@ -66,8 +86,11 @@ class PricesList extends Component {
           };
         });
         this.setState({ subscriptions });
+        this.setState({ totale: subscriptions.length });
       });
   }
+
+  // Mise à jour des abonnements selon le ou les filtres selectionnés
 
   handleSubscription(nameCheckbox, type) {
     const { subscriptions, all, [nameCheckbox]: checkbox } = this.state;
@@ -88,6 +111,8 @@ class PricesList extends Component {
 
     this.setState({
       all: [...clearAll, ...filtered],
+      cursor: { start: 0, end: 9, currentPage: 1 }, // On réinitialise notre curseur à la première page
+      totale: [...clearAll, ...filtered].length || subscriptions.length, // On réinitialise le nombre de pages
     });
   }
 
@@ -98,45 +123,71 @@ class PricesList extends Component {
   }
 
   render() {
-    const { subscriptions, all } = this.state;
+    const { subscriptions, all, cursor, totale } = this.state;
 
     return (
       <div className={styles.main}>
-        <h1>Tarifs</h1>
+        <div className={styles.header}>
+          <Link to="/">
+            <picture>
+              <source srcSet={logoGeoBikeDesktop} media="(min-width: 768px)" />
+              <source srcSet={logoGeoBikeMobile} />
+              <img
+                className={styles.logo}
+                src={logoGeoBikeMobile}
+                alt="logo GeoBike"
+              />
+            </picture>
+          </Link>
+          <h1>Les Abonnements</h1>
+          <div className={styles.checkbox}>
+            <label htmlFor="long" className={styles.filters}>
+              <input
+                type="checkbox"
+                name="onlyLong"
+                onChange={this.handleCheckbox}
+              />
+              Moyenne et longue durée
+            </label>
+            <label htmlFor="free" className={styles.filters}>
+              <input
+                type="checkbox"
+                name="onlyFree"
+                onChange={this.handleCheckbox}
+              />
+              Libre service
+            </label>
+            <label htmlFor="parking" className={styles.filters}>
+              <input
+                type="checkbox"
+                name="onlyParking"
+                onChange={this.handleCheckbox}
+              />
+              Stationnement abrité
+            </label>
+          </div>
+        </div>
 
-        <label htmlFor="long">
-          <input
-            type="checkbox"
-            name="onlyLong"
-            onChange={this.handleCheckbox}
-          />
-          Moyenne et longue durée
-        </label>
-        <label htmlFor="free">
-          <input
-            type="checkbox"
-            name="onlyFree"
-            onChange={this.handleCheckbox}
-          />
-          Libre service
-        </label>
-        <label htmlFor="parking">
-          <input
-            type="checkbox"
-            name="onlyParking"
-            onChange={this.handleCheckbox}
-          />
-          Stationnement abrité
-        </label>
+        <Pagination
+          className={styles.pagination}
+          onChange={this.setcursor}
+          current={cursor.currentPage}
+          pageSize={9}
+          total={totale}
+          locale={langLocal}
+        />
 
-        <ul>
-          {all.length > 0
-            ? all.map((price) => <PricesCard key={price.id} price={price} />)
-            : subscriptions.map((price) => (
-                // eslint-disable-next-line react/jsx-indent
-                <PricesCard key={price.id} price={price} />
-              ))}
-        </ul>
+        <div>
+          <ul>
+            {all.length > 0
+              ? all
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)
+              : subscriptions
+                  .slice(cursor.start, cursor.end)
+                  .map((price) => <PricesCard key={price.id} price={price} />)}
+          </ul>
+        </div>
       </div>
     );
   }
