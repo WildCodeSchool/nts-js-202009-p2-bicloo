@@ -16,7 +16,7 @@
 
 .leaflet-popup-content {
   font-size: 1rem;
-  width: 25rem !important;
+  width: 95vw !important;
   margin: 0;
 }
 
@@ -29,9 +29,15 @@
 }
 
 .leaflet-container a.leaflet-popup-close-button:hover {
-  color: #00445f;
+  color: #037fa9;
 }
 
 .leaflet-routing-container {
   display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .leaflet-popup-content {
+    width: 25rem !important;
+  }
 }
