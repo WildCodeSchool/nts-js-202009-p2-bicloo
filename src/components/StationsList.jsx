@@ -74,6 +74,16 @@ const StationsList = ({
             <CardList key={station.id} station={station} display={display} />
           );
         })}
+
+        <Pagination
+          className={styles.pagination2}
+          onChange={handlePagination}
+          current={currentPage}
+          pageSize={9}
+          total={totale}
+          locale={langLocal}
+          style={{ margin: '1rem 2.5rem 0rem 0rem' }}
+        />
       </ul>
     </div>
   );
