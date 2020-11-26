@@ -5,6 +5,10 @@ import styles from '../css/PricesCard.module.css';
 const PricesCard = ({ price }) => {
   const upperName =
     price.name.charAt(0).toUpperCase() + price.name.substring(1).toLowerCase();
+  const tarif =
+    price.typeTarif.charAt(0).toUpperCase() +
+    price.typeTarif.substring(1).toLowerCase();
+
   return (
     <div className={styles.pricesCard}>
       <li className={styles.card}>
@@ -24,8 +28,10 @@ const PricesCard = ({ price }) => {
             : ''}
         </p>
         <p>
-          {price.typeTarif.charAt(0).toUpperCase() +
-            price.typeTarif.substring(1).toLowerCase()}
+          {tarif ===
+          "Coût d'usage de la formule illimités et des tickets 1 et 3 jour(s)"
+            ? "Coût d'usage de la formule illimitée et des tickets 1 et 3 jour(s)"
+            : tarif}
           : <b>{price.montant}€</b>
         </p>
       </li>
