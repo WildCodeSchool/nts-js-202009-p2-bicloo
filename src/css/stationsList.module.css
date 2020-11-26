@@ -22,6 +22,7 @@
   margin: 1rem 3vw;
   padding: 1.3rem;
   max-height: 60vw;
+  height: clamp(9rem, 100%, 12rem);
   display: flex;
   border-radius: 5px;
   justify-content: space-around;
@@ -48,33 +49,28 @@ p {
   font-family: 'Dosis';
   font-style: normal;
 }
-.banking {
+
+.banking,
+.notBanking {
   color: #97454b;
   border-style: solid;
   border-color: #c92e3a;
   border-radius: 0.5vh;
   border-width: 1px;
-  padding: 1.09rem 0.31rem;
+  padding: 0.7rem 0.31rem;
   text-align: center;
   margin-bottom: 0;
   width: 5rem;
 }
 .notBanking {
   color: #00754e;
-  border-style: solid;
   border-color: #009966;
-  border-radius: 0.5vh;
-  border-width: 1px;
-  padding: 1.09rem 0.31rem;
-  text-align: center;
-  margin-bottom: 0;
-  width: 5rem;
 }
 .button {
   background-color: var(--card-item-btn-itinerary-background);
   color: white;
   border: none;
-  padding: 1.25rem 0.5rem;
+  padding: 0.85rem 0.5rem;
   border-radius: 0.5vh;
   width: 5.75rem;
 }
@@ -126,15 +122,6 @@ p {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
-  .listStation {
-    display: flex;
-    flex-direction: column;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
   .button,
   .banking,
   .notBanking {
