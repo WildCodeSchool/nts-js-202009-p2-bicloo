@@ -48,6 +48,12 @@ ul {
   text-align: center;
 }
 
+.pagination2 {
+  justify-content: center;
+  margin: 1rem 5rem 1rem 0rem;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     display: flex;
@@ -94,5 +100,8 @@ ul {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+  }
+  .pagination2 {
+    display: none;
   }
 }
