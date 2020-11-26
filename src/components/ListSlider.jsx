@@ -1,10 +1,14 @@
 import React from 'react';
-import Slider from 'react-slick';
+import SwiperCore, { Scrollbar, Mousewheel } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import PropTypes from 'prop-types';
 
 import CardList from './CardList';
 
 import '../css/listSlider.css';
+import 'swiper/components/scrollbar/scrollbar.scss';
+
+SwiperCore.use([Scrollbar, Mousewheel]);
 
 function ListSlider({
   bikesIsChecked,
@@ -14,20 +18,16 @@ function ListSlider({
   handleRoutingControl,
   display,
 }) {
-  const settings = {
-    infinite: false,
-    speed: 500,
-    slidesToShow: 2.5,
-    slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-    swipeToSlide: true,
-    draggable: true,
-  };
-
   return (
     <div className="container">
-      <Slider className="slider" {...settings}>
+      <Swiper
+        className="slider"
+        direction="vertical"
+        mousewheel
+        scrollbar={{ draggable: true }}
+        spaceBetween={50}
+        slidesPerView={3}
+      >
         {stations
           .filter((station) => {
             if (bankingIsChecked) {
@@ -49,15 +49,16 @@ function ListSlider({
           })
           .map((station) => {
             return (
-              <CardList
-                key={station.id}
-                station={station}
-                handleRoutingControl={handleRoutingControl}
-                display={display}
-              />
+              <SwiperSlide key={station.id}>
+                <CardList
+                  station={station}
+                  handleRoutingControl={handleRoutingControl}
+                  display={display}
+                />
+              </SwiperSlide>
             );
           })}
-      </Slider>
+      </Swiper>
     </div>
   );
 }

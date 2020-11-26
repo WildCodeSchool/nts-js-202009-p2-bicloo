@@ -16,10 +16,4 @@
     height: 75vh;
     overflow-y: clip;
   }
-
-  .slick-prev:before,
-  .slick-next:before {
-    opacity: 1;
-    color: #248bad !important;
-  }
 }
