@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import PopupContact from '../components/PopupContact';
 import WrapperStation from '../components/WrapperStation';
 import Header from '../components/Header';
-import NavigationButton from '../components/NavigationButton';
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       stations: {},
       loading: true,
@@ -17,13 +15,11 @@ class Home extends Component {
       bikesIsChecked: true,
       standsIsChecked: true,
       bankingIsChecked: true,
-      isOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.setCurrentAdress = this.setCurrentAdress.bind(this);
     this.setArrivalAddress = this.setArrivalAddress.bind(this);
-    this.handlePopup = this.handlePopup.bind(this);
   }
 
   componentDidMount() {
@@ -48,15 +44,19 @@ class Home extends Component {
 
   fetchData() {
     axios
-      .get(
-        'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=50&facet=banking&facet=bonus&facet=status&facet=contract_name&refine.status=OPEN',
-        {
-          headers: {
-            Authorization:
-              'ApiKey c05f988c5637dd721c0c53db8abf952a3416a0ac0fa2cd535d82a521 ',
-          },
-        }
-      )
+      .get('https://data.nantesmetropole.fr/api/records/1.0/search/', {
+        params: {
+          dataset:
+            '244400404_stations-velos-libre-service-nantes-metropole-disponibilites',
+          rows: 200,
+          facet: 'status',
+          'refine.status': 'OPEN',
+        },
+
+        headers: {
+          Authorization: process.env.REACT_APP_NANTES_DATA_API_KEY,
+        },
+      })
       .then(({ data }) => {
         const stations = data.records.map((record) => {
           return {
@@ -78,11 +78,6 @@ class Home extends Component {
     this.setState({ [e.target.name]: e.target.checked });
   }
 
-  handlePopup() {
-    const { isOpen } = this.state;
-    this.setState({ isOpen: !isOpen });
-  }
-
   render() {
     const {
       loading,
@@ -92,11 +87,9 @@ class Home extends Component {
       bankingIsChecked,
       currentAddress,
       arrivalAddress,
-      isOpen,
     } = this.state;
     return (
       <div className="App">
-        <PopupContact isOpen={isOpen} handlePopup={this.handlePopup} />
         <Header
           setCurrentAdress={this.setCurrentAdress}
           handleChange={this.handleChange}
@@ -117,9 +110,9 @@ class Home extends Component {
             />
           </>
         )}
-        <NavigationButton handlePopup={this.handlePopup} />
       </div>
     );
   }
 }
+
 export default Home;

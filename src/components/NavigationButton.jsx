@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import more from '../assets/icons/more.svg';
 import search from '../assets/icons/search.svg';
 import credit from '../assets/icons/credit_card.svg';
 import help from '../assets/icons/help.svg';
@@ -13,10 +12,8 @@ function NavigationButton(props) {
   const [active, setActive] = useState(false);
   const { handlePopup } = props;
 
-  /* Popup temporaire en attendant d'avoir la 2ème page */
-
   return (
-    <div className={styles.main}>
+    <div className={styles.main} onClick={() => setActive(!active)}>
       <div
         className={`${styles.container} ${active && styles.containerActive}`}
       >
@@ -34,17 +31,18 @@ function NavigationButton(props) {
           <Link to="/prices">
             <img className={styles.icon} src={credit} alt="icon credit" />
           </Link>
-
-          <img className={styles.icon} src={search} alt="icon search" />
+          <Link to="/">
+            <img className={styles.icon} src={search} alt="icon search" />
+          </Link>
         </div>
         <button
           className={`${styles.btn} ${
             active ? styles.btnActive : styles.btnDisabled
           }`}
-          onClick={() => setActive(!active)}
           type="button"
         >
-          <img className={styles.icon} src={more} alt="icon more" />
+          <span className={styles.sliceCross} />
+          <span className={styles.sliceCross} />
         </button>
       </div>
     </div>
