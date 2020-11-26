@@ -85,7 +85,13 @@ p {
   width: 100%;
   z-index: 0;
 }
+
 .pagination {
+  justify-content: center;
+  text-align: center;
+}
+
+.pagination2 {
   justify-content: center;
   text-align: center;
 }

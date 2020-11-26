@@ -186,6 +186,15 @@ class PricesList extends Component {
               : subscriptions
                   .slice(cursor.start, cursor.end)
                   .map((price) => <PricesCard key={price.id} price={price} />)}
+
+            <Pagination
+              className={styles.pagination2}
+              onChange={this.setcursor}
+              current={cursor.currentPage}
+              pageSize={9}
+              total={totale}
+              locale={langLocal}
+            />
           </ul>
         </div>
       </div>
