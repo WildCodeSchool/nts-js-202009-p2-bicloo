@@ -42,6 +42,7 @@
   color: var(--card-item-title-color);
   font-family: 'Days One';
   font-style: normal;
+  font-size: 1.4rem;
 }
 p {
   font-family: 'Dosis';
@@ -53,9 +54,10 @@ p {
   border-color: #c92e3a;
   border-radius: 0.5vh;
   border-width: 1px;
-  padding: 1.3rem 0.3rem;
+  padding: 1.09rem 0.31rem;
   text-align: center;
   margin-bottom: 0;
+  width: 5rem;
 }
 .notBanking {
   color: #00754e;
@@ -63,16 +65,18 @@ p {
   border-color: #009966;
   border-radius: 0.5vh;
   border-width: 1px;
-  padding: 1.3rem 0.3rem;
+  padding: 1.09rem 0.31rem;
   text-align: center;
   margin-bottom: 0;
+  width: 5rem;
 }
 .button {
   background-color: var(--card-item-btn-itinerary-background);
   color: white;
   border: none;
-  padding: 1.5rem 0.5rem;
+  padding: 1.25rem 0.5rem;
   border-radius: 0.5vh;
+  width: 5.75rem;
 }
 
 .mapBlock {
@@ -80,6 +84,10 @@ p {
   height: calc(100vh - 198px - 50.6px);
   width: 100%;
   z-index: 0;
+}
+.pagination {
+  justify-content: center;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -119,7 +127,7 @@ p {
   .buttons {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    align-items: center;
   }
   .button,
   .banking,
