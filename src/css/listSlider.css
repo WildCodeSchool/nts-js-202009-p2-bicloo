@@ -5,21 +5,13 @@
 @media screen and (min-width: 768px) {
   .container {
     display: block;
-    width: 35vw;
+    position: absolute;
+    right: 0;
   }
 
   .slider {
-    position: relative;
-    left: 67vw;
-    width: 30vw;
-    top: 1.5vw;
+    width: 28rem;
     height: 75vh;
     overflow-y: clip;
-  }
-
-  .slick-prev:before,
-  .slick-next:before {
-    opacity: 1;
-    color: grey !important;
   }
 }

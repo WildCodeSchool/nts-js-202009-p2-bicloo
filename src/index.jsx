@@ -4,8 +4,7 @@ import './css/global/main.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import 'swiper/swiper.scss';
 
 ReactDOM.render(
   <React.StrictMode>
