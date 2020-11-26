@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import search from '../assets/icons/search.svg';
+import iconBike from '../assets/icons/directions_bike.svg';
 import credit from '../assets/icons/credit_card.svg';
 import help from '../assets/icons/help.svg';
 
@@ -32,7 +32,7 @@ function NavigationButton(props) {
             <img className={styles.icon} src={credit} alt="icon credit" />
           </Link>
           <Link to="/">
-            <img className={styles.icon} src={search} alt="icon search" />
+            <img className={styles.icon} src={iconBike} alt="icon search" />
           </Link>
         </div>
         <button

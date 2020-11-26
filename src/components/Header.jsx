@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import SearchBar from './SearchBar';
+import Checkbox from './Checkbox';
+
 import logoGeoBikeMobile from '../assets/geobike-mobile.png';
 import logoGeoBikeDesktop from '../assets/geobike-desktop.png';
-import Checkbox from './Checkbox';
-import iconSearch from '../assets/icons/search.svg';
+import iconBike from '../assets/icons/directions_bike.svg';
 import iconSetting from '../assets/icons/setting.svg';
+
 import styles from '../css/Header.module.css';
 
 const Header = ({
@@ -54,7 +57,7 @@ const Header = ({
             type="button"
             onClick={() => setSend(!send)}
           >
-            <img src={iconSearch} alt="icon search" />
+            <img src={iconBike} alt="icon search" />
           </button>
         </div>
 
