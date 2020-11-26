@@ -20,6 +20,6 @@
   .slick-prev:before,
   .slick-next:before {
     opacity: 1;
-    color: grey !important;
+    color: #248bad !important;
   }
 }
