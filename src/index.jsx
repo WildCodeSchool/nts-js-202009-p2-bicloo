@@ -4,8 +4,6 @@ import './css/global/main.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import 'swiper/swiper.scss';
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
