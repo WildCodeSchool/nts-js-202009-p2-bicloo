@@ -1,9 +1,7 @@
 import React from 'react';
-import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
 import CardList from './CardList';
-
 import '../css/listSlider.css';
 
 function ListSlider({
@@ -14,50 +12,37 @@ function ListSlider({
   handleRoutingControl,
   display,
 }) {
-  const settings = {
-    infinite: false,
-    speed: 500,
-    slidesToShow: 2.5,
-    slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-    swipeToSlide: true,
-    draggable: true,
-  };
-
   return (
     <div className="container">
-      <Slider className="slider" {...settings}>
-        {stations
-          .filter((station) => {
-            if (bankingIsChecked) {
-              return station.banking === 'True';
-            }
-            return station;
-          })
-          .filter((station) => {
-            if (bikesIsChecked) {
-              return station.availableBikes > 0;
-            }
-            return station;
-          })
-          .filter((station) => {
-            if (standsIsChecked) {
-              return station.availableBikeStand > 0;
-            }
-            return station;
-          })
-          .map((station) => {
-            return (
-              <CardList
-                key={station.id}
-                station={station}
-                handleRoutingControl={handleRoutingControl}
-                display={display}
-              />
-            );
-          })}
-      </Slider>
+      {stations
+        .filter((station) => {
+          if (bankingIsChecked) {
+            return station.banking === 'True';
+          }
+          return station;
+        })
+        .filter((station) => {
+          if (bikesIsChecked) {
+            return station.availableBikes > 0;
+          }
+          return station;
+        })
+        .filter((station) => {
+          if (standsIsChecked) {
+            return station.availableBikeStand > 0;
+          }
+          return station;
+        })
+        .map((station) => {
+          return (
+            <CardList
+              key={station.id}
+              station={station}
+              handleRoutingControl={handleRoutingControl}
+              display={display}
+            />
+          );
+        })}
     </div>
   );
 }
